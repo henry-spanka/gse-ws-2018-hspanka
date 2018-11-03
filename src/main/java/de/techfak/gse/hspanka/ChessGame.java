@@ -1,16 +1,21 @@
 package de.techfak.gse.hspanka;
 
+import de.techfak.gse.hspanka.Exceptions.ApplicationErrorException;
+
 public class ChessGame {
     public static void main(final String... args) {
-        BoardController boardController = new BoardController();
+        try {
+            BoardController boardController = new BoardController();
 
-        if (args.length > 0) {
-            if (args[0].isEmpty()) {
-                System.exit(0);
+            if (args.length > 0) {
+                boardController.setBoardConfigurationFromString(args[0]);
             }
-        }
 
-        boardController.showCurrentBoard();
+            boardController.showCurrentBoard();
+        } catch (ApplicationErrorException e) {
+            System.out.println(e.getErrorCode());
+            System.exit(e.getErrorCode());
+        }
     }
 
 }

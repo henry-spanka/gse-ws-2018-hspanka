@@ -1,5 +1,6 @@
 package de.techfak.gse.hspanka;
 
+import de.techfak.gse.hspanka.Exceptions.InvalidBoardConfiguration;
 import de.techfak.gse.hspanka.View.BoardView;
 
 public class BoardController {
@@ -13,5 +14,11 @@ public class BoardController {
 
     public void showCurrentBoard() {
         boardView.showCurrentConfiguration(board.getConfiguration());
+    }
+
+    public void setBoardConfigurationFromString(String conf) throws InvalidBoardConfiguration {
+        if (conf.isEmpty()) {
+            throw new InvalidBoardConfiguration("The configuration is empty.");
+        }
     }
 }
