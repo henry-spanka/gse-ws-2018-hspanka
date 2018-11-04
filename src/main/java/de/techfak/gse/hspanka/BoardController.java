@@ -55,6 +55,7 @@ public class BoardController {
             }
 
             Piece piece = Piece.fromChar(c);
+            board.placePiece(piece, x, y);
 
             x++;
         }

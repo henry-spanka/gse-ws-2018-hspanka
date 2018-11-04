@@ -43,4 +43,14 @@ public abstract class Piece {
 
         }
     }
+
+    public char playerToChar(char c) {
+        if (player == Player.BLACK) {
+            return Character.toLowerCase(c);
+        } else {
+            return Character.toUpperCase(c);
+        }
+    }
+
+    public abstract char toChar();
 }
