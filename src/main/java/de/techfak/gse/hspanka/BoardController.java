@@ -1,6 +1,7 @@
 package de.techfak.gse.hspanka;
 
 import de.techfak.gse.hspanka.Exceptions.InvalidBoardConfiguration;
+import de.techfak.gse.hspanka.Piece.Piece;
 import de.techfak.gse.hspanka.View.BoardView;
 
 /**
@@ -35,6 +36,27 @@ public class BoardController {
     public void setBoardConfigurationFromString(String conf) throws InvalidBoardConfiguration {
         if (conf.isEmpty()) {
             throw new InvalidBoardConfiguration("The configuration is empty.");
+        }
+
+        int x = 0, y = 0;
+
+        for (int i = 0; i < conf.length(); i++) {
+            char c = conf.charAt(i);
+
+            if (Character.isDigit(c)) {
+                x += c;
+                continue;
+            }
+
+            if (c == '/') {
+                x = 0;
+                y += 1;
+                continue;
+            }
+
+            Piece piece = Piece.fromChar(c);
+
+            x++;
         }
     }
 }
