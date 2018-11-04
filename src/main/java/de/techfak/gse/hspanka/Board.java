@@ -19,7 +19,6 @@ public class Board {
     }
 
     public void placePiece(Piece piece, int x, int y) {
-        System.out.println("Added to: " + x + "/"+y);
         configuration[x][y] = piece;
     }
 }
