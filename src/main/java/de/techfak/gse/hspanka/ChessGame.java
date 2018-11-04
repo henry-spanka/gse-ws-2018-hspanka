@@ -21,7 +21,6 @@ public class ChessGame {
 
             boardController.showCurrentBoard();
         } catch (ApplicationErrorException e) {
-            System.out.println(e.getErrorCode());
             System.exit(e.getErrorCode());
         }
     }
