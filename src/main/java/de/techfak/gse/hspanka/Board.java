@@ -12,13 +12,26 @@ public class Board {
     private Piece[][] configuration = new Piece[8][8];
 
     /**
+     * The player who currently makes a turn
+     */
+    private Player player;
+
+    /**
      * @return Current board configuration
      */
     public Piece[][] getConfiguration() {
         return configuration;
     }
 
-    public void placePiece(Piece piece, int x, int y) {
-        configuration[x][y] = piece;
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void placePiece(Piece piece, int col, int row) {
+        configuration[row][col] = piece;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 }

@@ -17,6 +17,8 @@ public class ChessGame {
 
             if (args.length > 0) {
                 boardController.setBoardConfigurationFromString(args[0]);
+            } else {
+                boardController.setDefaultBoardConfiguration();
             }
 
             boardController.showCurrentBoard();

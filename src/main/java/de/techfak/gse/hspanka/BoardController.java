@@ -26,7 +26,13 @@ public class BoardController {
      * Instructs the view to display the current board configuration
      */
     public void showCurrentBoard() {
-        boardView.showCurrentConfiguration(board.getConfiguration());
+        boardView.showCurrentConfiguration(board.getConfiguration(), board.getPlayer());
+    }
+
+    public void setDefaultBoardConfiguration() throws InvalidBoardConfiguration {
+        String conf = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w";
+
+        setBoardConfigurationFromString(conf);
     }
 
     /**
@@ -52,6 +58,21 @@ public class BoardController {
                 x = 0;
                 y += 1;
                 continue;
+            }
+
+            if (Character.isWhitespace(c)) {
+                if (i+2 == conf.length()) {
+                    c = conf.charAt(i+1);
+                    try {
+                        board.setPlayer(Player.playerFromChar(c));
+                    } catch (IllegalArgumentException e) {
+                        throw new InvalidBoardConfiguration(e.getMessage());
+                    }
+
+                    break;
+                } else {
+                    throw new InvalidBoardConfiguration("Whitespace encountered but not expected.");
+                }
             }
 
             Piece piece = Piece.fromChar(c);
