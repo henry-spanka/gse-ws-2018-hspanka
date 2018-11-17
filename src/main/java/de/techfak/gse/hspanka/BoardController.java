@@ -50,7 +50,7 @@ public class BoardController {
             char c = conf.charAt(i);
 
             if (Character.isDigit(c)) {
-                col += c;
+                col += (c - '0');
                 continue;
             }
 
