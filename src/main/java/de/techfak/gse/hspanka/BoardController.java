@@ -1,5 +1,6 @@
 package de.techfak.gse.hspanka;
 
+import de.techfak.gse.hspanka.Exceptions.ApplicationErrorException;
 import de.techfak.gse.hspanka.Exceptions.EmptyBoardConfigurationException;
 import de.techfak.gse.hspanka.Exceptions.InvalidBoardConfiguration;
 import de.techfak.gse.hspanka.Piece.Piece;
@@ -89,7 +90,8 @@ public class BoardController {
         throw new InvalidBoardConfiguration("The string terminated unexpectedly.");
     }
 
-    public void makeMove(Move move) {
+    public void makeMove(Move move) throws ApplicationErrorException {
+        board.validateMove(move);
         board.executeMove(move);
     }
 }

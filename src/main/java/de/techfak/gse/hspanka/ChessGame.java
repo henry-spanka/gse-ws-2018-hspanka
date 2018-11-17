@@ -1,6 +1,7 @@
 package de.techfak.gse.hspanka;
 
 import de.techfak.gse.hspanka.Exceptions.ApplicationErrorException;
+import de.techfak.gse.hspanka.Exceptions.BoardPositionEmptyException;
 import de.techfak.gse.hspanka.Exceptions.EmptyCommandException;
 import de.techfak.gse.hspanka.Exceptions.InvalidMoveException;
 
@@ -42,7 +43,7 @@ public class ChessGame {
                 }
             }
         } catch (ApplicationErrorException e) {
-            if (e instanceof InvalidMoveException) {
+            if (e instanceof InvalidMoveException || e instanceof BoardPositionEmptyException) {
                 boardController.showCurrentBoard();
             }
 

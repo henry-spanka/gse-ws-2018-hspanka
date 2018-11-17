@@ -4,7 +4,7 @@ import de.techfak.gse.hspanka.Exceptions.InvalidBoardConfiguration;
 import de.techfak.gse.hspanka.Player;
 
 public abstract class Piece {
-    Player player;
+    private Player player;
 
     public Piece(Player player) {
         this.player = player;
@@ -53,4 +53,8 @@ public abstract class Piece {
     }
 
     public abstract char toChar();
+
+    public Player getPlayer() {
+        return player;
+    }
 }

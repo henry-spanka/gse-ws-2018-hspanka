@@ -1,5 +1,7 @@
 package de.techfak.gse.hspanka;
 
+import de.techfak.gse.hspanka.Exceptions.BoardPositionEmptyException;
+import de.techfak.gse.hspanka.Exceptions.InvalidMoveException;
 import de.techfak.gse.hspanka.Piece.Piece;
 
 /**
@@ -47,6 +49,26 @@ public class Board {
             player = Player.WHITE;
         } else {
             player = Player.BLACK;
+        }
+    }
+
+    private Piece getPiece(int row, int col) {
+        Piece piece = configuration[row][col];
+
+        return piece;
+    }
+
+    public void validateMove(Move move) throws BoardPositionEmptyException, InvalidMoveException {
+        Piece fromPiece = getPiece(move.getrFrom(), move.getcFrom());
+
+        if (fromPiece.getPlayer() != player) {
+            throw new InvalidMoveException("Not allowed to move that piece.");
+        }
+
+        try {
+            Piece toPiece = getPiece(move.getrTo(), move.getcTo());
+        } catch (BoardPositionEmptyException e) {
+            return;
         }
     }
 }
