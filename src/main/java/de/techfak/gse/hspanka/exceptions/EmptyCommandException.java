@@ -14,7 +14,7 @@ public class EmptyCommandException extends ApplicationErrorException {
     }
 
     @SuppressWarnings("unused")
-    public EmptyCommandException(String message, Throwable cause) {
+    public EmptyCommandException(final String message, final Throwable cause) {
         super(message, cause);
     }
 

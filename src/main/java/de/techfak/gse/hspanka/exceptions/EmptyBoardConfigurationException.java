@@ -10,7 +10,7 @@ public class EmptyBoardConfigurationException extends ApplicationErrorException 
     private static final int ERR_CODE = 0;
 
     @SuppressWarnings("unused")
-    public EmptyBoardConfigurationException(String message, Throwable cause) {
+    public EmptyBoardConfigurationException(final String message, final Throwable cause) {
         super(message, cause);
     }
 

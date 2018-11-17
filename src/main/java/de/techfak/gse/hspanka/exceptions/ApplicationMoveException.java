@@ -6,15 +6,27 @@ package de.techfak.gse.hspanka.exceptions;
  */
 public abstract class ApplicationMoveException extends ApplicationErrorException {
 
+    /**
+     * Construct the ApplicationMoveException.
+     */
     ApplicationMoveException() {
         super();
     }
 
+    /**
+     * Construct the ApplicationMoveException.
+     * @param message The message.
+     */
     ApplicationMoveException(final String message) {
         super(message);
     }
 
-    ApplicationMoveException(final String message, Throwable cause) {
+    /**
+     * Construct the ApplicationMoveException.
+     * @param message The message.
+     * @param cause The cause.
+     */
+    ApplicationMoveException(final String message, final Throwable cause) {
         super(message, cause);
     }
 

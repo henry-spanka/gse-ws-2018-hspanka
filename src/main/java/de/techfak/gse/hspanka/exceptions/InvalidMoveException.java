@@ -14,7 +14,7 @@ public class InvalidMoveException extends ApplicationMoveException {
     }
 
     @SuppressWarnings("unused")
-    public InvalidMoveException(String message, Throwable cause) {
+    public InvalidMoveException(final String message, final Throwable cause) {
         super(message, cause);
     }
 

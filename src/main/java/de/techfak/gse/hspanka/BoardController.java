@@ -24,6 +24,9 @@ class BoardController {
      */
     private final BoardView boardView;
 
+    /**
+     * Construct the board controller and setup the dependencies.
+     */
     BoardController() {
         board = new Board();
         boardView = new BoardView();
@@ -105,7 +108,7 @@ class BoardController {
                     try {
                         board.setPlayer(Player.playerFromChar(character));
                     } catch (IllegalArgumentException e) {
-                        throw new InvalidBoardConfiguration(e.getMessage(), e.getCause());
+                        throw new InvalidBoardConfiguration(e.getMessage(), e);
                     }
 
                     return;

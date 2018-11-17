@@ -9,7 +9,7 @@ public class InvalidBoardConfiguration extends ApplicationErrorException {
      */
     private static final int ERR_CODE = 100;
 
-    public InvalidBoardConfiguration(String message, Throwable cause) {
+    public InvalidBoardConfiguration(final String message, final Throwable cause) {
         super(message, cause);
     }
 

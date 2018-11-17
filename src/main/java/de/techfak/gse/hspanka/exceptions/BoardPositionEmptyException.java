@@ -13,7 +13,7 @@ public class BoardPositionEmptyException extends ApplicationMoveException {
         super(message);
     }
 
-    public BoardPositionEmptyException(String message, Throwable cause) {
+    public BoardPositionEmptyException(final String message, final Throwable cause) {
         super(message, cause);
     }
 

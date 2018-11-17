@@ -5,15 +5,27 @@ package de.techfak.gse.hspanka.exceptions;
  */
 public abstract class ApplicationErrorException extends Exception {
 
+    /**
+     * Construct the ApplicationErrorException.
+     */
     ApplicationErrorException() {
         super();
     }
 
+    /**
+     * Construct the ApplicationErrorException.
+     * @param message The error message.
+     */
     ApplicationErrorException(final String message) {
         super(message);
     }
 
-    ApplicationErrorException(final String message, Throwable cause) {
+    /**
+     * Construct the ApplicationErrorException.
+     * @param message The error message.
+     * @param cause The cause.
+     */
+    ApplicationErrorException(final String message, final Throwable cause) {
         super(message, cause);
     }
 
