@@ -23,11 +23,11 @@ public class ChessGame {
                 boardController.setDefaultBoardConfiguration();
             }
 
-            boardController.showCurrentBoard();
-
             Scanner terminalInput = new Scanner(System.in);
 
             while (true) {
+                boardController.showCurrentBoard();
+
                 String nextLine = terminalInput.nextLine();
 
                 for (Move move: Move.fromString(nextLine)) {

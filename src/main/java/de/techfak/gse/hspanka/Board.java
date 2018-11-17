@@ -34,4 +34,9 @@ public class Board {
     public void setPlayer(Player player) {
         this.player = player;
     }
+
+    public void executeMove(Move move) {
+        configuration[move.getrTo()][move.getcTo()] = configuration[move.getrFrom()][move.getcFrom()];
+        configuration[move.getrFrom()][move.getcFrom()] = null;
+    }
 }

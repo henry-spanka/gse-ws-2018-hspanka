@@ -83,6 +83,6 @@ public class BoardController {
     }
 
     public void makeMove(Move move) {
-        
+        board.executeMove(move);
     }
 }
