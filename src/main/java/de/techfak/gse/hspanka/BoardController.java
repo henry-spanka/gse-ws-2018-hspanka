@@ -1,10 +1,10 @@
 package de.techfak.gse.hspanka;
 
-import de.techfak.gse.hspanka.Exceptions.ApplicationMoveException;
-import de.techfak.gse.hspanka.Exceptions.EmptyBoardConfigurationException;
-import de.techfak.gse.hspanka.Exceptions.InvalidBoardConfiguration;
-import de.techfak.gse.hspanka.Piece.Piece;
-import de.techfak.gse.hspanka.View.BoardView;
+import de.techfak.gse.hspanka.exceptions.ApplicationMoveException;
+import de.techfak.gse.hspanka.exceptions.EmptyBoardConfigurationException;
+import de.techfak.gse.hspanka.exceptions.InvalidBoardConfiguration;
+import de.techfak.gse.hspanka.piece.Piece;
+import de.techfak.gse.hspanka.view.BoardView;
 
 /**
  * Controller for interacting with the Chess Board
@@ -58,7 +58,7 @@ public class BoardController {
 
             if (c == '/') {
                 if (col != 8) {
-                    throw new InvalidBoardConfiguration("Piece expected but not found.");
+                    throw new InvalidBoardConfiguration("piece expected but not found.");
                 }
 
                 row -= 1;

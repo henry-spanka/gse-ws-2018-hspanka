@@ -1,6 +1,6 @@
-package de.techfak.gse.hspanka.View;
+package de.techfak.gse.hspanka.view;
 
-import de.techfak.gse.hspanka.Piece.Piece;
+import de.techfak.gse.hspanka.piece.Piece;
 import de.techfak.gse.hspanka.Player;
 
 import java.lang.System;

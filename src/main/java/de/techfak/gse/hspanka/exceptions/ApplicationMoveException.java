@@ -1,4 +1,4 @@
-package de.techfak.gse.hspanka.Exceptions;
+package de.techfak.gse.hspanka.exceptions;
 
 /**
  * Base Exception handled by the application to exit with an error code

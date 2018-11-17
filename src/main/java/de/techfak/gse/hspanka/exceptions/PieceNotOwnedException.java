@@ -1,4 +1,4 @@
-package de.techfak.gse.hspanka.Exceptions;
+package de.techfak.gse.hspanka.exceptions;
 
 /**
  * Exception that should be thrown if a piece is not owned by the current player.

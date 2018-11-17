@@ -1,9 +1,9 @@
 package de.techfak.gse.hspanka;
 
-import de.techfak.gse.hspanka.Exceptions.ApplicationMoveException;
-import de.techfak.gse.hspanka.Exceptions.BoardPositionEmptyException;
-import de.techfak.gse.hspanka.Exceptions.PieceNotOwnedException;
-import de.techfak.gse.hspanka.Piece.Piece;
+import de.techfak.gse.hspanka.exceptions.ApplicationMoveException;
+import de.techfak.gse.hspanka.exceptions.BoardPositionEmptyException;
+import de.techfak.gse.hspanka.exceptions.PieceNotOwnedException;
+import de.techfak.gse.hspanka.piece.Piece;
 
 /**
  * The board model

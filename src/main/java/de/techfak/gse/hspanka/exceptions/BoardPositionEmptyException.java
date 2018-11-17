@@ -1,4 +1,4 @@
-package de.techfak.gse.hspanka.Exceptions;
+package de.techfak.gse.hspanka.exceptions;
 
 /**
  * Exception that should be thrown if a piece is expected at the position of the board but not found

@@ -1,8 +1,8 @@
 package de.techfak.gse.hspanka;
 
-import de.techfak.gse.hspanka.Exceptions.ApplicationErrorException;
-import de.techfak.gse.hspanka.Exceptions.ApplicationMoveException;
-import de.techfak.gse.hspanka.Exceptions.EmptyCommandException;
+import de.techfak.gse.hspanka.exceptions.ApplicationErrorException;
+import de.techfak.gse.hspanka.exceptions.ApplicationMoveException;
+import de.techfak.gse.hspanka.exceptions.EmptyCommandException;
 
 import java.util.Scanner;
 

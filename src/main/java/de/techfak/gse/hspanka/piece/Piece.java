@@ -1,6 +1,6 @@
-package de.techfak.gse.hspanka.Piece;
+package de.techfak.gse.hspanka.piece;
 
-import de.techfak.gse.hspanka.Exceptions.InvalidBoardConfiguration;
+import de.techfak.gse.hspanka.exceptions.InvalidBoardConfiguration;
 import de.techfak.gse.hspanka.Player;
 
 public abstract class Piece {

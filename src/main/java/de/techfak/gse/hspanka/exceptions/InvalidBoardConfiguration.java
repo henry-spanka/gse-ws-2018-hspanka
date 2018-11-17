@@ -1,4 +1,4 @@
-package de.techfak.gse.hspanka.Exceptions;
+package de.techfak.gse.hspanka.exceptions;
 
 /**
  * Exception that should be thrown if the board configuration is invalid

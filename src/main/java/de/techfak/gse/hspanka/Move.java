@@ -1,8 +1,7 @@
 package de.techfak.gse.hspanka;
 
-import de.techfak.gse.hspanka.Exceptions.InvalidMoveException;
-import de.techfak.gse.hspanka.Exceptions.MoveToItselfException;
-import de.techfak.gse.hspanka.Piece.Piece;
+import de.techfak.gse.hspanka.exceptions.InvalidMoveException;
+import de.techfak.gse.hspanka.exceptions.MoveToItselfException;
 
 import java.util.ArrayList;
 import java.util.List;
