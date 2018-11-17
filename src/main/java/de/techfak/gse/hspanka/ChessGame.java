@@ -2,6 +2,8 @@ package de.techfak.gse.hspanka;
 
 import de.techfak.gse.hspanka.Exceptions.ApplicationErrorException;
 
+import java.util.Scanner;
+
 /**
  * The main class that is invoked on startup. Responsible for initialising the controller.
  */
@@ -22,6 +24,16 @@ public class ChessGame {
             }
 
             boardController.showCurrentBoard();
+
+            Scanner terminalInput = new Scanner(System.in);
+
+            while (true) {
+                String nextLine = terminalInput.nextLine();
+
+                for (Move move: Move.fromString(nextLine)) {
+                    boardController.makeMove(move);
+                }
+            }
         } catch (ApplicationErrorException e) {
             System.exit(e.getErrorCode());
         }

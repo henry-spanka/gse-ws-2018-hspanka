@@ -81,4 +81,8 @@ public class BoardController {
             x++;
         }
     }
+
+    public void makeMove(Move move) {
+        
+    }
 }
