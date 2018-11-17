@@ -27,6 +27,7 @@ public class Board {
 
     /**
      * Get the board configuration.
+     *
      * @return Current board configuration.
      */
     public Piece[][] getConfiguration() {
@@ -35,6 +36,7 @@ public class Board {
 
     /**
      * Get the current player.
+     *
      * @return The current player.
      */
     public Player getPlayer() {
@@ -43,9 +45,10 @@ public class Board {
 
     /**
      * Places a piece on the board.
+     *
      * @param piece The piece that should be placed on the board.
-     * @param row The row where the piece should be placed.
-     * @param col The column where the piece should be placed. (a=0, b=1, ..., h=7)
+     * @param row   The row where the piece should be placed.
+     * @param col   The column where the piece should be placed. (a=0, b=1, ..., h=7)
      * @see <a href="https://en.wikipedia.org/wiki/Chess#Movement">Chess Movement</a>
      */
     public void placePiece(final Piece piece, final int row, final int col) {
@@ -54,6 +57,7 @@ public class Board {
 
     /**
      * Set the current player who turn it is.
+     *
      * @param player The player model.
      */
     public void setPlayer(final Player player) {
@@ -62,6 +66,7 @@ public class Board {
 
     /**
      * Executes a move by changing the board configuration.
+     *
      * @param move The move object that describes the move.
      */
     public void executeMove(final Move move) {
@@ -84,6 +89,7 @@ public class Board {
 
     /**
      * Get a Piece from the board by position.
+     *
      * @param row The row where the piece is located.
      * @param col The column where the piece is located.
      * @return The piece at the specified position.
@@ -102,6 +108,7 @@ public class Board {
     /**
      * Validates the move by checking whether the move is legal and the player
      * can actually move this piece.
+     *
      * @param move The move that should be checked.
      * @throws ApplicationMoveException A subclass is thrown that indicates the constraint that failed.
      */

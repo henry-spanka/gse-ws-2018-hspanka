@@ -8,6 +8,7 @@ public enum Player {
 
     /**
      * Parses a character (either 'w' or 'b') and returns the Player enum.
+     *
      * @param player The character to be parsed.
      * @return The Player object.
      * @throws IllegalArgumentException Thrown if the character is invalid.
@@ -25,6 +26,7 @@ public enum Player {
 
     /**
      * Converts the player object into a char in FEN notation, representing the player ('w' or 'b').
+     *
      * @return The player as a character.
      * @throws IllegalArgumentException Thrown if no character is known for the player.
      */

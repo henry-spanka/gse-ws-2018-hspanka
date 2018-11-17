@@ -1,11 +1,12 @@
 package de.techfak.gse.hspanka.piece;
 
-import de.techfak.gse.hspanka.exceptions.InvalidBoardConfiguration;
 import de.techfak.gse.hspanka.Player;
+import de.techfak.gse.hspanka.exceptions.InvalidBoardConfiguration;
 
 /**
  * A abstract Piece is used to play Chess.
  * This class should be extended by all piece types.
+ *
  * @see <a href="https://en.wikipedia.org/wiki/Chess#Setup">Chess Setup</a>
  */
 public abstract class Piece {
@@ -16,6 +17,7 @@ public abstract class Piece {
 
     /**
      * Create a piece.
+     *
      * @param player The player who owns the piece.
      */
     Piece(final Player player) {
@@ -24,9 +26,10 @@ public abstract class Piece {
 
     /**
      * Returns the Piece object from a character as specified in FEN notation.
+     *
      * @param piece The char to be converted.
-     *          Lowercase characters correspond to the black player and uppercase
-     *          to the white player.
+     *              Lowercase characters correspond to the black player and uppercase
+     *              to the white player.
      * @return A piece subclass.
      * @throws InvalidBoardConfiguration Thrown if the character can not be recognised.
      */
@@ -68,9 +71,11 @@ public abstract class Piece {
      * Converts a character depending on player owning the Piece.
      * If the player is black then the character will be converted to lower case.
      * Otherwise (white player) to upper case.
+     *
      * @param player The character to be converted.
      * @return The converted character (Piece in FEN notation).
      */
+    @SuppressWarnings("WeakerAccess")
     public char playerToChar(final char player) {
         if (this.player == Player.BLACK) {
             return Character.toLowerCase(player);
@@ -81,13 +86,15 @@ public abstract class Piece {
 
     /**
      * Converts the piece to a character in FEN notation.
-     * @see <a href="{https://tdpe.techfak.uni-bielefeld.de/projects/gse-ws-2018/wiki/Schachnotation">Chess notation</a>
+     *
      * @return The character represented by the piece in FEN notation.
+     * @see <a href="{https://tdpe.techfak.uni-bielefeld.de/projects/gse-ws-2018/wiki/Schachnotation">Chess notation</a>
      */
     public abstract char toChar();
 
     /**
      * Get the current player.
+     *
      * @return the current player.
      */
     public Player getPlayer() {

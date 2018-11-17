@@ -15,6 +15,7 @@ public abstract class ApplicationMoveException extends ApplicationErrorException
 
     /**
      * Construct the ApplicationMoveException.
+     *
      * @param message The message.
      */
     ApplicationMoveException(final String message) {
@@ -23,8 +24,9 @@ public abstract class ApplicationMoveException extends ApplicationErrorException
 
     /**
      * Construct the ApplicationMoveException.
+     *
      * @param message The message.
-     * @param cause The cause.
+     * @param cause   The cause.
      */
     ApplicationMoveException(final String message, final Throwable cause) {
         super(message, cause);

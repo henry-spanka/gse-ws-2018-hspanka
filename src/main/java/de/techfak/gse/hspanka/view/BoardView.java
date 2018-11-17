@@ -1,8 +1,8 @@
 package de.techfak.gse.hspanka.view;
 
 import de.techfak.gse.hspanka.Board;
-import de.techfak.gse.hspanka.piece.Piece;
 import de.techfak.gse.hspanka.Player;
+import de.techfak.gse.hspanka.piece.Piece;
 
 /**
  * The board view that is responsible for displaying the current board for the user who interacts
@@ -11,8 +11,9 @@ import de.techfak.gse.hspanka.Player;
 public class BoardView {
     /**
      * Displays the board on the user's screen.
+     *
      * @param configuration The configuration that should be displayed.
-     * @param player The player who's turn it is.
+     * @param player        The player who's turn it is.
      */
     public void showCurrentConfiguration(final Piece[][] configuration, final Player player) {
         // The number of subsequent empty fields in a row.
@@ -24,7 +25,7 @@ public class BoardView {
         // Row is set to field size - 1 (max value) because it's at the top left of chess board where we start.
         for (int row = Board.FIELD_SIZE - 1; row >= 0; row--) {
             // Check each piece in a row from the left to the right.
-            for (final Piece piece: configuration[row]) {
+            for (final Piece piece : configuration[row]) {
                 if (piece == null) {
                     // Empty pieces can be skipped. We will just print the number of pieces we skipped in a given row.
                     emptyPieces++;

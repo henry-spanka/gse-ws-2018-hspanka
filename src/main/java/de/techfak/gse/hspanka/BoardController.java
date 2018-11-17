@@ -41,7 +41,8 @@ class BoardController {
 
     /**
      * Sets the board to the default configuration.
-     * @throws InvalidBoardConfiguration The configuration can not be parsed.
+     *
+     * @throws InvalidBoardConfiguration        The configuration can not be parsed.
      * @throws EmptyBoardConfigurationException An empty string was supplied.
      * @see <a href="https://en.wikipedia.org/wiki/Chess#Movement">Chess Movement</a>
      */
@@ -53,8 +54,9 @@ class BoardController {
 
     /**
      * Sets the board to the given configuration.
+     *
      * @param conf The board configuration to be set in simplified FEN notation
-     * @throws InvalidBoardConfiguration The configuration can not be parsed.
+     * @throws InvalidBoardConfiguration        The configuration can not be parsed.
      * @throws EmptyBoardConfigurationException An empty string was supplied.
      * @see <a href="https://en.wikipedia.org/wiki/Chess#Movement">Chess Movement</a>
      */
@@ -131,6 +133,7 @@ class BoardController {
 
     /**
      * Tries to make a move.
+     *
      * @param move The move that should be made.
      * @throws ApplicationMoveException If the move is invalid or can not be made.
      */

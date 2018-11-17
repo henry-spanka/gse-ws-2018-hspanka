@@ -14,6 +14,7 @@ public abstract class ApplicationErrorException extends Exception {
 
     /**
      * Construct the ApplicationErrorException.
+     *
      * @param message The error message.
      */
     ApplicationErrorException(final String message) {
@@ -22,8 +23,9 @@ public abstract class ApplicationErrorException extends Exception {
 
     /**
      * Construct the ApplicationErrorException.
+     *
      * @param message The error message.
-     * @param cause The cause.
+     * @param cause   The cause.
      */
     ApplicationErrorException(final String message, final Throwable cause) {
         super(message, cause);

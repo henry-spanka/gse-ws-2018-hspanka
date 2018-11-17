@@ -45,7 +45,7 @@ class ChessGame {
                 }
 
                 // Parse the moves and execute them.
-                for (final Move move: Move.fromString(nextLine)) {
+                for (final Move move : Move.fromString(nextLine)) {
                     boardController.makeMove(move);
                 }
             }

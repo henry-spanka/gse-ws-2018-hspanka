@@ -42,10 +42,11 @@ final class Move {
 
     /**
      * The constructor of the Move.
+     *
      * @param cFrom The column of the Piece which should be moved.
      * @param rFrom the row of the Piece which should be moved.
-     * @param cTo The column of the target piece/field.
-     * @param rTo The row of the target piece/field.
+     * @param cTo   The column of the target piece/field.
+     * @param rTo   The row of the target piece/field.
      */
     private Move(final int cFrom, final int rFrom, final int cTo, final int rTo) {
         this.cFrom = cFrom;
@@ -56,6 +57,7 @@ final class Move {
 
     /**
      * Converts a String in FEN notation of moves to a List of Move objects.
+     *
      * @param moveString The string in FEN notation.
      * @return The ArrayList of Move objects.
      * @throws InvalidMoveException Thrown if the string can not be parsed.
@@ -80,7 +82,7 @@ final class Move {
 
             // Check the bounds (0-7) of the move.
             if (cFrom < 0 || cTo < 0 || rFrom < 0 || rTo < 0 ||
-                cFrom > MOVE_LENGTH + 1 || cTo > MOVE_LENGTH + 1 || rFrom > MOVE_LENGTH + 1 || rTo >  MOVE_LENGTH + 1) {
+                cFrom > MOVE_LENGTH + 1 || cTo > MOVE_LENGTH + 1 || rFrom > MOVE_LENGTH + 1 || rTo > MOVE_LENGTH + 1) {
                 throw new InvalidMoveException("Move out of bounds");
             }
 
@@ -112,6 +114,7 @@ final class Move {
 
     /**
      * Validate that a move is unique and that source does not match destination.
+     *
      * @throws MoveToItselfException Thrown if source and destination matches.
      */
     public void validateUniqueness() throws MoveToItselfException {
