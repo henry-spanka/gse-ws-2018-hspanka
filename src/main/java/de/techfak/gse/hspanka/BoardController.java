@@ -70,7 +70,7 @@ public class BoardController {
                         throw new InvalidBoardConfiguration(e.getMessage());
                     }
 
-                    break;
+                    return;
                 } else {
                     throw new InvalidBoardConfiguration("Whitespace encountered but not expected.");
                 }
@@ -81,6 +81,8 @@ public class BoardController {
 
             col += 1;
         }
+
+        throw new InvalidBoardConfiguration("The string terminated unexpectedly.");
     }
 
     public void makeMove(Move move) {
