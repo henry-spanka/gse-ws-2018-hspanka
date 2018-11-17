@@ -44,19 +44,19 @@ public class BoardController {
             throw new InvalidBoardConfiguration("The configuration is empty.");
         }
 
-        int x = 0, y = 0;
+        int row = 7, col = 0;
 
         for (int i = 0; i < conf.length(); i++) {
             char c = conf.charAt(i);
 
             if (Character.isDigit(c)) {
-                x += c;
+                col += c;
                 continue;
             }
 
             if (c == '/') {
-                x = 0;
-                y += 1;
+                row -= 1;
+                col = 0;
                 continue;
             }
 
@@ -76,9 +76,9 @@ public class BoardController {
             }
 
             Piece piece = Piece.fromChar(c);
-            board.placePiece(piece, x, y);
+            board.placePiece(piece, row, col);
 
-            x++;
+            col += 1;
         }
     }
 

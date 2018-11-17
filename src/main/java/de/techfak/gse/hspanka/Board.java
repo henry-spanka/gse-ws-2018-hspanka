@@ -27,7 +27,7 @@ public class Board {
         return player;
     }
 
-    public void placePiece(Piece piece, int col, int row) {
+    public void placePiece(Piece piece, int row, int col) {
         configuration[row][col] = piece;
     }
 

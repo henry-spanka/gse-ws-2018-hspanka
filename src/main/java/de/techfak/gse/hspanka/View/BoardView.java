@@ -10,8 +10,8 @@ public class BoardView {
         int emptyPieces = 0;
         StringBuilder output = new StringBuilder();
 
-        for (int row = 0; row < configuration.length; row++) {
-            for (Piece piece : configuration[row]) {
+        for (int row = 7; row >= 0; row--) {
+            for (Piece piece: configuration[row]) {
                 if (piece == null) {
                     emptyPieces++;
                 } else {
@@ -29,7 +29,7 @@ public class BoardView {
                 emptyPieces = 0;
             }
 
-            if (row < configuration.length-1) {
+            if (row > 0) {
                 output.append('/');
             }
         }
