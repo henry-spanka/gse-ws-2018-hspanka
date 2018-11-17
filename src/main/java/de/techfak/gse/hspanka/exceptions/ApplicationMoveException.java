@@ -38,5 +38,6 @@ public abstract class ApplicationMoveException extends ApplicationErrorException
      * @return An error code that the application exits with
      */
     @SuppressWarnings("unused")
+    @Override
     public abstract int getErrorCode();
 }
