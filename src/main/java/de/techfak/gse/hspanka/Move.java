@@ -11,6 +11,16 @@ import java.util.List;
  */
 public class Move {
     /**
+     * The start of the target move position in FEN notation.
+     */
+    public static final int MOVE_TARGET_START = 3;
+
+    /**
+     * The length of a move in FEN notation.
+     */
+    public static final int MOVE_LENGTH = 6;
+
+    /**
      * The column of the Piece which should be moved.
      */
     private int cFrom;
@@ -46,7 +56,7 @@ public class Move {
 
     /**
      * Converts a String in FEN notation of moves to a List of Move objects.
-     * @param m The string in FEN notatino.
+     * @param m The string in FEN notation.
      * @return The ArrayList of Move objects.
      * @throws InvalidMoveException Thrown if the string can not be parsed.
      */
@@ -56,27 +66,28 @@ public class Move {
         int i = 0;
         // Parse each character
         while (i < m.length()) {
-            // Lookahead 6 characters to make sure the move has the correct length and syntax.
-            if (i + 6 > m.length() || m.charAt(i + 2) != '-' || m.charAt(i + 5) != ';') {
+            // Lookahead MOVE_LENGTH characters to make sure the move has the correct length and syntax.
+            if (i + MOVE_LENGTH > m.length() || m.charAt(i + 2) != '-' || m.charAt(i + MOVE_LENGTH - 1) != ';') {
                 throw new InvalidMoveException("The format could not be recognised.");
             }
 
             // Convert the chars a to h to integers from 0 to 7.
             int cFrom = m.charAt(i) - 'a';
             int rFrom = m.charAt(i + 1) - '0' - 1;
-            int cTo = m.charAt(i + 3) - 'a';
-            int rTo = m.charAt(i + 4) - '0' - 1;
+            int cTo = m.charAt(i + MOVE_TARGET_START) - 'a';
+            int rTo = m.charAt(i + MOVE_TARGET_START + 1) - '0' - 1;
 
             // Check the bounds (0-7) of the move.
-            if (cFrom < 0 || cTo < 0 || rFrom < 0 || rTo < 0 || cFrom > 7 || cTo > 7 || rFrom > 7 || rTo > 7) {
+            if (cFrom < 0 || cTo < 0 || rFrom < 0 || rTo < 0 ||
+                cFrom > MOVE_LENGTH + 1 || cTo > MOVE_LENGTH + 1 || rFrom > MOVE_LENGTH + 1 || rTo >  MOVE_LENGTH + 1) {
                 throw new InvalidMoveException("Move out of bounds");
             }
 
             // Add the move to the Array list.
             moves.add(new Move(cFrom, rFrom, cTo, rTo));
 
-            // Skip the next 6 characters as we have already parsed them.
-            i += 6;
+            // Skip the next MOVE_LENGTH characters as we have already parsed them.
+            i += MOVE_LENGTH;
         }
 
         return moves;

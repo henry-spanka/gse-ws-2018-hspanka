@@ -10,6 +10,11 @@ import de.techfak.gse.hspanka.piece.Piece;
  */
 public class Board {
     /**
+     * The size of the chess field.
+     */
+    public static final int FIELD_SIZE = 8;
+
+    /**
      * The board array in which the pieces are stored.
      * Null values indicate that the field is empty.
      */

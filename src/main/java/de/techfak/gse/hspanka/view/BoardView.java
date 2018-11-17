@@ -1,5 +1,6 @@
 package de.techfak.gse.hspanka.view;
 
+import de.techfak.gse.hspanka.Board;
 import de.techfak.gse.hspanka.piece.Piece;
 import de.techfak.gse.hspanka.Player;
 
@@ -20,8 +21,8 @@ public class BoardView {
         // The string that will be displayed in the user's terminal.
         StringBuilder output = new StringBuilder();
 
-        // Row is set to 7 (max value) because it's at the top left of chess board where we start.
-        for (int row = 7; row >= 0; row--) {
+        // Row is set to field size - 1 (max value) because it's at the top left of chess board where we start.
+        for (int row = Board.FIELD_SIZE - 1; row >= 0; row--) {
             // Check each piece in a row from the left to the right.
             for (Piece piece: configuration[row]) {
                 if (piece == null) {

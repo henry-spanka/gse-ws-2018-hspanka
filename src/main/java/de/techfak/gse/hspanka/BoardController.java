@@ -57,8 +57,8 @@ public class BoardController {
             throw new EmptyBoardConfigurationException("The configuration is empty.");
         }
 
-        // Row is set to 7 (max value) because it's at the top left of chess board where we start.
-        int row = 7;
+        // Row is set to field size - 1 (max value) because it's at the top left of chess board where we start.
+        int row = Board.FIELD_SIZE - 1;
         int col = 0;
 
         // Parse the conf character by character.
@@ -78,7 +78,7 @@ public class BoardController {
              * so we don't leave any fields uninitialised.
              */
             if (c == '/') {
-                if (col != 8) {
+                if (col != Board.FIELD_SIZE) {
                     throw new InvalidBoardConfiguration("Piece expected but not found.");
                 }
 
