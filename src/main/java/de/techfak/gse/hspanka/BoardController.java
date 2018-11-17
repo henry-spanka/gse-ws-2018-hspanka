@@ -56,6 +56,10 @@ public class BoardController {
             }
 
             if (c == '/') {
+                if (col != 7) {
+                    throw new InvalidBoardConfiguration("Piece expected but not found.");
+                }
+
                 row -= 1;
                 col = 0;
                 continue;
