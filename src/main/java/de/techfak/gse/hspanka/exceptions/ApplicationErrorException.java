@@ -4,6 +4,8 @@ package de.techfak.gse.hspanka.exceptions;
  * Base Exception handled by the application to exit with an error code
  */
 public abstract class ApplicationErrorException extends Exception {
+    private static final int ERR_CODE = 1;
+
     public ApplicationErrorException() {
         super();
     }
@@ -15,5 +17,7 @@ public abstract class ApplicationErrorException extends Exception {
     /**
      * @return An error code that the application exits with
      */
-    public abstract int getErrorCode();
+    public int getErrorCode() {
+        return ERR_CODE;
+    };
 }
