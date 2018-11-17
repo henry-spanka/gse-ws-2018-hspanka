@@ -8,12 +8,12 @@ public enum Player {
 
     /**
      * Parses a character (either 'w' or 'b') and returns the Player enum.
-     * @param c The character to be parsed.
+     * @param player The character to be parsed.
      * @return The Player object.
      * @throws IllegalArgumentException Thrown if the character is invalid.
      */
-    public static Player playerFromChar(final char c) throws IllegalArgumentException {
-        switch (c) {
+    public static Player playerFromChar(final char player) throws IllegalArgumentException {
+        switch (player) {
             case 'w':
                 return WHITE;
             case 'b':

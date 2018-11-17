@@ -30,7 +30,7 @@ public class Board {
      * @return Current board configuration.
      */
     public Piece[][] getConfiguration() {
-        return configuration;
+        return configuration.clone();
     }
 
     /**
@@ -112,10 +112,10 @@ public class Board {
             throw new PieceNotOwnedException("Not allowed to move that piece.");
         }
 
-        try {
+        /*try {
             final Piece toPiece = getPiece(move.getrTo(), move.getcTo());
         } catch (BoardPositionEmptyException e) {
             return;
-        }
+        }*/
     }
 }

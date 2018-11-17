@@ -56,26 +56,26 @@ public class Move {
 
     /**
      * Converts a String in FEN notation of moves to a List of Move objects.
-     * @param m The string in FEN notation.
+     * @param moveString The string in FEN notation.
      * @return The ArrayList of Move objects.
      * @throws InvalidMoveException Thrown if the string can not be parsed.
      */
-    public static List<Move> fromString(final String m) throws InvalidMoveException {
+    public static List<Move> fromString(final String moveString) throws InvalidMoveException {
         final List<Move> moves = new ArrayList<>();
 
-        int i = 0;
+        int pos = 0;
         // Parse each character
-        while (i < m.length()) {
+        while (pos < moveString.length()) {
             // Lookahead MOVE_LENGTH characters to make sure the move has the correct length and syntax.
-            if (i + MOVE_LENGTH > m.length() || m.charAt(i + 2) != '-' || m.charAt(i + MOVE_LENGTH - 1) != ';') {
+            if (pos + MOVE_LENGTH > moveString.length() || moveString.charAt(pos + 2) != '-' || moveString.charAt(pos + MOVE_LENGTH - 1) != ';') {
                 throw new InvalidMoveException("The format could not be recognised.");
             }
 
             // Convert the chars a to h to integers from 0 to 7.
-            final int cFrom = m.charAt(i) - 'a';
-            final int rFrom = m.charAt(i + 1) - '0' - 1;
-            final int cTo = m.charAt(i + MOVE_TARGET_START) - 'a';
-            final int rTo = m.charAt(i + MOVE_TARGET_START + 1) - '0' - 1;
+            final int cFrom = moveString.charAt(pos) - 'a';
+            final int rFrom = moveString.charAt(pos + 1) - '0' - 1;
+            final int cTo = moveString.charAt(pos + MOVE_TARGET_START) - 'a';
+            final int rTo = moveString.charAt(pos + MOVE_TARGET_START + 1) - '0' - 1;
 
             // Check the bounds (0-7) of the move.
             if (cFrom < 0 || cTo < 0 || rFrom < 0 || rTo < 0 ||
@@ -87,7 +87,7 @@ public class Move {
             moves.add(new Move(cFrom, rFrom, cTo, rTo));
 
             // Skip the next MOVE_LENGTH characters as we have already parsed them.
-            i += MOVE_LENGTH;
+            pos += MOVE_LENGTH;
         }
 
         return moves;

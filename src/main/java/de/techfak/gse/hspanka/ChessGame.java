@@ -17,6 +17,7 @@ public class ChessGame {
      *
      * @param args Command line arguments supplied on execution
      */
+    @SuppressWarnings({"PMD.DoNotCallSystemExit", "PMD.AvoidInstanceofChecksInCatchClause"})
     public static void main(final String... args) {
         final BoardController boardController = new BoardController();
 

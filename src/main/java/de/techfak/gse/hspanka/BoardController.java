@@ -11,6 +11,11 @@ import de.techfak.gse.hspanka.view.BoardView;
  */
 public class BoardController {
     /**
+     * The FEN row separator.
+     */
+    public static final char FEN_ROW_SEPARATOR = '/';
+
+    /**
      * The board model.
      */
     private Board board;
@@ -63,11 +68,11 @@ public class BoardController {
 
         // Parse the conf character by character.
         for (int i = 0; i < conf.length(); i++) {
-            char c = conf.charAt(i);
+            char character = conf.charAt(i);
 
             // If the character is a digit, it indicates how many fields in the current row we can skip (are empty).
-            if (Character.isDigit(c)) {
-                col += (c - '0');
+            if (Character.isDigit(character)) {
+                col += (character - '0');
                 continue;
             }
 
@@ -77,7 +82,7 @@ public class BoardController {
              * To be sure, we check if we have actually reached the last column,
              * so we don't leave any fields uninitialised.
              */
-            if (c == '/') {
+            if (character == FEN_ROW_SEPARATOR) {
                 if (col != Board.FIELD_SIZE) {
                     throw new InvalidBoardConfiguration("Piece expected but not found.");
                 }
@@ -94,11 +99,11 @@ public class BoardController {
              * who's next turn it is (White or Black player).
              * Just to be safe, we check that after the whitespace only one character follows.
              */
-            if (Character.isWhitespace(c)) {
+            if (Character.isWhitespace(character)) {
                 if (i + 2 == conf.length()) {
-                    c = conf.charAt(i + 1);
+                    character = conf.charAt(i + 1);
                     try {
-                        board.setPlayer(Player.playerFromChar(c));
+                        board.setPlayer(Player.playerFromChar(character));
                     } catch (IllegalArgumentException e) {
                         throw new InvalidBoardConfiguration(e.getMessage());
                     }
@@ -110,7 +115,7 @@ public class BoardController {
             }
 
             // Create an instance of the piece and place it on the board.
-            final Piece piece = Piece.fromChar(c);
+            final Piece piece = Piece.fromChar(character);
             board.placePiece(piece, row, col);
 
             // Parse the next column in the current row.

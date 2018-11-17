@@ -6,6 +6,7 @@ import org.junit.jupiter.api.*;
 class ExampleUnitTest {
 
     @Test
+    @SuppressWarnings("PMD")
     void unitTest() {
         Assertions.assertThat(true).isTrue();
     }

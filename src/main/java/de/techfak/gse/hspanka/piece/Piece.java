@@ -20,14 +20,14 @@ public abstract class Piece {
 
     /**
      * Returns the Piece object from a character as specified in FEN notation.
-     * @param c The char to be converted.
+     * @param piece The char to be converted.
      *          Lowercase characters correspond to the black player and uppercase
      *          to the white player.
      * @return A piece subclass.
      * @throws InvalidBoardConfiguration Thrown if the character can not be recognised.
      */
-    public static Piece fromChar(final char c) throws InvalidBoardConfiguration {
-        switch (c) {
+    public static Piece fromChar(final char piece) throws InvalidBoardConfiguration {
+        switch (piece) {
             case 'k':
                 return new King(Player.BLACK);
             case 'q':
@@ -55,7 +55,7 @@ public abstract class Piece {
                 return new Pawn(Player.WHITE);
 
             default:
-                throw new InvalidBoardConfiguration("The character " + c + " is not recognised");
+                throw new InvalidBoardConfiguration("The character " + piece + " is not recognised");
 
         }
     }
@@ -64,14 +64,14 @@ public abstract class Piece {
      * Converts a character depending on player owning the Piece.
      * If the player is black then the character will be converted to lower case.
      * Otherwise (white player) to upper case.
-     * @param c The character to be converted.
+     * @param player The character to be converted.
      * @return The converted character (Piece in FEN notation).
      */
-    public char playerToChar(final char c) {
-        if (player == Player.BLACK) {
-            return Character.toLowerCase(c);
+    public char playerToChar(final char player) {
+        if (this.player == Player.BLACK) {
+            return Character.toLowerCase(player);
         } else {
-            return Character.toUpperCase(c);
+            return Character.toUpperCase(player);
         }
     }
 

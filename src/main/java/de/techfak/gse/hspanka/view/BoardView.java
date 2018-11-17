@@ -53,8 +53,7 @@ public class BoardView {
         }
 
         // Print a whitespace and encode the player who's turn it is as a character.
-        output.append(' ');
-        output.append(player.toChar());
+        output.append(' ').append(player.toChar());
 
         // Print the current configuration.
         System.out.println(output);
