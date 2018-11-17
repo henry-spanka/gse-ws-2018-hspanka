@@ -1,5 +1,6 @@
 package de.techfak.gse.hspanka;
 
+import de.techfak.gse.hspanka.Exceptions.EmptyBoardConfigurationException;
 import de.techfak.gse.hspanka.Exceptions.InvalidBoardConfiguration;
 import de.techfak.gse.hspanka.Piece.Piece;
 import de.techfak.gse.hspanka.View.BoardView;
@@ -29,7 +30,7 @@ public class BoardController {
         boardView.showCurrentConfiguration(board.getConfiguration(), board.getPlayer());
     }
 
-    public void setDefaultBoardConfiguration() throws InvalidBoardConfiguration {
+    public void setDefaultBoardConfiguration() throws InvalidBoardConfiguration, EmptyBoardConfigurationException {
         String conf = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w";
 
         setBoardConfigurationFromString(conf);
@@ -39,9 +40,9 @@ public class BoardController {
      * @param conf The board configuration to be set in simplified FEN notation
      * @throws InvalidBoardConfiguration Thrown if the supplied configuration cannot be parsed or is invalid
      */
-    public void setBoardConfigurationFromString(String conf) throws InvalidBoardConfiguration {
+    public void setBoardConfigurationFromString(String conf) throws InvalidBoardConfiguration, EmptyBoardConfigurationException {
         if (conf.isEmpty()) {
-            throw new InvalidBoardConfiguration("The configuration is empty.");
+            throw new EmptyBoardConfigurationException("The configuration is empty.");
         }
 
         int row = 7, col = 0;
