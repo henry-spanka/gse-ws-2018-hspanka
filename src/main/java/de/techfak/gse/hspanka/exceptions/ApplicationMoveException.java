@@ -5,6 +5,8 @@ package de.techfak.gse.hspanka.exceptions;
  * Before the application exits it will print the current board state.
  */
 public abstract class ApplicationMoveException extends ApplicationErrorException {
+    @SuppressWarnings("PMD.FieldNamingConventions")
+    private static final long serialVersionUID = 1254117891749590840L;
 
     /**
      * Construct the ApplicationMoveException.

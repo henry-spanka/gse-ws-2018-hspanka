@@ -4,6 +4,9 @@ package de.techfak.gse.hspanka.exceptions;
  * Exception that should be thrown if the board configuration is empty.
  */
 public class EmptyBoardConfigurationException extends ApplicationErrorException {
+    @SuppressWarnings("PMD.FieldNamingConventions")
+    private static final long serialVersionUID = 433735308933254079L;
+
     /**
      * The exit code the application should exit with.
      */

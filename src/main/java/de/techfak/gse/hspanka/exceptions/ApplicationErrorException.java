@@ -4,6 +4,8 @@ package de.techfak.gse.hspanka.exceptions;
  * Base Exception handled by the application to exit with an error code.
  */
 public abstract class ApplicationErrorException extends Exception {
+    @SuppressWarnings("PMD.FieldNamingConventions")
+    private static final long serialVersionUID = 2505365132097187187L;
 
     /**
      * Construct the ApplicationErrorException.
