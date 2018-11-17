@@ -63,7 +63,7 @@ public class Move {
     }
 
     public void validateUniqueness() throws MoveToItselfException {
-        if (cFrom == rFrom && cTo == rTo) {
+        if (cFrom == cTo && rFrom == rTo) {
             throw new MoveToItselfException("A piece can not be moved on itself.");
         }
     }
