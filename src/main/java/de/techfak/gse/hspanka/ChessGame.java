@@ -2,6 +2,7 @@ package de.techfak.gse.hspanka;
 
 import de.techfak.gse.hspanka.Exceptions.ApplicationErrorException;
 import de.techfak.gse.hspanka.Exceptions.EmptyCommandException;
+import de.techfak.gse.hspanka.Exceptions.InvalidMoveException;
 
 import java.util.Scanner;
 
@@ -15,8 +16,9 @@ public class ChessGame {
      * @param args Command line arguments supplied on execution
      */
     public static void main(final String... args) {
+        BoardController boardController = new BoardController();
+
         try {
-            BoardController boardController = new BoardController();
 
             if (args.length > 0) {
                 boardController.setBoardConfigurationFromString(args[0]);
@@ -40,6 +42,10 @@ public class ChessGame {
                 }
             }
         } catch (ApplicationErrorException e) {
+            if (e instanceof InvalidMoveException) {
+                boardController.showCurrentBoard();
+            }
+
             System.exit(e.getErrorCode());
         }
     }
