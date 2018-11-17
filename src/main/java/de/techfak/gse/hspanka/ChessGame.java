@@ -1,6 +1,7 @@
 package de.techfak.gse.hspanka;
 
 import de.techfak.gse.hspanka.Exceptions.ApplicationErrorException;
+import de.techfak.gse.hspanka.Exceptions.EmptyCommandException;
 
 import java.util.Scanner;
 
@@ -29,6 +30,10 @@ public class ChessGame {
                 boardController.showCurrentBoard();
 
                 String nextLine = terminalInput.nextLine();
+
+                if (nextLine.isEmpty()) {
+                    throw new EmptyCommandException("An empty command was supplied");
+                }
 
                 for (Move move: Move.fromString(nextLine)) {
                     boardController.makeMove(move);
