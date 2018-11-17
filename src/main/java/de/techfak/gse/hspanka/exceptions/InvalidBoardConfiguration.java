@@ -1,9 +1,12 @@
 package de.techfak.gse.hspanka.exceptions;
 
 /**
- * Exception that should be thrown if the board configuration is invalid
+ * Exception that should be thrown if the board configuration is invalid.
  */
 public class InvalidBoardConfiguration extends ApplicationErrorException {
+    /**
+     * The exit code the application should exit with.
+     */
     private static final int ERR_CODE = 100;
 
     public InvalidBoardConfiguration(String message) {
