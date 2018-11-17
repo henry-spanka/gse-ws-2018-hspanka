@@ -1,5 +1,6 @@
 package de.techfak.gse.hspanka;
 
+import de.techfak.gse.hspanka.Exceptions.ApplicationMoveException;
 import de.techfak.gse.hspanka.Exceptions.BoardPositionEmptyException;
 import de.techfak.gse.hspanka.Exceptions.PieceNotOwnedException;
 import de.techfak.gse.hspanka.Piece.Piece;
@@ -62,7 +63,7 @@ public class Board {
         return piece;
     }
 
-    public void validateMove(Move move) throws BoardPositionEmptyException, PieceNotOwnedException {
+    public void validateMove(Move move) throws ApplicationMoveException {
         Piece fromPiece = getPiece(move.getrFrom(), move.getcFrom());
 
         if (fromPiece.getPlayer() != player) {

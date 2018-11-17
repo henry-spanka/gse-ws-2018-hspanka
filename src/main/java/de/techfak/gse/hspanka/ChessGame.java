@@ -1,6 +1,8 @@
 package de.techfak.gse.hspanka;
 
-import de.techfak.gse.hspanka.Exceptions.*;
+import de.techfak.gse.hspanka.Exceptions.ApplicationErrorException;
+import de.techfak.gse.hspanka.Exceptions.ApplicationMoveException;
+import de.techfak.gse.hspanka.Exceptions.EmptyCommandException;
 
 import java.util.Scanner;
 
@@ -40,7 +42,7 @@ public class ChessGame {
                 }
             }
         } catch (ApplicationErrorException e) {
-            if (e instanceof InvalidMoveException || e instanceof BoardPositionEmptyException || e instanceof PieceNotOwnedException || e instanceof MoveToItselfException) {
+            if (e instanceof ApplicationMoveException) {
                 boardController.showCurrentBoard();
             }
 
