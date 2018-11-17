@@ -27,17 +27,13 @@ public class Move {
                 throw new InvalidMoveException("The format could not be recognised.");
             }
 
-            char cFrom = m.charAt(i);
-            char rFrom = m.charAt(i + 1);
-            char cTo = m.charAt(i + 3);
-            char rTo = m.charAt(i + 4);
+            int cFrom = m.charAt(i) - 'a';
+            int rFrom = m.charAt(i + 1) - '0' - 1;
+            int cTo = m.charAt(i + 3) - 'a';
+            int rTo = m.charAt(i + 4) - '0' - 1;
 
-            if (cFrom < 'a' || cFrom > 'h' || cTo < 'a' || cTo > 'h') {
-                throw new InvalidMoveException("The column is out of bounds.");
-            }
-
-            if (rFrom < '1' || rFrom > '8' || rTo < '1' || rTo > '8') {
-                throw new InvalidMoveException("The row is out of bounds.");
+            if (cFrom < 0 || cTo < 0 || rFrom < 0 || rTo < 0 || cFrom > 7 || cTo > 7 || rFrom > 7 || rTo > 7) {
+                throw new InvalidMoveException("Move out of bounds");
             }
 
             moves.add(new Move(cFrom, rFrom, cTo, rTo));
@@ -46,5 +42,21 @@ public class Move {
         }
 
         return moves;
+    }
+
+    public int getcFrom() {
+        return cFrom;
+    }
+
+    public int getrFrom() {
+        return rFrom;
+    }
+
+    public int getcTo() {
+        return cTo;
+    }
+
+    public int getrTo() {
+        return rTo;
     }
 }
