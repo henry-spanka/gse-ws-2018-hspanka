@@ -9,6 +9,10 @@ public class EmptyBoardConfigurationException extends ApplicationErrorException 
      */
     private static final int ERR_CODE = 0;
 
+    public EmptyBoardConfigurationException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
     public EmptyBoardConfigurationException(final String message) {
         super(message);
     }

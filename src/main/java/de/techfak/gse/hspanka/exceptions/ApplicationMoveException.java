@@ -18,6 +18,10 @@ public abstract class ApplicationMoveException extends ApplicationErrorException
         super(message);
     }
 
+    public ApplicationMoveException(final String message, Throwable cause) {
+        super(message, cause);
+    }
+
     /**
      * @return An error code that the application exits with
      */

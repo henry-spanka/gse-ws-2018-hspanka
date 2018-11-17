@@ -9,6 +9,10 @@ public class InvalidBoardConfiguration extends ApplicationErrorException {
      */
     private static final int ERR_CODE = 100;
 
+    public InvalidBoardConfiguration(String message, Throwable cause) {
+        super(message, cause);
+    }
+
     public InvalidBoardConfiguration(final String message) {
         super(message);
     }

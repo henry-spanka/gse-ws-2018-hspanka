@@ -13,6 +13,10 @@ public class PieceNotOwnedException extends ApplicationMoveException {
         super(message);
     }
 
+    public PieceNotOwnedException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
     @Override
     public int getErrorCode() {
         return ERR_CODE;

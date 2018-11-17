@@ -13,6 +13,10 @@ public class InvalidMoveException extends ApplicationMoveException {
         super(message);
     }
 
+    public InvalidMoveException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
     @Override
     public int getErrorCode() {
         return ERR_CODE;

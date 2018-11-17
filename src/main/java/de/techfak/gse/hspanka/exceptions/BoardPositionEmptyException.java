@@ -13,6 +13,10 @@ public class BoardPositionEmptyException extends ApplicationMoveException {
         super(message);
     }
 
+    public BoardPositionEmptyException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
     @Override
     public int getErrorCode() {
         return ERR_CODE;

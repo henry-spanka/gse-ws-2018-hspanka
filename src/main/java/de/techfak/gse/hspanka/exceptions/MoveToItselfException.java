@@ -13,6 +13,10 @@ public class MoveToItselfException extends ApplicationMoveException {
         super(message);
     }
 
+    public MoveToItselfException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
     @Override
     public int getErrorCode() {
         return ERR_CODE;

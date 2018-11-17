@@ -17,6 +17,10 @@ public abstract class ApplicationErrorException extends Exception {
         super(message);
     }
 
+    public ApplicationErrorException(final String message, Throwable cause) {
+        super(message, cause);
+    }
+
     /**
      * @return An error code that the application exits with
      */

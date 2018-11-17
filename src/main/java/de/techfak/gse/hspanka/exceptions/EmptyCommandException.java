@@ -13,6 +13,10 @@ public class EmptyCommandException extends ApplicationErrorException {
         super(message);
     }
 
+    public EmptyCommandException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
     @Override
     public int getErrorCode() {
         return ERR_CODE;

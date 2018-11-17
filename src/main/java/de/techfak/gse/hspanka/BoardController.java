@@ -105,7 +105,7 @@ public class BoardController {
                     try {
                         board.setPlayer(Player.playerFromChar(character));
                     } catch (IllegalArgumentException e) {
-                        throw new InvalidBoardConfiguration(e.getMessage());
+                        throw new InvalidBoardConfiguration(e.getMessage(), e.getCause());
                     }
 
                     return;
