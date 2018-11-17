@@ -38,5 +38,15 @@ public class Board {
     public void executeMove(Move move) {
         configuration[move.getrTo()][move.getcTo()] = configuration[move.getrFrom()][move.getcFrom()];
         configuration[move.getrFrom()][move.getcFrom()] = null;
+
+        switchTurn();
+    }
+
+    private void switchTurn() {
+        if (player == Player.BLACK) {
+            player = Player.WHITE;
+        } else {
+            player = Player.BLACK;
+        }
     }
 }
