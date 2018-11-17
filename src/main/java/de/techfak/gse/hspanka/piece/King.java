@@ -7,7 +7,7 @@ import de.techfak.gse.hspanka.Player;
  * @see <a href="https://en.wikipedia.org/wiki/Chess#Setup">Chess Setup</a>
  */
 public class King extends Piece {
-    public King(Player player) {
+    public King(final Player player) {
         super(player);
     }
 

@@ -38,7 +38,7 @@ public class BoardController {
      * @see <a href="https://en.wikipedia.org/wiki/Chess#Movement">Chess Movement</a>
      */
     public void setDefaultBoardConfiguration() throws InvalidBoardConfiguration, EmptyBoardConfigurationException {
-        String conf = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w";
+        final String conf = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w";
 
         setBoardConfigurationFromString(conf);
     }
@@ -50,7 +50,7 @@ public class BoardController {
      * @throws EmptyBoardConfigurationException An empty string was supplied.
      * @see <a href="https://en.wikipedia.org/wiki/Chess#Movement">Chess Movement</a>
      */
-    public void setBoardConfigurationFromString(String conf) throws
+    public void setBoardConfigurationFromString(final String conf) throws
         InvalidBoardConfiguration,
         EmptyBoardConfigurationException {
         if (conf.isEmpty()) {
@@ -110,7 +110,7 @@ public class BoardController {
             }
 
             // Create an instance of the piece and place it on the board.
-            Piece piece = Piece.fromChar(c);
+            final Piece piece = Piece.fromChar(c);
             board.placePiece(piece, row, col);
 
             // Parse the next column in the current row.
@@ -126,7 +126,7 @@ public class BoardController {
      * @param move The move that should be made.
      * @throws ApplicationMoveException If the move is invalid or can not be made.
      */
-    public void makeMove(Move move) throws ApplicationMoveException {
+    public void makeMove(final Move move) throws ApplicationMoveException {
         move.validateUniqueness();
         board.validateMove(move);
         board.executeMove(move);

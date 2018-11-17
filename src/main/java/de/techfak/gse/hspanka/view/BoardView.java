@@ -14,17 +14,17 @@ public class BoardView {
      * @param configuration The configuration that should be displayed.
      * @param player The player who's turn it is.
      */
-    public void showCurrentConfiguration(Piece[][] configuration, Player player) {
+    public void showCurrentConfiguration(final Piece[][] configuration, final Player player) {
         // The number of subsequent empty fields in a row.
         int emptyPieces = 0;
 
         // The string that will be displayed in the user's terminal.
-        StringBuilder output = new StringBuilder();
+        final StringBuilder output = new StringBuilder();
 
         // Row is set to field size - 1 (max value) because it's at the top left of chess board where we start.
         for (int row = Board.FIELD_SIZE - 1; row >= 0; row--) {
             // Check each piece in a row from the left to the right.
-            for (Piece piece: configuration[row]) {
+            for (final Piece piece: configuration[row]) {
                 if (piece == null) {
                     // Empty pieces can be skipped. We will just print the number of pieces we skipped in a given row.
                     emptyPieces++;

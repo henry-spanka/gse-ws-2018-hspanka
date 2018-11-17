@@ -48,7 +48,7 @@ public class Board {
      * @param col The column where the piece should be placed. (a=0, b=1, ..., h=7)
      * @see <a href="https://en.wikipedia.org/wiki/Chess#Movement">Chess Movement</a>
      */
-    public void placePiece(Piece piece, int row, int col) {
+    public void placePiece(final Piece piece, final int row, final int col) {
         configuration[row][col] = piece;
     }
 
@@ -56,7 +56,7 @@ public class Board {
      * Set the current player who turn it is.
      * @param player The player model.
      */
-    public void setPlayer(Player player) {
+    public void setPlayer(final Player player) {
         this.player = player;
     }
 
@@ -64,7 +64,7 @@ public class Board {
      * Executes a move by changing the board configuration.
      * @param move The move object that describes the move.
      */
-    public void executeMove(Move move) {
+    public void executeMove(final Move move) {
         configuration[move.getrTo()][move.getcTo()] = configuration[move.getrFrom()][move.getcFrom()];
         configuration[move.getrFrom()][move.getcFrom()] = null;
 
@@ -89,8 +89,8 @@ public class Board {
      * @return The piece at the specified position.
      * @throws BoardPositionEmptyException Thrown if the Position is empty.
      */
-    private Piece getPiece(int row, int col) throws BoardPositionEmptyException {
-        Piece piece = configuration[row][col];
+    private Piece getPiece(final int row, final int col) throws BoardPositionEmptyException {
+        final Piece piece = configuration[row][col];
 
         if (piece == null) {
             throw new BoardPositionEmptyException("No piece found at the position on the board");
@@ -105,15 +105,15 @@ public class Board {
      * @param move The move that should be checked.
      * @throws ApplicationMoveException A subclass is thrown that indicates the constraint that failed.
      */
-    public void validateMove(Move move) throws ApplicationMoveException {
-        Piece fromPiece = getPiece(move.getrFrom(), move.getcFrom());
+    public void validateMove(final Move move) throws ApplicationMoveException {
+        final Piece fromPiece = getPiece(move.getrFrom(), move.getcFrom());
 
         if (fromPiece.getPlayer() != player) {
             throw new PieceNotOwnedException("Not allowed to move that piece.");
         }
 
         try {
-            Piece toPiece = getPiece(move.getrTo(), move.getcTo());
+            final Piece toPiece = getPiece(move.getrTo(), move.getcTo());
         } catch (BoardPositionEmptyException e) {
             return;
         }

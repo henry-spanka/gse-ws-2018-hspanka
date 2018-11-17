@@ -12,7 +12,7 @@ public enum Player {
      * @return The Player object.
      * @throws IllegalArgumentException Thrown if the character is invalid.
      */
-    public static Player playerFromChar(char c) throws IllegalArgumentException {
+    public static Player playerFromChar(final char c) throws IllegalArgumentException {
         switch (c) {
             case 'w':
                 return WHITE;

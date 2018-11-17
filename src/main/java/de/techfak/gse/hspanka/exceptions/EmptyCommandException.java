@@ -9,7 +9,7 @@ public class EmptyCommandException extends ApplicationErrorException {
      */
     private static final int ERR_CODE = 0;
 
-    public EmptyCommandException(String message) {
+    public EmptyCommandException(final String message) {
         super(message);
     }
 

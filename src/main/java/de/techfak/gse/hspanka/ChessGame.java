@@ -18,7 +18,7 @@ public class ChessGame {
      * @param args Command line arguments supplied on execution
      */
     public static void main(final String... args) {
-        BoardController boardController = new BoardController();
+        final BoardController boardController = new BoardController();
 
         try {
             // Parse the comand line argument as a board configuration if specified.
@@ -29,21 +29,21 @@ public class ChessGame {
             }
 
             // Read moves from the command line.
-            Scanner terminalInput = new Scanner(System.in);
+            final Scanner terminalInput = new Scanner(System.in);
 
             while (true) {
                 // Show the current board after we made a move.
                 boardController.showCurrentBoard();
 
                 // Read a move from the command line.
-                String nextLine = terminalInput.nextLine();
+                final String nextLine = terminalInput.nextLine();
 
                 if (nextLine.isEmpty()) {
                     throw new EmptyCommandException("An empty command was supplied");
                 }
 
                 // Parse the moves and execute them.
-                for (Move move: Move.fromString(nextLine)) {
+                for (final Move move: Move.fromString(nextLine)) {
                     boardController.makeMove(move);
                 }
             }

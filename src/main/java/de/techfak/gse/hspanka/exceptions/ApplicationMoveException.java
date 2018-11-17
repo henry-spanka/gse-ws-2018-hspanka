@@ -14,7 +14,7 @@ public abstract class ApplicationMoveException extends ApplicationErrorException
         super();
     }
 
-    public ApplicationMoveException(String message) {
+    public ApplicationMoveException(final String message) {
         super(message);
     }
 

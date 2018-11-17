@@ -7,7 +7,7 @@ import de.techfak.gse.hspanka.Player;
  * @see <a href="https://en.wikipedia.org/wiki/Chess#Setup">Chess Setup</a>
  */
 public class Pawn extends Piece {
-    public Pawn(Player player) {
+    public Pawn(final Player player) {
         super(player);
     }
 

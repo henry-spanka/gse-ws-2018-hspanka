@@ -7,7 +7,7 @@ import de.techfak.gse.hspanka.Player;
  * @see <a href="https://en.wikipedia.org/wiki/Chess#Setup">Chess Setup</a>
  */
 public class Rook extends Piece {
-    public Rook(Player player) {
+    public Rook(final Player player) {
         super(player);
     }
 

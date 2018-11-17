@@ -9,7 +9,7 @@ public class BoardPositionEmptyException extends ApplicationMoveException {
      */
     private static final int ERR_CODE = 102;
 
-    public BoardPositionEmptyException(String message) {
+    public BoardPositionEmptyException(final String message) {
         super(message);
     }
 

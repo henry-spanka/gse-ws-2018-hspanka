@@ -13,7 +13,7 @@ public abstract class ApplicationErrorException extends Exception {
         super();
     }
 
-    public ApplicationErrorException(String message) {
+    public ApplicationErrorException(final String message) {
         super(message);
     }
 

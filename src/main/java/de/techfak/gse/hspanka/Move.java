@@ -60,8 +60,8 @@ public class Move {
      * @return The ArrayList of Move objects.
      * @throws InvalidMoveException Thrown if the string can not be parsed.
      */
-    public static List<Move> fromString(String m) throws InvalidMoveException {
-        List<Move> moves = new ArrayList<>();
+    public static List<Move> fromString(final String m) throws InvalidMoveException {
+        final List<Move> moves = new ArrayList<>();
 
         int i = 0;
         // Parse each character
@@ -72,10 +72,10 @@ public class Move {
             }
 
             // Convert the chars a to h to integers from 0 to 7.
-            int cFrom = m.charAt(i) - 'a';
-            int rFrom = m.charAt(i + 1) - '0' - 1;
-            int cTo = m.charAt(i + MOVE_TARGET_START) - 'a';
-            int rTo = m.charAt(i + MOVE_TARGET_START + 1) - '0' - 1;
+            final int cFrom = m.charAt(i) - 'a';
+            final int rFrom = m.charAt(i + 1) - '0' - 1;
+            final int cTo = m.charAt(i + MOVE_TARGET_START) - 'a';
+            final int rTo = m.charAt(i + MOVE_TARGET_START + 1) - '0' - 1;
 
             // Check the bounds (0-7) of the move.
             if (cFrom < 0 || cTo < 0 || rFrom < 0 || rTo < 0 ||

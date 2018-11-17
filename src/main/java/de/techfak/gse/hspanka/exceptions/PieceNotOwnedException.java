@@ -9,7 +9,7 @@ public class PieceNotOwnedException extends ApplicationMoveException {
      */
     private static final int ERR_CODE = 103;
 
-    public PieceNotOwnedException(String message) {
+    public PieceNotOwnedException(final String message) {
         super(message);
     }
 

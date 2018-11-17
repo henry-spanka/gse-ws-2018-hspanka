@@ -9,7 +9,7 @@ public class InvalidMoveException extends ApplicationMoveException {
      */
     private static final int ERR_CODE = 101;
 
-    public InvalidMoveException(String message) {
+    public InvalidMoveException(final String message) {
         super(message);
     }
 

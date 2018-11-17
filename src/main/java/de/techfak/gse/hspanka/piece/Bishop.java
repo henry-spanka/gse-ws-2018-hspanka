@@ -7,7 +7,7 @@ import de.techfak.gse.hspanka.Player;
  * @see <a href="https://en.wikipedia.org/wiki/Chess#Setup">Chess Setup</a>
  */
 public class Bishop extends Piece {
-    public Bishop(Player player) {
+    public Bishop(final Player player) {
         super(player);
     }
 

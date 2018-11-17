@@ -14,7 +14,7 @@ public abstract class Piece {
      */
     private Player player;
 
-    public Piece(Player player) {
+    public Piece(final Player player) {
         this.player = player;
     }
 
@@ -26,7 +26,7 @@ public abstract class Piece {
      * @return A piece subclass.
      * @throws InvalidBoardConfiguration Thrown if the character can not be recognised.
      */
-    public static Piece fromChar(char c) throws InvalidBoardConfiguration {
+    public static Piece fromChar(final char c) throws InvalidBoardConfiguration {
         switch (c) {
             case 'k':
                 return new King(Player.BLACK);
@@ -67,7 +67,7 @@ public abstract class Piece {
      * @param c The character to be converted.
      * @return The converted character (Piece in FEN notation).
      */
-    public char playerToChar(char c) {
+    public char playerToChar(final char c) {
         if (player == Player.BLACK) {
             return Character.toLowerCase(c);
         } else {

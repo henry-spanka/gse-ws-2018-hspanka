@@ -9,7 +9,7 @@ public class MoveToItselfException extends ApplicationMoveException {
      */
     private static final int ERR_CODE = 104;
 
-    public MoveToItselfException(String message) {
+    public MoveToItselfException(final String message) {
         super(message);
     }
 
