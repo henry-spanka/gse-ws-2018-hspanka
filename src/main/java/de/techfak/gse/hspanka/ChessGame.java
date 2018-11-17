@@ -40,7 +40,7 @@ public class ChessGame {
                 }
             }
         } catch (ApplicationErrorException e) {
-            if (e instanceof InvalidMoveException || e instanceof BoardPositionEmptyException || e instanceof PieceNotOwnedException) {
+            if (e instanceof InvalidMoveException || e instanceof BoardPositionEmptyException || e instanceof PieceNotOwnedException || e instanceof MoveToItselfException) {
                 boardController.showCurrentBoard();
             }
 
