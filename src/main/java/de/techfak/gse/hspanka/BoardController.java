@@ -9,22 +9,22 @@ import de.techfak.gse.hspanka.view.BoardView;
 /**
  * Controller for interacting with the Chess Board.
  */
-public class BoardController {
+class BoardController {
     /**
      * The FEN row separator.
      */
-    public static final char FEN_ROW_SEPARATOR = '/';
+    private static final char FEN_ROW_SEPARATOR = '/';
 
     /**
      * The board model.
      */
-    private Board board;
+    private final Board board;
     /**
      * The board view.
      */
-    private BoardView boardView;
+    private final BoardView boardView;
 
-    public BoardController() {
+    BoardController() {
         board = new Board();
         boardView = new BoardView();
     }

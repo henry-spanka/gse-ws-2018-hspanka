@@ -18,7 +18,7 @@ public class Board {
      * The board array in which the pieces are stored.
      * Null values indicate that the field is empty.
      */
-    private Piece[][] configuration = new Piece[8][8];
+    private final Piece[][] configuration = new Piece[FIELD_SIZE][FIELD_SIZE];
 
     /**
      * The player who currently makes a move.

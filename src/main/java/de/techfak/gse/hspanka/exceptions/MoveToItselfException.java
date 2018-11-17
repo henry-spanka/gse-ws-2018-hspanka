@@ -13,6 +13,7 @@ public class MoveToItselfException extends ApplicationMoveException {
         super(message);
     }
 
+    @SuppressWarnings("unused")
     public MoveToItselfException(String message, Throwable cause) {
         super(message, cause);
     }

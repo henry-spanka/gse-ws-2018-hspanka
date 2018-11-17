@@ -18,6 +18,7 @@ public class BoardPositionEmptyException extends ApplicationMoveException {
     }
 
     @Override
+    @SuppressWarnings("unused")
     public int getErrorCode() {
         return ERR_CODE;
     }

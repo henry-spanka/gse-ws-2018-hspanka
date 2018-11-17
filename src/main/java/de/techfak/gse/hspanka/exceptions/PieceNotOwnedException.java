@@ -13,6 +13,7 @@ public class PieceNotOwnedException extends ApplicationMoveException {
         super(message);
     }
 
+    @SuppressWarnings("unused")
     public PieceNotOwnedException(String message, Throwable cause) {
         super(message, cause);
     }

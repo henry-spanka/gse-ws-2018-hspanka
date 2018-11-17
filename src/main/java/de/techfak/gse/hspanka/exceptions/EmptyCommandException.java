@@ -13,6 +13,7 @@ public class EmptyCommandException extends ApplicationErrorException {
         super(message);
     }
 
+    @SuppressWarnings("unused")
     public EmptyCommandException(String message, Throwable cause) {
         super(message, cause);
     }

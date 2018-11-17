@@ -12,9 +12,9 @@ public abstract class Piece {
     /**
      * The player who's piece this is.
      */
-    private Player player;
+    private final Player player;
 
-    public Piece(final Player player) {
+    Piece(final Player player) {
         this.player = player;
     }
 
@@ -67,7 +67,7 @@ public abstract class Piece {
      * @param player The character to be converted.
      * @return The converted character (Piece in FEN notation).
      */
-    public char playerToChar(final char player) {
+    char playerToChar(final char player) {
         if (this.player == Player.BLACK) {
             return Character.toLowerCase(player);
         } else {

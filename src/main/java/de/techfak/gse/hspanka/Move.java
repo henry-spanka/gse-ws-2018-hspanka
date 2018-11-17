@@ -9,36 +9,36 @@ import java.util.List;
 /**
  * Describes a move on the chess board that should be made.
  */
-public class Move {
+final class Move {
     /**
      * The start of the target move position in FEN notation.
      */
-    public static final int MOVE_TARGET_START = 3;
+    private static final int MOVE_TARGET_START = 3;
 
     /**
      * The length of a move in FEN notation.
      */
-    public static final int MOVE_LENGTH = 6;
+    private static final int MOVE_LENGTH = 6;
 
     /**
      * The column of the Piece which should be moved.
      */
-    private int cFrom;
+    private final int cFrom;
 
     /**
      * the row of the Piece which should be moved.
      */
-    private int rFrom;
+    private final int rFrom;
 
     /**
      * The column of the target piece/field.
      */
-    private int cTo;
+    private final int cTo;
 
     /**
      * The row of the target piece/field.
      */
-    private int rTo;
+    private final int rTo;
 
     /**
      * The constructor of the Move.
@@ -47,7 +47,7 @@ public class Move {
      * @param cTo The column of the target piece/field.
      * @param rTo The row of the target piece/field.
      */
-    public Move(final int cFrom, final int rFrom, final int cTo, final int rTo) {
+    private Move(final int cFrom, final int rFrom, final int cTo, final int rTo) {
         this.cFrom = cFrom;
         this.rFrom = rFrom;
         this.cTo = cTo;
@@ -67,7 +67,8 @@ public class Move {
         // Parse each character
         while (pos < moveString.length()) {
             // Lookahead MOVE_LENGTH characters to make sure the move has the correct length and syntax.
-            if (pos + MOVE_LENGTH > moveString.length() || moveString.charAt(pos + 2) != '-' || moveString.charAt(pos + MOVE_LENGTH - 1) != ';') {
+            if (pos + MOVE_LENGTH > moveString.length() || moveString.charAt(pos + 2) != '-' ||
+                moveString.charAt(pos + MOVE_LENGTH - 1) != ';') {
                 throw new InvalidMoveException("The format could not be recognised.");
             }
 

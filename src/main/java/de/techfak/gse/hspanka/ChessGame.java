@@ -10,7 +10,7 @@ import java.util.Scanner;
  * The main class that is invoked on startup.
  * Responsible for initialising the controller.
  */
-public class ChessGame {
+class ChessGame {
     /**
      * Bootstrap the Application.
      * This function initialises the controller and handles input from the command line.
@@ -32,6 +32,7 @@ public class ChessGame {
             // Read moves from the command line.
             final Scanner terminalInput = new Scanner(System.in);
 
+            //noinspection InfiniteLoopStatement
             while (true) {
                 // Show the current board after we made a move.
                 boardController.showCurrentBoard();
