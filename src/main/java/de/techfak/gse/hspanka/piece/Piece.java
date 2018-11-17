@@ -3,13 +3,29 @@ package de.techfak.gse.hspanka.piece;
 import de.techfak.gse.hspanka.exceptions.InvalidBoardConfiguration;
 import de.techfak.gse.hspanka.Player;
 
+/**
+ * A abstract Piece is used to play Chess.
+ * This class should be extended by all piece types.
+ * @see <a href="https://en.wikipedia.org/wiki/Chess#Setup">Chess Setup</a>
+ */
 public abstract class Piece {
+    /**
+     * The player who's piece this is.
+     */
     private Player player;
 
     public Piece(Player player) {
         this.player = player;
     }
 
+    /**
+     * Returns the Piece object from a character as specified in FEN notation.
+     * @param c The char to be converted.
+     *          Lowercase characters correspond to the black player and uppercase
+     *          to the white player.
+     * @return A piece subclass.
+     * @throws InvalidBoardConfiguration Thrown if the character can not be recognised.
+     */
     public static Piece fromChar(char c) throws InvalidBoardConfiguration {
         switch (c) {
             case 'k':
@@ -44,6 +60,13 @@ public abstract class Piece {
         }
     }
 
+    /**
+     * Converts a character depending on player owning the Piece.
+     * If the player is black then the character will be converted to lower case.
+     * Otherwise (white player) to upper case.
+     * @param c The character to be converted.
+     * @return The converted character (Piece in FEN notation).
+     */
     public char playerToChar(char c) {
         if (player == Player.BLACK) {
             return Character.toLowerCase(c);
@@ -52,8 +75,17 @@ public abstract class Piece {
         }
     }
 
+    /**
+     * Converts the piece to a character in FEN notation.
+     * @see <a href="{https://tdpe.techfak.uni-bielefeld.de/projects/gse-ws-2018/wiki/Schachnotation">Chess notation</a>
+     * @return The character represented by the piece in FEN notation.
+     */
     public abstract char toChar();
 
+    /**
+     * Get the current player.
+     * @return the current player.
+     */
     public Player getPlayer() {
         return player;
     }
