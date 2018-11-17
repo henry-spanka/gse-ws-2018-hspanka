@@ -1,6 +1,8 @@
 package de.techfak.gse.hspanka;
 
 import de.techfak.gse.hspanka.Exceptions.InvalidMoveException;
+import de.techfak.gse.hspanka.Exceptions.MoveToItselfException;
+import de.techfak.gse.hspanka.Piece.Piece;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,5 +60,11 @@ public class Move {
 
     public int getrTo() {
         return rTo;
+    }
+
+    public void validateUniqueness() throws MoveToItselfException {
+        if (cFrom == rFrom && cTo == rTo) {
+            throw new MoveToItselfException("A piece can not be moved on itself.");
+        }
     }
 }
