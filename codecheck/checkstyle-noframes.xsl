@@ -1,6 +1,6 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
 <xsl:output method="html" indent="yes"/>
-<xsl:decimal-format decimal-separator="." grouping-separator="," />
+<xsl:decimal-format/>
 
 <xsl:template match="checkstyle">
     <html>
@@ -58,7 +58,7 @@
         </style>
         </head>
         <body>
-            <a name="#top"></a>
+          <a name="#top"/>
       <!-- jakarta logo -->
       <table border="0" cellpadding="0" cellspacing="0" width="100%">
       <tr>
@@ -120,7 +120,7 @@
     
     
     <xsl:template match="file">
-    <a name="#{@name}"></a>
+      <a name="#{@name}"/>
     <h3>File <xsl:value-of select="@name"/></h3>
     
     <table class="log" border="0" cellpadding="5" cellspacing="2" width="100%">
