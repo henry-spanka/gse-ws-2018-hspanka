@@ -127,10 +127,10 @@ class BoardController {
             }
 
             /*
-             * Check that we do not exceed the column boundary.
+             * Check that we do not exceed the column/row boundary.
              */
-            if (col > Board.FIELD_SIZE - 1) {
-                throw new InvalidBoardConfiguration("Too many pieces in a row.");
+            if (col > Board.FIELD_SIZE - 1 || row < 0) {
+                throw new InvalidBoardConfiguration("Too many pieces in a row or column.");
             }
 
             // Create an instance of the piece and place it on the board.
