@@ -60,6 +60,7 @@ class BoardController {
      * @throws EmptyBoardConfigurationException An empty string was supplied.
      * @see <a href="https://en.wikipedia.org/wiki/Chess#Movement">Chess Movement</a>
      */
+    @SuppressWarnings("PMD.CyclomaticComplexity")
     public void setBoardConfigurationFromString(final String conf) throws
         InvalidBoardConfiguration,
         EmptyBoardConfigurationException {
