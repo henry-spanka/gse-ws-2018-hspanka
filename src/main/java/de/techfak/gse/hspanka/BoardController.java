@@ -105,6 +105,13 @@ class BoardController {
              * Just to be safe, we check that after the whitespace only one character follows.
              */
             if (Character.isWhitespace(character)) {
+                /*
+                 * Check that we have a full board.
+                 */
+                if (col != Board.FIELD_SIZE || row != 0) {
+                    throw new InvalidBoardConfiguration("Some pieces are missing.");
+                }
+
                 if (i + 2 == conf.length()) {
                     character = conf.charAt(i + 1);
                     try {
@@ -117,6 +124,13 @@ class BoardController {
                 } else {
                     throw new InvalidBoardConfiguration("Whitespace encountered but not expected.");
                 }
+            }
+
+            /*
+             * Check that we do not exceed the column boundary.
+             */
+            if (col > Board.FIELD_SIZE - 1) {
+                throw new InvalidBoardConfiguration("Too many pieces in a row.");
             }
 
             // Create an instance of the piece and place it on the board.
