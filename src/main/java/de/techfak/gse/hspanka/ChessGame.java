@@ -29,7 +29,7 @@ class ChessGame {
                 app = appFactory.makeConsoleApplication();
             }
 
-            app.run();
+            app.run(args);
         } catch (ApplicationErrorException e) {
             // Terminate the program with the exit code specified in the exception class.
             System.exit(e.getErrorCode());
