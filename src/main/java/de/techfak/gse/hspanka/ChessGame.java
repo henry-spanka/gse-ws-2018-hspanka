@@ -12,18 +12,22 @@ import de.techfak.gse.hspanka.exceptions.ApplicationMoveException;
 class ChessGame {
     /**
      * Bootstrap the Application.
-     * This function initialises the controller and handles input from the command line.
      *
      * @param args Command line arguments supplied on execution
      */
-    @SuppressWarnings({"PMD.DoNotCallSystemExit", "PMD.AvoidInstanceofChecksInCatchClause"})
+    @SuppressWarnings("PMD.DoNotCallSystemExit")
     public static void main(final String... args) {
         ChessGameApplicationFactory appFactory = new ChessGameApplicationFactory();
 
         try {
             ChessGameApplication app;
 
-            app = appFactory.makeConsoleApplication();
+            // Parse the command line argument if '--gui' is set
+            if (args.length > 0 && args[0].equals("--gui")) {
+                app = appFactory.makeGuiApplication();
+            } else {
+                app = appFactory.makeConsoleApplication();
+            }
 
             app.run();
         } catch (ApplicationErrorException e) {

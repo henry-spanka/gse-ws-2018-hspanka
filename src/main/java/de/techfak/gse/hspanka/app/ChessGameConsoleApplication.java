@@ -10,6 +10,11 @@ import java.util.Scanner;
 
 public class ChessGameConsoleApplication implements ChessGameApplication {
     @Override
+    /**
+     * This function initialises the controller and handles input from the command line.
+     *
+     * @param args Command line arguments supplied on execution
+     */
     public void run(String... args) throws ApplicationErrorException {
         final BoardController boardController = new BoardController();
 
