@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Describes a move on the chess board that should be made.
  */
-final class Move {
+public final class Move {
     /**
      * The start of the target move position in FEN notation.
      */

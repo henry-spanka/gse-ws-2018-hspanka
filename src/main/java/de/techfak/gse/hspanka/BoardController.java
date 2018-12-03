@@ -9,7 +9,7 @@ import de.techfak.gse.hspanka.view.BoardView;
 /**
  * Controller for interacting with the Chess Board.
  */
-class BoardController {
+public class BoardController {
     /**
      * The FEN row separator.
      */
@@ -27,7 +27,7 @@ class BoardController {
     /**
      * Construct the board controller and setup the dependencies.
      */
-    BoardController() {
+    public BoardController() {
         board = new Board();
         boardView = new BoardView();
     }

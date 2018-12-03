@@ -1,10 +1,9 @@
 package de.techfak.gse.hspanka;
 
+import de.techfak.gse.hspanka.app.ChessGameApplication;
+import de.techfak.gse.hspanka.app.ChessGameApplicationFactory;
 import de.techfak.gse.hspanka.exceptions.ApplicationErrorException;
 import de.techfak.gse.hspanka.exceptions.ApplicationMoveException;
-import de.techfak.gse.hspanka.exceptions.EmptyCommandException;
-
-import java.util.Scanner;
 
 /**
  * The main class that is invoked on startup.
@@ -19,42 +18,15 @@ class ChessGame {
      */
     @SuppressWarnings({"PMD.DoNotCallSystemExit", "PMD.AvoidInstanceofChecksInCatchClause"})
     public static void main(final String... args) {
-        final BoardController boardController = new BoardController();
+        ChessGameApplicationFactory appFactory = new ChessGameApplicationFactory();
 
         try {
-            // Parse the comand line argument as a board configuration if specified.
-            if (args.length > 0) {
-                boardController.setBoardConfigurationFromString(args[0]);
-            } else {
-                boardController.setDefaultBoardConfiguration();
-            }
+            ChessGameApplication app;
 
-            // Read moves from the command line.
-            final Scanner terminalInput = new Scanner(System.in);
+            app = appFactory.makeConsoleApplication();
 
-            //noinspection InfiniteLoopStatement
-            while (true) {
-                // Show the current board after we made a move.
-                boardController.showCurrentBoard();
-
-                // Read a move from the command line.
-                final String nextLine = terminalInput.nextLine();
-
-                if (nextLine.isEmpty()) {
-                    throw new EmptyCommandException("An empty command was supplied");
-                }
-
-                // Parse the moves and execute them.
-                for (final Move move : Move.fromString(nextLine)) {
-                    boardController.makeMove(move);
-                }
-            }
+            app.run();
         } catch (ApplicationErrorException e) {
-            // Print the board before exiting. This means the exception was thrown during a move.
-            if (e instanceof ApplicationMoveException) {
-                boardController.showCurrentBoard();
-            }
-
             // Terminate the program with the exit code specified in the exception class.
             System.exit(e.getErrorCode());
         }
