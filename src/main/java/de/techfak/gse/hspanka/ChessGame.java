@@ -3,7 +3,6 @@ package de.techfak.gse.hspanka;
 import de.techfak.gse.hspanka.app.ChessGameApplication;
 import de.techfak.gse.hspanka.app.ChessGameApplicationFactory;
 import de.techfak.gse.hspanka.exceptions.ApplicationErrorException;
-import de.techfak.gse.hspanka.exceptions.ApplicationMoveException;
 
 /**
  * The main class that is invoked on startup.
