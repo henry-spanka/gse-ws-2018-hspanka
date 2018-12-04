@@ -5,10 +5,17 @@ import de.techfak.gse.hspanka.Move;
 import de.techfak.gse.hspanka.exceptions.ApplicationErrorException;
 import de.techfak.gse.hspanka.exceptions.ApplicationMoveException;
 import de.techfak.gse.hspanka.exceptions.EmptyCommandException;
+import javafx.scene.Scene;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.Scanner;
 
 public class ChessGameConsoleApplication implements ChessGameApplication {
+    @Override
+    public void setScene(Scene scene) {
+        throw new NotImplementedException();
+    }
+
     @Override
     /**
      * This function initialises the controller and handles input from the command line.

@@ -8,7 +8,8 @@ import de.techfak.gse.hspanka.exceptions.ApplicationErrorException;
  * The main class that is invoked on startup.
  * Responsible for initialising the controller.
  */
-class ChessGame {
+public class ChessGame {
+    private static ChessGameApplication app;
     /**
      * Bootstrap the Application.
      *
@@ -20,13 +21,14 @@ class ChessGame {
 
         try {
             ChessGameApplication app;
-
             // Parse the command line argument if '--gui' is set
             if (args.length > 0 && args[0].equals("--gui")) {
                 app = appFactory.makeGuiApplication();
             } else {
                 app = appFactory.makeConsoleApplication();
             }
+
+            setApp(app);
 
             app.run(args);
         } catch (ApplicationErrorException e) {
@@ -35,4 +37,11 @@ class ChessGame {
         }
     }
 
+    public static ChessGameApplication getApp() {
+        return app;
+    }
+
+    public static void setApp(ChessGameApplication app) {
+        ChessGame.app = app;
+    }
 }

@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.techfak.gse.hspanka.controller.console.BoardController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.techfak.gse.hspanka.controller.gui.AppController">
    <children>
       <HBox alignment="CENTER" focusTraversable="true" prefHeight="100.0" prefWidth="200.0">
          <children>
@@ -14,7 +14,7 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button alignment="TOP_LEFT" mnemonicParsing="false" text="New Game" />
+            <Button fx:id="startDefaultGameButton" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#startDefaultGame" text="New Game" />
          </children>
       </HBox>
    </children>
