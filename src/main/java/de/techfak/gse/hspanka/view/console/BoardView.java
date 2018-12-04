@@ -1,4 +1,4 @@
-package de.techfak.gse.hspanka.view;
+package de.techfak.gse.hspanka.view.console;
 
 import de.techfak.gse.hspanka.Board;
 import de.techfak.gse.hspanka.Player;

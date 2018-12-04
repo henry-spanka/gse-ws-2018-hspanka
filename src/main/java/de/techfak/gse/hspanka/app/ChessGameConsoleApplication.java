@@ -1,6 +1,6 @@
 package de.techfak.gse.hspanka.app;
 
-import de.techfak.gse.hspanka.BoardController;
+import de.techfak.gse.hspanka.controller.console.BoardController;
 import de.techfak.gse.hspanka.Move;
 import de.techfak.gse.hspanka.exceptions.ApplicationErrorException;
 import de.techfak.gse.hspanka.exceptions.ApplicationMoveException;

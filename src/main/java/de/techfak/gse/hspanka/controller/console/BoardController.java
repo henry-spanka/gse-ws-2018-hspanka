@@ -1,10 +1,13 @@
-package de.techfak.gse.hspanka;
+package de.techfak.gse.hspanka.controller.console;
 
+import de.techfak.gse.hspanka.Board;
+import de.techfak.gse.hspanka.Move;
+import de.techfak.gse.hspanka.Player;
 import de.techfak.gse.hspanka.exceptions.ApplicationMoveException;
 import de.techfak.gse.hspanka.exceptions.EmptyBoardConfigurationException;
 import de.techfak.gse.hspanka.exceptions.InvalidBoardConfiguration;
 import de.techfak.gse.hspanka.piece.Piece;
-import de.techfak.gse.hspanka.view.BoardView;
+import de.techfak.gse.hspanka.view.console.BoardView;
 
 /**
  * Controller for interacting with the Chess Board.
