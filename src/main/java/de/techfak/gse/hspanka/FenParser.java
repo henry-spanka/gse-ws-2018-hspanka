@@ -35,8 +35,8 @@ public class FenParser {
             throw new EmptyBoardConfigurationException("The configuration is empty.");
         }
 
-        // Row is set to field size - 1 (max value) because it's at the top left of chess board where we start.
-        int row = Board.FIELD_SIZE - 1;
+        // We start at the top left of the board.
+        int row = 0;
         int col = 0;
 
         // Parse the conf character by character.
@@ -61,7 +61,7 @@ public class FenParser {
                 }
 
                 // Parse the next row starting at the first column.
-                row -= 1;
+                row += 1;
                 col = 0;
                 continue;
             }
@@ -76,7 +76,7 @@ public class FenParser {
                 /*
                  * Check that we have a full board.
                  */
-                if (col != Board.FIELD_SIZE || row != 0) {
+                if (col != Board.FIELD_SIZE || row != Board.FIELD_SIZE - 1) {
                     throw new InvalidBoardConfiguration("Some pieces are missing.");
                 }
 
@@ -97,7 +97,7 @@ public class FenParser {
             /*
              * Check that we do not exceed the column/row boundary.
              */
-            if (col > Board.FIELD_SIZE - 1 || row < 0) {
+            if (col > Board.FIELD_SIZE - 1 || row > Board.FIELD_SIZE - 1) {
                 throw new InvalidBoardConfiguration("Too many pieces in a row or column.");
             }
 

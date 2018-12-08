@@ -22,8 +22,8 @@ public class BoardView {
         // The string that will be displayed in the user's terminal.
         final StringBuilder output = new StringBuilder();
 
-        // Row is set to field size - 1 (max value) because it's at the top left of chess board where we start.
-        for (int row = Board.FIELD_SIZE - 1; row >= 0; row--) {
+        // We start at the top left of the board.
+        for (int row = 0; row < Board.FIELD_SIZE; row++) {
             // Check each piece in a row from the left to the right.
             for (final Piece piece : configuration[row]) {
                 if (piece == null) {
@@ -48,7 +48,7 @@ public class BoardView {
             }
 
             // If we are not in the last row, add the row separator '/'.
-            if (row > 0) {
+            if (row < Board.FIELD_SIZE - 1) {
                 output.append('/');
             }
         }
