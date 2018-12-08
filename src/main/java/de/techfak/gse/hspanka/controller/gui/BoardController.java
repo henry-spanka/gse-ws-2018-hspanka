@@ -1,4 +1,7 @@
 package de.techfak.gse.hspanka.controller.gui;
 
-public class BoardController {
+public class BoardController extends AbstractGuiController {
+    public void setDefaultConfiguration() {
+        // TODO: IMPLEMENT
+    }
 }

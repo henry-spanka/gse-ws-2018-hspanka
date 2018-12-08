@@ -1,7 +1,5 @@
 package de.techfak.gse.hspanka.controller.gui;
 
-import de.techfak.gse.hspanka.ChessGame;
-import de.techfak.gse.hspanka.app.ChessGameGUIApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,9 +8,7 @@ import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
-public class AppController {
-    private ChessGameGUIApplication app;
-
+public class AppController extends AbstractGuiController {
     @FXML
     private Button startDefaultGameButton;
 
@@ -21,12 +17,11 @@ public class AppController {
 
         Pane root = fxmlLoader.load();
         BoardController boardController = fxmlLoader.getController();
+        boardController.setApp(app);
 
         Scene scene = new Scene(root);
         app.setScene(scene);
-    }
 
-    public void setApp(ChessGameGUIApplication app) {
-        this.app = app;
+        boardController.setDefaultConfiguration();
     }
 }
