@@ -87,7 +87,13 @@ public final class Move {
             }
 
             // Add the move to the Array list.
-            moves.add(new Move(cFrom, rFrom, cTo, rTo));
+            // Invert the positions as the board is indexed from top-left to right-bottom.
+            moves.add(new Move(
+                Math.abs(cFrom - Board.FIELD_SIZE + 1),
+                Math.abs(rFrom - Board.FIELD_SIZE + 1),
+                Math.abs(cTo - Board.FIELD_SIZE + 1),
+                Math.abs(rTo - Board.FIELD_SIZE + 1)
+            ));
 
             // Skip the next MOVE_LENGTH characters as we have already parsed them.
             pos += MOVE_LENGTH;
