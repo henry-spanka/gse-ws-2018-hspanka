@@ -15,7 +15,6 @@ public class BoardPane extends GridPane {
 
     private StackPane getStackPane(int col, int row) {
         for (Node node : super.getChildren()) {
-            System.out.println("looping");
             Integer node_col = BoardPane.getColumnIndex(node);
             Integer node_row = BoardPane.getRowIndex(node);
 
@@ -62,7 +61,7 @@ public class BoardPane extends GridPane {
                 Piece piece = pieces[row][col];
 
                 if (piece == null) {
-                    System.out.println("null");
+                    // TODO: Remove Background
                 } else {
                     StackPane stackPane = getStackPane(col, row);
 
