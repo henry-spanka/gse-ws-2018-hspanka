@@ -1,5 +1,6 @@
 package de.techfak.gse.hspanka.controller.gui;
 
+import de.techfak.gse.hspanka.exceptions.ApplicationErrorException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,7 +13,7 @@ public class AppController extends AbstractGuiController {
     @FXML
     private Button startDefaultGameButton;
 
-    public void startDefaultGame() throws IOException  {
+    public void startDefaultGame() throws IOException, ApplicationErrorException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("board.fxml"));
 
         Pane root = fxmlLoader.load();
