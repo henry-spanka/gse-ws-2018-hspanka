@@ -112,4 +112,48 @@ public class FenParser {
         // No whitespace was encountered where the player is encoded but the end of the string was reached.
         throw new InvalidBoardConfiguration("The string terminated unexpectedly.");
     }
+
+    public String toString(Piece[][] pieces, Player player) {
+        // The number of subsequent empty fields in a row.
+        int emptyPieces = 0;
+
+        // The string that will be displayed in the user's terminal.
+        final StringBuilder result = new StringBuilder();
+
+        // We start at the top left of the board.
+        for (int row = 0; row < Board.FIELD_SIZE; row++) {
+            // Check each piece in a row from the left to the right.
+            for (final Piece piece : pieces[row]) {
+                if (piece == null) {
+                    // Empty pieces can be skipped. We will just print the number of pieces we skipped in a given row.
+                    emptyPieces++;
+                } else {
+                    // Print the number of pieces we skipped before printing the next piece.
+                    if (emptyPieces > 0) {
+                        result.append(emptyPieces);
+                        emptyPieces = 0;
+                    }
+
+                    // Print the next piece.
+                    result.append(piece.toChar());
+                }
+            }
+
+            // If we skipped pieces at the end of a row we need to print them now before continuing to the next row.
+            if (emptyPieces > 0) {
+                result.append(emptyPieces);
+                emptyPieces = 0;
+            }
+
+            // If we are not in the last row, add the row separator '/'.
+            if (row < Board.FIELD_SIZE - 1) {
+                result.append('/');
+            }
+        }
+
+        // Print a whitespace and encode the player who's turn it is as a character.
+        result.append(' ').append(player.toChar());
+
+        return result.toString();
+    }
 }
