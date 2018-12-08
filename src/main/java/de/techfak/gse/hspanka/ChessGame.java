@@ -9,7 +9,6 @@ import de.techfak.gse.hspanka.exceptions.ApplicationErrorException;
  * Responsible for initialising the controller.
  */
 public class ChessGame {
-    private static ChessGameApplication app;
     /**
      * Bootstrap the Application.
      *
@@ -28,20 +27,10 @@ public class ChessGame {
                 app = appFactory.makeConsoleApplication();
             }
 
-            setApp(app);
-
             app.run(args);
         } catch (ApplicationErrorException e) {
             // Terminate the program with the exit code specified in the exception class.
             System.exit(e.getErrorCode());
         }
-    }
-
-    public static ChessGameApplication getApp() {
-        return app;
-    }
-
-    public static void setApp(ChessGameApplication app) {
-        ChessGame.app = app;
     }
 }

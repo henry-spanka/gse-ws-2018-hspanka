@@ -1,6 +1,5 @@
 package de.techfak.gse.hspanka.app;
 
-import de.techfak.gse.hspanka.ChessGame;
 import de.techfak.gse.hspanka.controller.gui.AppController;
 import de.techfak.gse.hspanka.exceptions.ApplicationErrorException;
 import javafx.application.Application;
@@ -20,12 +19,12 @@ public class ChessGameGUIApplication extends Application implements ChessGameApp
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        ChessGame.setApp(this);
         stage = primaryStage;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("app.fxml"));
 
         Pane root = fxmlLoader.load();
         AppController appController = fxmlLoader.getController();
+        appController.setApp(this);
 
         Scene scene = new Scene(root);
 
