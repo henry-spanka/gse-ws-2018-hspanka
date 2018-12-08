@@ -87,11 +87,11 @@ public final class Move {
             }
 
             // Add the move to the Array list.
-            // Invert the positions as the board is indexed from top-left to right-bottom.
+            // Invert the row positions as the board is indexed from top-left to right-bottom.
             moves.add(new Move(
-                Math.abs(cFrom - Board.FIELD_SIZE + 1),
+                Math.abs(cFrom),
                 Math.abs(rFrom - Board.FIELD_SIZE + 1),
-                Math.abs(cTo - Board.FIELD_SIZE + 1),
+                Math.abs(cTo),
                 Math.abs(rTo - Board.FIELD_SIZE + 1)
             ));
 
