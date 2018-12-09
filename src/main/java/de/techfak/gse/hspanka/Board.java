@@ -2,6 +2,7 @@ package de.techfak.gse.hspanka;
 
 import de.techfak.gse.hspanka.exceptions.ApplicationMoveException;
 import de.techfak.gse.hspanka.exceptions.BoardPositionEmptyException;
+import de.techfak.gse.hspanka.exceptions.CannotMoveToOwnedPieceException;
 import de.techfak.gse.hspanka.exceptions.PieceNotOwnedException;
 import de.techfak.gse.hspanka.piece.Piece;
 
@@ -145,22 +146,44 @@ public class Board extends Observable {
 
     /**
      * Validates the move by checking whether the move is legal and the player
-     * can actually move this piece.
+     * can actually move this piece. Does not check destination
      *
      * @param move The move that should be checked
      * @throws ApplicationMoveException A subclass is thrown that indicates the constraint that failed.
      */
     public void validateMove(Move move) throws ApplicationMoveException {
-        final Piece fromPiece = getPiece(move.getrFrom(), move.getcFrom());
+        validateMove(move, false);
+    }
 
-        if (fromPiece.getPlayer() != player) {
-            throw new PieceNotOwnedException("Not allowed to move that piece.");
+    /**
+     * Validates the move by checking whether the move is legal and the player
+     * can actually move this piece.
+     *
+     * @param move The move that should be checked.
+     * @param checkDest Whether we should also check that the destination is correct.
+     * @throws ApplicationMoveException A subclass is thrown that indicates the constraint that failed.
+     */
+    public void validateMove(Move move, boolean checkDest) throws ApplicationMoveException {
+        if (move.sourceComplete()) {
+            final Piece fromPiece = getPiece(move.getrFrom(), move.getcFrom());
+
+            if (fromPiece.getPlayer() != player) {
+                throw new PieceNotOwnedException("Not allowed to move that piece.");
+            }
         }
 
-        /*try {
-            final Piece toPiece = getPiece(move.getrTo(), move.getcTo());
-        } catch (BoardPositionEmptyException e) {
-            return;
-        }*/
+        if (move.destinationComplete() && checkDest) {
+            try {
+                final Piece toPiece = getPiece(move.getrTo(), move.getcTo());
+
+                if (toPiece.getPlayer() == player) {
+                    throw new CannotMoveToOwnedPieceException(
+                        "Cannot move to a piece that is owned by the executing player"
+                    );
+                }
+            } catch (BoardPositionEmptyException e) {
+                //
+            }
+        }
     }
 }
