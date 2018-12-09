@@ -16,7 +16,11 @@ public class FileChooser {
         this.window = window;
     }
 
-    public File getFile() {
+    public File saveFile() {
         return fileChooser.showSaveDialog(window);
+    }
+
+    public File openFile() {
+        return fileChooser.showOpenDialog(window);
     }
 }
