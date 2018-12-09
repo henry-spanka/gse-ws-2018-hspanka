@@ -1,8 +1,6 @@
 package de.techfak.gse.hspanka;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 public class FileIO {
     private final File file;
@@ -21,5 +19,16 @@ public class FileIO {
         }
 
         return true;
+    }
+
+    public String read() {
+        try {
+            FileReader fileReader = new FileReader(file);
+            BufferedReader buffReader = new BufferedReader(fileReader);
+
+            return buffReader.readLine();
+        } catch (IOException e) {
+            return null;
+        }
     }
 }

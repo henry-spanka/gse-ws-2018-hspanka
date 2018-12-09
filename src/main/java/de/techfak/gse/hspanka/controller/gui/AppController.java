@@ -1,5 +1,6 @@
 package de.techfak.gse.hspanka.controller.gui;
 
+import de.techfak.gse.hspanka.FileIO;
 import de.techfak.gse.hspanka.exceptions.ApplicationErrorException;
 import de.techfak.gse.hspanka.view.gui.FileChooser;
 import javafx.event.ActionEvent;
@@ -23,10 +24,16 @@ public class AppController extends AbstractGuiController {
     }
 
     @FXML
-    public void loadGame(ActionEvent event) {
+    public void loadGame(ActionEvent event) throws IOException, ApplicationErrorException {
         event.consume();
 
         FileChooser fileChooser = new FileChooser(app.getStage());
-        File fileName = fileChooser.openFile();
+        File file = fileChooser.openFile();
+
+        FileIO fileIO = new FileIO(file);
+        String fen = fileIO.read();
+
+        BoardController boardController = (BoardController) app.loadView("board");
+        boardController.setBoardConfigurationFromString(fen);
     }
 }
