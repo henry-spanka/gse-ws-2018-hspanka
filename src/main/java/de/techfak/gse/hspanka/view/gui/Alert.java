@@ -4,7 +4,7 @@ package de.techfak.gse.hspanka.view.gui;
  * Shows an alert box.
  */
 public class Alert extends javafx.scene.control.Alert {
-    public Alert(AlertType alertType) {
+    public Alert(final AlertType alertType) {
         super(alertType);
     }
 

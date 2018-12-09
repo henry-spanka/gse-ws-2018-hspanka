@@ -23,7 +23,7 @@ public class ChessGameGUIApplication extends Application implements ChessGameApp
      * Set's a scene.
      * @param scene The scene to be set.
      */
-    public void setScene(Scene scene) {
+    public void setScene(final Scene scene) {
         stage.setTitle("Chess Game");
         stage.setScene(scene);
         stage.show();
@@ -41,7 +41,7 @@ public class ChessGameGUIApplication extends Application implements ChessGameApp
      * Initializes the stage.
      */
     @Override
-    public void start(Stage primaryStage) throws IOException {
+    public void start(final Stage primaryStage) throws IOException {
         stage = primaryStage;
 
         loadView("app");
@@ -51,7 +51,7 @@ public class ChessGameGUIApplication extends Application implements ChessGameApp
      * Launches JavaFX.
      */
     @Override
-    public void run(String... args) {
+    public void run(final String... args) {
         launch(args);
     }
 
@@ -61,14 +61,15 @@ public class ChessGameGUIApplication extends Application implements ChessGameApp
      * @return The controller used by the new.
      * @throws IOException If the controller cannot be found.
      */
-    public AbstractGuiController loadView(String viewName) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource(viewName + ".fxml"));
+    @SuppressWarnings("PMD.UseProperClassLoader")
+    public AbstractGuiController loadView(final String viewName) throws IOException {
+        final FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource(viewName + ".fxml"));
 
-        Pane root = fxmlLoader.load();
-        AbstractGuiController controller = fxmlLoader.getController();
+        final Pane root = fxmlLoader.load();
+        final AbstractGuiController controller = fxmlLoader.getController();
         controller.setApp(this);
 
-        Scene scene = new Scene(root);
+        final Scene scene = new Scene(root);
 
         setScene(scene);
 

@@ -21,7 +21,7 @@ public class PieceImage extends Image {
      * Initializes the piece image.
      * @param piece The piece which should be shown.
      */
-    public PieceImage(Piece piece) {
+    public PieceImage(final Piece piece) {
         super(IMG_LOCATION + getImageName(piece));
     }
 
@@ -30,7 +30,7 @@ public class PieceImage extends Image {
      * @param piece The piece to be converted.
      * @return The image name.
      */
-    private static String getImageName(Piece piece) {
+    private static String getImageName(final Piece piece) {
         switch (piece.toChar()) {
             case 'k':
                 return "king_black.png";

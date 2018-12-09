@@ -11,13 +11,13 @@ public class FileChooser {
     /**
      * Which extensions should be allowed to select.
      */
-    public static final javafx.stage.FileChooser.ExtensionFilter extensionFilter =
+    public static final javafx.stage.FileChooser.ExtensionFilter EXTENSION_FILTER =
         new javafx.stage.FileChooser.ExtensionFilter("FEN files (*.fen)", "*.fen");
 
     /**
      * The File chooser.
      */
-    private javafx.stage.FileChooser fileChooser;
+    private javafx.stage.FileChooser fxFileChooser;
 
     /**
      * The Window where the chooser should be displayed.
@@ -28,9 +28,9 @@ public class FileChooser {
      * Initializes the File Chooser.
      * @param window The window where the chooser should be displayed.
      */
-    public FileChooser(Window window) {
-        fileChooser = new javafx.stage.FileChooser();
-        fileChooser.getExtensionFilters().add(extensionFilter);
+    public FileChooser(final Window window) {
+        fxFileChooser = new javafx.stage.FileChooser();
+        fxFileChooser.getExtensionFilters().add(EXTENSION_FILTER);
         this.window = window;
     }
 
@@ -39,7 +39,7 @@ public class FileChooser {
      * @return The file selected.
      */
     public File saveFile() {
-        return fileChooser.showSaveDialog(window);
+        return fxFileChooser.showSaveDialog(window);
     }
 
     /**
@@ -47,6 +47,6 @@ public class FileChooser {
      * @return The file selected.
      */
     public File openFile() {
-        return fileChooser.showOpenDialog(window);
+        return fxFileChooser.showOpenDialog(window);
     }
 }

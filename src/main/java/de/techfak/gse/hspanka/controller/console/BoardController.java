@@ -60,7 +60,7 @@ public class BoardController {
     public void setBoardConfigurationFromString(final String conf) throws
         InvalidBoardConfiguration,
         EmptyBoardConfigurationException {
-        FenParser fen = new FenParser(board);
+        final FenParser fen = new FenParser(board);
 
         fen.parse(conf);
     }

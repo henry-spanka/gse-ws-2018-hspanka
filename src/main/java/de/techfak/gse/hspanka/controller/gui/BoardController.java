@@ -39,6 +39,8 @@ public class BoardController extends AbstractGuiController implements Observer {
     public CurrentPlayerText currentPlayer;
 
     public BoardController() {
+        super();
+
         this.board = new Board();
     }
 
@@ -80,19 +82,19 @@ public class BoardController extends AbstractGuiController implements Observer {
     public void setBoardConfigurationFromString(final String conf) throws
         InvalidBoardConfiguration,
         EmptyBoardConfigurationException {
-        FenParser fen = new FenParser(board);
+        final FenParser fen = new FenParser(board);
 
         fen.parse(conf);
     }
 
     /**
      * Called by the observervable to update the view.
-     * @param o The observable.
+     * @param observable The observable.
      * @param arg The board if update is forced.
      */
     @Override
-    public void update(Observable o, Object arg) {
-        if (o != null && o.equals(this.board)) {
+    public void update(final Observable observable, final Object arg) {
+        if (observable != null && observable.equals(this.board)) {
             grid.redraw(this.board.getConfiguration(), this.board.getMove());
             currentPlayer.setPlayer(this.board.getPlayer());
         } else if (arg != null && arg.equals(this.board)) {
@@ -108,33 +110,33 @@ public class BoardController extends AbstractGuiController implements Observer {
      * @param row The row clicked.
      */
     @FXML
-    public void fieldClicked(int col, int row) {
-        Move move = this.board.getMove();
+    public void fieldClicked(final int col, final int row) {
+        final Move move = this.board.getMove();
 
-        Move staged_move;
+        Move stagedMove;
 
         // If no selection has been made yet, try set selection as source positition.
         if (move == null) {
-            staged_move = new Move(col, row, Move.POS_UNKNOWN, Move.POS_UNKNOWN);
+            stagedMove = new Move(col, row, Move.POS_UNKNOWN, Move.POS_UNKNOWN);
             try {
-                this.board.validateMove(staged_move);
+                this.board.validateMove(stagedMove);
             } catch (ApplicationMoveException e) {
                 return;
             }
         // If the col and row is present in the move, we remove the source position to deselect.
         } else if (move.isInvolved(col, row)) {
-            staged_move = new Move(Move.POS_UNKNOWN, Move.POS_UNKNOWN, move.getcTo(), move.getrTo());
+            stagedMove = new Move(Move.POS_UNKNOWN, Move.POS_UNKNOWN, move.getcTo(), move.getrTo());
         } else {
         // Try to set position as source position and if it fails try destination instead.
-            staged_move = new Move(col, row, move.getcTo(), move.getrTo());
+            stagedMove = new Move(col, row, move.getcTo(), move.getrTo());
             try {
                 // Check if the position is a valid source position.
-                this.board.validateMove(staged_move, true);
+                this.board.validateMove(stagedMove, true);
             } catch (ApplicationMoveException e) {
-                staged_move = new Move(move.getcFrom(), move.getrFrom(), col, row);
+                stagedMove = new Move(move.getcFrom(), move.getrFrom(), col, row);
                 try {
                     // Try as destination position instead.
-                    this.board.validateMove(staged_move, true);
+                    this.board.validateMove(stagedMove, true);
                 } catch (ApplicationMoveException e3) {
                     return;
                 }
@@ -142,10 +144,10 @@ public class BoardController extends AbstractGuiController implements Observer {
         }
 
         // Set's the move on the board.
-        this.board.setMove(staged_move);
+        this.board.setMove(stagedMove);
 
         // If source and destionation is present, we should execute the move.
-        if (staged_move.sourceComplete() && staged_move.destinationComplete()) {
+        if (stagedMove.sourceComplete() && stagedMove.destinationComplete()) {
             board.executeMove();
         }
     }
@@ -155,33 +157,31 @@ public class BoardController extends AbstractGuiController implements Observer {
      * @param event The ActionEvent.
      */
     @FXML
-    public void saveGame(ActionEvent event) {
+    public void saveGame(final ActionEvent event) {
         event.consume();
 
         // Open the FileChooser.
-        FileChooser fileChooser = new FileChooser(app.getStage());
-        File fileName = fileChooser.saveFile();
+        final FileChooser fileChooser = new FileChooser(app.getStage());
+        final File fileName = fileChooser.saveFile();
 
         // If the fileName is null show an error message.
         if (fileName == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
+            final Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.saveError();
             alert.show();
             return;
         }
 
         // Convert the configuration into a string.
-        FenParser fenParser = new FenParser(null);
-        String data = fenParser.toString(board.getConfiguration(), board.getPlayer());
+        final FenParser fenParser = new FenParser(null);
+        final String data = fenParser.toString(board.getConfiguration(), board.getPlayer());
 
         // Try to write to the selected file. If it fails show an error message instead.
-        FileIO fileIO = new FileIO(fileName);
-        if (fileIO.write(data) == false) {
-            if (fileName == null) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.saveError();
-                alert.show();
-            }
+        final FileIO fileIO = new FileIO(fileName);
+        if (!fileIO.write(data)) {
+            final Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.saveError();
+            alert.show();
         }
     }
 
@@ -191,7 +191,7 @@ public class BoardController extends AbstractGuiController implements Observer {
      * @throws IOException Thrown if the view cannot be found.
      */
     @FXML
-    public void backToMenu(ActionEvent event) throws IOException {
+    public void backToMenu(final ActionEvent event) throws IOException {
         event.consume();
 
         app.loadView("app");

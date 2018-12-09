@@ -9,7 +9,7 @@ public class ChessGameApplicationFactory {
      * @return The Console application instance implementing ChessGameApplication.
      */
     public ChessGameApplication makeConsoleApplication() {
-        ChessGameApplication app = new ChessGameConsoleApplication();
+        final ChessGameApplication app = new ChessGameConsoleApplication();
 
         return app;
     }
@@ -19,7 +19,7 @@ public class ChessGameApplicationFactory {
      * @return The GUI application instance implementing ChessGameApplication.
      */
     public ChessGameApplication makeGuiApplication() {
-        ChessGameApplication app = new ChessGameGUIApplication();
+        final ChessGameApplication app = new ChessGameGUIApplication();
 
         return app;
     }

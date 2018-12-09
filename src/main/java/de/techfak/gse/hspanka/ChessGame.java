@@ -16,7 +16,7 @@ public class ChessGame {
      */
     @SuppressWarnings("PMD.DoNotCallSystemExit")
     public static void main(final String... args) {
-        ChessGameApplicationFactory appFactory = new ChessGameApplicationFactory();
+        final ChessGameApplicationFactory appFactory = new ChessGameApplicationFactory();
 
         try {
             ChessGameApplication app;

@@ -153,7 +153,7 @@ public final class Move {
      * @param row The row.
      * @return True or False.
      */
-    public boolean isInvolved(int col, int row) {
+    public boolean isInvolved(final int col, final int row) {
         return (cFrom == col && rFrom == row) || (cTo == col && rTo == row);
     }
 }

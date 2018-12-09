@@ -6,7 +6,6 @@ import de.techfak.gse.hspanka.exceptions.ApplicationErrorException;
 import de.techfak.gse.hspanka.exceptions.ApplicationMoveException;
 import de.techfak.gse.hspanka.exceptions.EmptyCommandException;
 import javafx.scene.Scene;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.Scanner;
 
@@ -18,8 +17,8 @@ public class ChessGameConsoleApplication implements ChessGameApplication {
      * Set's a scene. Not appliciable for console.
      */
     @Override
-    public void setScene(Scene scene) {
-        throw new NotImplementedException();
+    public void setScene(final Scene scene) {
+        throw new IllegalArgumentException();
     }
 
     /**
@@ -28,7 +27,8 @@ public class ChessGameConsoleApplication implements ChessGameApplication {
      * @param args Command line arguments supplied on execution
      */
     @Override
-    public void run(String... args) throws ApplicationErrorException {
+    @SuppressWarnings("PMD.AvoidInstanceofChecksInCatchClause")
+    public void run(final String... args) throws ApplicationErrorException {
         final BoardController boardController = new BoardController();
 
         try {

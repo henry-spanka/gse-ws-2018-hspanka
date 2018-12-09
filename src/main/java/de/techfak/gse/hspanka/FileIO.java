@@ -24,9 +24,10 @@ public class FileIO {
      * @param data The data to be written.
      * @return Returns true if the write was successfull. False instead.
      */
-    public boolean write(String data) {
+    @SuppressWarnings("PMD.AvoidFileStream")
+    public boolean write(final String data) {
         try {
-            FileWriter fileWriter = new FileWriter(file);
+            final FileWriter fileWriter = new FileWriter(file);
             fileWriter.write(data);
             fileWriter.close();
         } catch (IOException e) {
@@ -40,10 +41,11 @@ public class FileIO {
      * Reads the first line from the file.
      * @return The string or null if an error occurred.
      */
+    @SuppressWarnings("PMD.AvoidFileStream")
     public String read() {
         try {
-            FileReader fileReader = new FileReader(file);
-            BufferedReader buffReader = new BufferedReader(fileReader);
+            final FileReader fileReader = new FileReader(file);
+            final BufferedReader buffReader = new BufferedReader(fileReader);
 
             return buffReader.readLine();
         } catch (IOException e) {

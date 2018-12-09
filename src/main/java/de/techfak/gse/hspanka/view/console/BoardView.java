@@ -16,7 +16,7 @@ public class BoardView {
      * @param player        The player who's turn it is.
      */
     public void showCurrentConfiguration(final Piece[][] configuration, final Player player) {
-        FenParser fen = new FenParser(null);
+        final FenParser fen = new FenParser(null);
 
         // Print the current configuration.
         System.out.println(fen.toString(configuration, player));

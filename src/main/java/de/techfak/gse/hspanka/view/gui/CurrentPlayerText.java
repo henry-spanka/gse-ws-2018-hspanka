@@ -11,7 +11,7 @@ public class CurrentPlayerText extends Text {
      * Set's the text appropriately.
      * @param player The current player.
      */
-    public void setPlayer(Player player) {
+    public void setPlayer(final Player player) {
         if (player == Player.WHITE) {
             setText("Current Player: White");
         } else {

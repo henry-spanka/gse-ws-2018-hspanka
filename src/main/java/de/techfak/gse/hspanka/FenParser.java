@@ -21,7 +21,7 @@ public class FenParser {
      * Initialize the FEN parser with the board.
      * @param board The board model.
      */
-    public FenParser(Board board) {
+    public FenParser(final Board board) {
         this.board = board;
     }
 
@@ -125,7 +125,7 @@ public class FenParser {
      * @param player The player to be converted.
      * @return A string in FEN notation.
      */
-    public String toString(Piece[][] pieces, Player player) {
+    public String toString(final Piece[][] pieces, final Player player) {
         // The number of subsequent empty fields in a row.
         int emptyPieces = 0;
 

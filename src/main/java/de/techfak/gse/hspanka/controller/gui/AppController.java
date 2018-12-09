@@ -21,10 +21,10 @@ public class AppController extends AbstractGuiController {
      * @throws ApplicationErrorException Thrown if the configuration cannot be parsed.
      */
     @FXML
-    public void startDefaultGame(ActionEvent event) throws IOException, ApplicationErrorException {
+    public void startDefaultGame(final ActionEvent event) throws IOException, ApplicationErrorException {
         event.consume();
 
-        BoardController boardController = (BoardController) app.loadView("board");
+        final BoardController boardController = (BoardController) app.loadView("board");
         boardController.setDefaultConfiguration();
     }
 
@@ -35,20 +35,20 @@ public class AppController extends AbstractGuiController {
      * @throws ApplicationErrorException Thrown if the content cannot be parsed.
      */
     @FXML
-    public void loadGame(ActionEvent event) throws IOException, ApplicationErrorException {
+    public void loadGame(final ActionEvent event) throws IOException, ApplicationErrorException {
         event.consume();
 
-        FileChooser fileChooser = new FileChooser(app.getStage());
-        File file = fileChooser.openFile();
+        final FileChooser fileChooser = new FileChooser(app.getStage());
+        final File file = fileChooser.openFile();
 
-        FileIO fileIO = new FileIO(file);
-        String fen = fileIO.read();
+        final FileIO fileIO = new FileIO(file);
+        final String fen = fileIO.read();
 
-        BoardController boardController = (BoardController) app.loadView("board");
+        final BoardController boardController = (BoardController) app.loadView("board");
         try {
             boardController.setBoardConfigurationFromString(fen);
         } catch (ApplicationErrorException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
+            final Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.loadError();
             alert.show();
         }

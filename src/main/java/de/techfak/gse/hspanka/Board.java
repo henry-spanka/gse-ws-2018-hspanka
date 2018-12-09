@@ -82,7 +82,7 @@ public class Board extends Observable {
         return move;
     }
 
-    public void setMove(Move move) {
+    public void setMove(final Move move) {
         this.move = move;
 
         setChanged();
@@ -150,7 +150,7 @@ public class Board extends Observable {
      * @param move The move that should be checked
      * @throws ApplicationMoveException A subclass is thrown that indicates the constraint that failed.
      */
-    public void validateMove(Move move) throws ApplicationMoveException {
+    public void validateMove(final Move move) throws ApplicationMoveException {
         validateMove(move, false);
     }
 
@@ -162,7 +162,8 @@ public class Board extends Observable {
      * @param checkDest Whether we should also check that the destination is correct.
      * @throws ApplicationMoveException A subclass is thrown that indicates the constraint that failed.
      */
-    public void validateMove(Move move, boolean checkDest) throws ApplicationMoveException {
+    @SuppressWarnings("PMD.EmptyCatchBlock")
+    public void validateMove(final Move move, final boolean checkDest) throws ApplicationMoveException {
         if (move.sourceComplete()) {
             final Piece fromPiece = getPiece(move.getrFrom(), move.getcFrom());
 
