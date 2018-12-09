@@ -11,6 +11,9 @@ import javafx.scene.Node;
 import javafx.scene.control.Control;
 import javafx.scene.layout.*;
 
+/**
+ * Displays the board on the stage.
+ */
 public class BoardPane extends GridPane {
     /**
      * The BoardController so we can setup the event handler correctly.
@@ -21,6 +24,12 @@ public class BoardPane extends GridPane {
         super();
     }
 
+    /**
+     * Returns the StackPane at the specified position.
+     * @param col The column.
+     * @param row The row.
+     * @return The StackPane or null if not found.
+     */
     private StackPane getStackPane(int col, int row) {
         for (Node node : super.getChildren()) {
             Integer node_col = BoardPane.getColumnIndex(node);
@@ -34,6 +43,12 @@ public class BoardPane extends GridPane {
         return null;
     }
 
+    /**
+     * Registers an event handler for the given row and column.
+     * @param col The column where the event was fired.
+     * @param row The row where the event was fired.
+     * @param pane The pane on which the event handler should be registered.
+     */
     private void registerEventHandler(int col, int row, StackPane pane) {
         EventHandler handler = event -> {
             controller.fieldClicked(col, row);
@@ -43,6 +58,12 @@ public class BoardPane extends GridPane {
         pane.setOnMouseClicked(handler);
     }
 
+    /**
+     * Set's the color of a field to display the alternating grid colors.
+     * @param col The column where the field is located.
+     * @param row The row where the field is located.
+     * @param pane The pane on which the color should be applied.
+     */
     private void colorizeField(int col, int row, StackPane pane) {
         if ((row + col) % 2 == 0) {
             pane.setStyle("-fx-background-color: #e8ebef");
@@ -51,9 +72,14 @@ public class BoardPane extends GridPane {
         }
     }
 
+    /**
+     * Initializes the grid
+     * @param controller The board controller on which the event handler's should be registered.
+     */
     public void initialize(BoardController controller) {
         this.controller = controller;
 
+        // Set the grid size.
         for (int i = 0; i < Board.FIELD_SIZE; i++) {
             getColumnConstraints().add(
                 new ColumnConstraints(5, Control.USE_COMPUTED_SIZE, Double.POSITIVE_INFINITY, Priority.ALWAYS,
@@ -67,6 +93,8 @@ public class BoardPane extends GridPane {
             );
         }
 
+        // Create a square in each cell and color it.
+        // Also registers the event handler.
         for (int row = 0; row < Board.FIELD_SIZE; row++) {
             for (int col = 0; col < Board.FIELD_SIZE; col++) {
                 StackPane square = new StackPane();
@@ -79,6 +107,11 @@ public class BoardPane extends GridPane {
         }
     }
 
+    /**
+     * Redraw's the grid.
+     * @param pieces The pieces that should be drawed on the grid.
+     * @param move The current player.
+     */
     public void redraw(Piece[][] pieces, Move move) {
         for (int row = 0; row < Board.FIELD_SIZE; row++) {
             // Check each piece in a row from the left to the right.
@@ -87,12 +120,14 @@ public class BoardPane extends GridPane {
 
                 StackPane square = getStackPane(col, row);
 
+                // If we have a field without a piece, remove the image (if any) and set color.
                 if (piece == null) {
                     if (square.getChildren() != null && !square.getChildren().isEmpty()) {
                         square.getChildren().remove(0, 1);
                         colorizeField(col, row, square);
                     }
                 } else {
+                    // Check if the field is involved in a move and color it appropriately.
                     if (move != null && move.isInvolved(col, row)) {
                         square.setStyle("-fx-background-color: #1e4156");
                     } else {
@@ -100,6 +135,7 @@ public class BoardPane extends GridPane {
                     }
 
                     StackPane piece_pane;
+                    // Add the piece image onto the cell.
                     if (square.getChildren() == null || square.getChildren().isEmpty()) {
                         piece_pane = new StackPane();
                         square.getChildren().add(piece_pane);

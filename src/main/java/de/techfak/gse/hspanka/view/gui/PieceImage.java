@@ -4,6 +4,9 @@ import de.techfak.gse.hspanka.piece.Piece;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 
+/**
+ * Displays the piece's image.
+ */
 public class PieceImage extends Image {
     /**
      * The location of the images
@@ -14,10 +17,19 @@ public class PieceImage extends Image {
      */
     private static final double IMAGE_SIZE = 0.75;
 
+    /**
+     * Initializes the piece image.
+     * @param piece The piece which should be shown.
+     */
     public PieceImage(Piece piece) {
         super(IMG_LOCATION + getImageName(piece));
     }
 
+    /**
+     * Convert's a piece to the corresponding image name.
+     * @param piece The piece to be converted.
+     * @return The image name.
+     */
     private static String getImageName(Piece piece) {
         switch (piece.toChar()) {
             case 'k':
@@ -51,6 +63,10 @@ public class PieceImage extends Image {
         }
     }
 
+    /**
+     * Returns the image wrapped into a background.
+     * @return The JavaFX background.
+     */
     public Background asBackground() {
         return new Background(
             new BackgroundImage(this,

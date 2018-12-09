@@ -10,18 +10,24 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.Scanner;
 
+/**
+ * The Console application.
+ */
 public class ChessGameConsoleApplication implements ChessGameApplication {
+    /**
+     * Set's a scene. Not appliciable for console.
+     */
     @Override
     public void setScene(Scene scene) {
         throw new NotImplementedException();
     }
 
-    @Override
     /**
      * This function initialises the controller and handles input from the command line.
      *
      * @param args Command line arguments supplied on execution
      */
+    @Override
     public void run(String... args) throws ApplicationErrorException {
         final BoardController boardController = new BoardController();
 

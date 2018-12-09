@@ -17,7 +17,7 @@
          <children>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Button fx:id="startDefaultGameButton" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#startDefaultGame" text="New Game" />
+                  <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#startDefaultGame" text="New Game" />
                   <Button mnemonicParsing="false" onAction="#loadGame" text="Load Game">
                      <VBox.margin>
                         <Insets top="10.0" />

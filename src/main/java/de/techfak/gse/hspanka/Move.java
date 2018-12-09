@@ -131,20 +131,28 @@ public final class Move {
         }
     }
 
+    /**
+     * Checks if the source is complete.
+     * @return True of False.
+     */
     public boolean sourceComplete() {
         return cFrom != POS_UNKNOWN && rFrom != POS_UNKNOWN;
     }
 
+    /**
+     * Checks if the destination is complete.
+     * @return True or False.
+     */
     public boolean destinationComplete() {
         return cTo != POS_UNKNOWN && rTo != POS_UNKNOWN;
     }
 
-    public void validateComplete() throws InvalidMoveException {
-        if (!sourceComplete() || !destinationComplete()) {
-            throw new InvalidMoveException("The move cannot be executed because it is missing some positions");
-        }
-    }
-
+    /**
+     * Checks if a position is involved in a move.
+     * @param col The column.
+     * @param row The row.
+     * @return True or False.
+     */
     public boolean isInvolved(int col, int row) {
         return (cFrom == col && rFrom == row) || (cTo == col && rTo == row);
     }

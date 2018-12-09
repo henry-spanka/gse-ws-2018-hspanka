@@ -25,8 +25,16 @@ public class BoardController extends AbstractGuiController implements Observer {
      * The board model.
      */
     private final Board board;
+
+    /**
+     * The Board grid.
+     */
     @FXML
     public BoardPane grid;
+
+    /**
+     * The current player text.
+     */
     @FXML
     public CurrentPlayerText currentPlayer;
 
@@ -34,6 +42,9 @@ public class BoardController extends AbstractGuiController implements Observer {
         this.board = new Board();
     }
 
+    /**
+     * Initializes the grid.
+     */
     @FXML
     public void initialize() {
         Platform.runLater(() -> {
@@ -66,7 +77,6 @@ public class BoardController extends AbstractGuiController implements Observer {
      * @throws EmptyBoardConfigurationException An empty string was supplied.
      * @see <a href="https://en.wikipedia.org/wiki/Chess#Movement">Chess Movement</a>
      */
-    @SuppressWarnings("PMD.CyclomaticComplexity")
     public void setBoardConfigurationFromString(final String conf) throws
         InvalidBoardConfiguration,
         EmptyBoardConfigurationException {
@@ -75,6 +85,11 @@ public class BoardController extends AbstractGuiController implements Observer {
         fen.parse(conf);
     }
 
+    /**
+     * Called by the observervable to update the view.
+     * @param o The observable.
+     * @param arg The board if update is forced.
+     */
     @Override
     public void update(Observable o, Object arg) {
         if (o != null && o.equals(this.board)) {
@@ -87,12 +102,18 @@ public class BoardController extends AbstractGuiController implements Observer {
         }
     }
 
+    /**
+     * Called by JavaFX when a field is clicked.
+     * @param col The column clicked.
+     * @param row The row clicked.
+     */
     @FXML
     public void fieldClicked(int col, int row) {
         Move move = this.board.getMove();
 
-        Move staged_move = null;
+        Move staged_move;
 
+        // If no selection has been made yet, try set selection as source positition.
         if (move == null) {
             staged_move = new Move(col, row, Move.POS_UNKNOWN, Move.POS_UNKNOWN);
             try {
@@ -100,15 +121,19 @@ public class BoardController extends AbstractGuiController implements Observer {
             } catch (ApplicationMoveException e) {
                 return;
             }
+        // If the col and row is present in the move, we remove the source position to deselect.
         } else if (move.isInvolved(col, row)) {
             staged_move = new Move(Move.POS_UNKNOWN, Move.POS_UNKNOWN, move.getcTo(), move.getrTo());
         } else {
+        // Try to set position as source position and if it fails try destination instead.
             staged_move = new Move(col, row, move.getcTo(), move.getrTo());
             try {
+                // Check if the position is a valid source position.
                 this.board.validateMove(staged_move, true);
             } catch (ApplicationMoveException e) {
                 staged_move = new Move(move.getcFrom(), move.getrFrom(), col, row);
                 try {
+                    // Try as destination position instead.
                     this.board.validateMove(staged_move, true);
                 } catch (ApplicationMoveException e3) {
                     return;
@@ -116,20 +141,28 @@ public class BoardController extends AbstractGuiController implements Observer {
             }
         }
 
+        // Set's the move on the board.
         this.board.setMove(staged_move);
 
+        // If source and destionation is present, we should execute the move.
         if (staged_move.sourceComplete() && staged_move.destinationComplete()) {
             board.executeMove();
         }
     }
 
+    /**
+     * Saves the game to a file. Called by JavaFX when the button is selected.
+     * @param event The ActionEvent.
+     */
     @FXML
     public void saveGame(ActionEvent event) {
         event.consume();
 
+        // Open the FileChooser.
         FileChooser fileChooser = new FileChooser(app.getStage());
         File fileName = fileChooser.saveFile();
 
+        // If the fileName is null show an error message.
         if (fileName == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.saveError();
@@ -137,9 +170,11 @@ public class BoardController extends AbstractGuiController implements Observer {
             return;
         }
 
+        // Convert the configuration into a string.
         FenParser fenParser = new FenParser(null);
         String data = fenParser.toString(board.getConfiguration(), board.getPlayer());
 
+        // Try to write to the selected file. If it fails show an error message instead.
         FileIO fileIO = new FileIO(fileName);
         if (fileIO.write(data) == false) {
             if (fileName == null) {
@@ -150,6 +185,11 @@ public class BoardController extends AbstractGuiController implements Observer {
         }
     }
 
+    /**
+     * Switches the view back to the menu (AppController).
+     * @param event The ActionEvent.
+     * @throws IOException Thrown if the view cannot be found.
+     */
     @FXML
     public void backToMenu(ActionEvent event) throws IOException {
         event.consume();

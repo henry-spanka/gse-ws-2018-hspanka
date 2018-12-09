@@ -4,6 +4,9 @@ import de.techfak.gse.hspanka.exceptions.EmptyBoardConfigurationException;
 import de.techfak.gse.hspanka.exceptions.InvalidBoardConfiguration;
 import de.techfak.gse.hspanka.piece.Piece;
 
+/**
+ * Parses a String in FEN Notation.
+ */
 public class FenParser {
     /**
      * The FEN row separator.
@@ -14,6 +17,10 @@ public class FenParser {
      */
     private final Board board;
 
+    /**
+     * Initialize the FEN parser with the board.
+     * @param board The board model.
+     */
     public FenParser(Board board) {
         this.board = board;
     }
@@ -112,6 +119,12 @@ public class FenParser {
         throw new InvalidBoardConfiguration("The string terminated unexpectedly.");
     }
 
+    /**
+     * Converts from pieces back to a string.
+     * @param pieces The pieces to be converted.
+     * @param player The player to be converted.
+     * @return A string in FEN notation.
+     */
     public String toString(Piece[][] pieces, Player player) {
         // The number of subsequent empty fields in a row.
         int emptyPieces = 0;
