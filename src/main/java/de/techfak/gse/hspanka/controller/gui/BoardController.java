@@ -127,7 +127,7 @@ public class BoardController extends AbstractGuiController implements Observer {
         Move stagedMove;
 
         // If no selection has been made yet, try set selection as source positition.
-        if (move == null) {
+        if (move == null || (!move.sourceComplete() && !move.destinationComplete())) {
             stagedMove = new Move(col, row, Move.POS_UNKNOWN, Move.POS_UNKNOWN);
             try {
                 this.board.validateMove(stagedMove);
