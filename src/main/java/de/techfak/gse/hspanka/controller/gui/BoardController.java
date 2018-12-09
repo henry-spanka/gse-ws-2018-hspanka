@@ -9,7 +9,10 @@ import de.techfak.gse.hspanka.view.gui.CurrentPlayerText;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 
-public class BoardController extends AbstractGuiController {
+import java.util.Observable;
+import java.util.Observer;
+
+public class BoardController extends AbstractGuiController implements Observer {
     @FXML
     public BoardPane grid;
 
@@ -29,8 +32,10 @@ public class BoardController extends AbstractGuiController {
     public void initialize() {
         Platform.runLater(() -> {
             grid.initialize();
-            grid.redraw(board.getConfiguration());
-            currentPlayer.setPlayer((board.getPlayer()));
+            // We can only observe after we have initialized the grid
+            // We make sure the view is at least once up to date.
+            board.addObserver(this);
+            this.update(null, this.board);
         });
     }
 
@@ -62,5 +67,17 @@ public class BoardController extends AbstractGuiController {
         FenParser fen = new FenParser(board);
 
         fen.parse(conf);
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        if (o != null && o.equals(this.board)) {
+            grid.redraw(this.board.getConfiguration());
+            currentPlayer.setPlayer(this.board.getPlayer());
+        } else if (arg != null && arg.equals(this.board)) {
+            // Force update by controller.
+            grid.redraw(this.board.getConfiguration());
+            currentPlayer.setPlayer(this.board.getPlayer());
+        }
     }
 }

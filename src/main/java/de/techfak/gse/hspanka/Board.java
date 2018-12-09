@@ -5,10 +5,12 @@ import de.techfak.gse.hspanka.exceptions.BoardPositionEmptyException;
 import de.techfak.gse.hspanka.exceptions.PieceNotOwnedException;
 import de.techfak.gse.hspanka.piece.Piece;
 
+import java.util.Observable;
+
 /**
  * The board model that is responsible for managing the board and the pieces on it.
  */
-public class Board {
+public class Board extends Observable {
     /**
      * The size of the chess field.
      */
@@ -53,6 +55,9 @@ public class Board {
      */
     public void placePiece(final Piece piece, final int row, final int col) {
         configuration[row][col] = piece;
+
+        setChanged();
+        notifyObservers();
     }
 
     /**
@@ -62,6 +67,9 @@ public class Board {
      */
     public void setPlayer(final Player player) {
         this.player = player;
+
+        setChanged();
+        notifyObservers();
     }
 
     /**
@@ -85,6 +93,9 @@ public class Board {
         } else {
             player = Player.BLACK;
         }
+
+        setChanged();
+        notifyObservers();
     }
 
     /**
