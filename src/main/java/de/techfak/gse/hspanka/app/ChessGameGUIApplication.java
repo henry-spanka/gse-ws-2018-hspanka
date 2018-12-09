@@ -17,6 +17,10 @@ public class ChessGameGUIApplication extends Application implements ChessGameApp
         stage.show();
     }
 
+    public Stage getStage() {
+        return stage;
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         stage = primaryStage;

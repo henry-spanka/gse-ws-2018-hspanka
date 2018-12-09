@@ -6,6 +6,7 @@ import de.techfak.gse.hspanka.Move;
 import de.techfak.gse.hspanka.exceptions.*;
 import de.techfak.gse.hspanka.view.gui.BoardPane;
 import de.techfak.gse.hspanka.view.gui.CurrentPlayerText;
+import de.techfak.gse.hspanka.view.gui.FileChooser;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -121,5 +122,8 @@ public class BoardController extends AbstractGuiController implements Observer {
     @FXML
     public void saveGame(ActionEvent event) {
         event.consume();
+
+        FileChooser fileChooser = new FileChooser(app.getStage());
+        fileChooser.getFile();
     }
 }
