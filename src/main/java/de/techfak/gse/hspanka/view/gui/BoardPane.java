@@ -9,6 +9,7 @@ import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.control.Control;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 
 import java.util.Objects;
@@ -53,12 +54,11 @@ public class BoardPane extends GridPane {
      * @param pane The pane on which the event handler should be registered.
      */
     private void registerEventHandler(final int col, final int row, final StackPane pane) {
-        final EventHandler handler = event -> {
+        final EventHandler<MouseEvent> handler = event -> {
             controller.fieldClicked(col, row);
             event.consume();
         };
-
-        //noinspection unchecked
+        
         pane.setOnMouseClicked(handler);
     }
 
