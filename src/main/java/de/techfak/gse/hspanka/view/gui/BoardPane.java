@@ -1,7 +1,10 @@
 package de.techfak.gse.hspanka.view.gui;
 
 import de.techfak.gse.hspanka.Board;
+import de.techfak.gse.hspanka.controller.gui.BoardController;
 import de.techfak.gse.hspanka.piece.Piece;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
@@ -9,6 +12,11 @@ import javafx.scene.control.Control;
 import javafx.scene.layout.*;
 
 public class BoardPane extends GridPane {
+    /**
+     * The BoardController so we can setup the event handler correctly.
+     */
+    private BoardController controller;
+
     public BoardPane() {
         super();
     }
@@ -26,7 +34,18 @@ public class BoardPane extends GridPane {
         return null;
     }
 
-    public void initialize() {
+    private void registerEventHandler(int col, int row, StackPane pane) {
+        EventHandler handler = event -> {
+            controller.fieldClicked(col, row);
+            event.consume();
+        };
+
+        pane.setOnMouseClicked(handler);
+    }
+
+    public void initialize(BoardController controller) {
+        this.controller = controller;
+
         for (int i = 0; i < Board.FIELD_SIZE; i++) {
             getColumnConstraints().add(
                 new ColumnConstraints(5, Control.USE_COMPUTED_SIZE, Double.POSITIVE_INFINITY, Priority.ALWAYS,
@@ -48,6 +67,8 @@ public class BoardPane extends GridPane {
                 } else {
                     square.setStyle("-fx-background-color: #7d8796");
                 }
+
+                registerEventHandler(col, row, square);
 
                 add(square, col, row);
             }

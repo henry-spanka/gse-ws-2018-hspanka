@@ -31,7 +31,7 @@ public class BoardController extends AbstractGuiController implements Observer {
     @FXML
     public void initialize() {
         Platform.runLater(() -> {
-            grid.initialize();
+            grid.initialize(this);
             // We can only observe after we have initialized the grid
             // We make sure the view is at least once up to date.
             board.addObserver(this);
@@ -79,5 +79,10 @@ public class BoardController extends AbstractGuiController implements Observer {
             grid.redraw(this.board.getConfiguration());
             currentPlayer.setPlayer(this.board.getPlayer());
         }
+    }
+
+    @FXML
+    public void fieldClicked(int col, int row) {
+        // TODO: IMPLEMENT
     }
 }
