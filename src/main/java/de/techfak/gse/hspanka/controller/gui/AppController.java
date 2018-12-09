@@ -2,6 +2,7 @@ package de.techfak.gse.hspanka.controller.gui;
 
 import de.techfak.gse.hspanka.FileIO;
 import de.techfak.gse.hspanka.exceptions.ApplicationErrorException;
+import de.techfak.gse.hspanka.view.gui.Alert;
 import de.techfak.gse.hspanka.view.gui.FileChooser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,6 +35,13 @@ public class AppController extends AbstractGuiController {
         String fen = fileIO.read();
 
         BoardController boardController = (BoardController) app.loadView("board");
-        boardController.setBoardConfigurationFromString(fen);
+        try {
+            boardController.setBoardConfigurationFromString(fen);
+        } catch (ApplicationErrorException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.loadError();
+            alert.show();
+            return;
+        }
     }
 }
