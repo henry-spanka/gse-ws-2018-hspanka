@@ -46,6 +46,10 @@ public class AppController extends AbstractGuiController {
         final FileChooser fileChooser = new FileChooser(app.getStage());
         final File file = fileChooser.openFile();
 
+        if (file == null) {
+            return;
+        }
+
         final FileIO fileIO = new FileIO(file);
         final String fen = fileIO.read();
 

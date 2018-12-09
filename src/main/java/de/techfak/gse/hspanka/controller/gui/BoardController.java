@@ -175,11 +175,8 @@ public class BoardController extends AbstractGuiController implements Observer {
         final FileChooser fileChooser = new FileChooser(app.getStage());
         final File fileName = fileChooser.saveFile();
 
-        // If the fileName is null show an error message.
+        // If the fileName is null return
         if (fileName == null) {
-            final Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.saveError();
-            alert.show();
             return;
         }
 
