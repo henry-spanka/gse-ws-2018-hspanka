@@ -58,7 +58,7 @@ public class BoardPane extends GridPane {
             controller.fieldClicked(col, row);
             event.consume();
         };
-        
+
         pane.setOnMouseClicked(handler);
     }
 
