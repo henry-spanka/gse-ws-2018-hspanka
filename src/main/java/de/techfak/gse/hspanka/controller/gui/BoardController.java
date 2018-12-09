@@ -2,6 +2,7 @@ package de.techfak.gse.hspanka.controller.gui;
 
 import de.techfak.gse.hspanka.Board;
 import de.techfak.gse.hspanka.FenParser;
+import de.techfak.gse.hspanka.FileIO;
 import de.techfak.gse.hspanka.Move;
 import de.techfak.gse.hspanka.exceptions.*;
 import de.techfak.gse.hspanka.view.gui.BoardPane;
@@ -11,6 +12,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
+import java.io.File;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -124,6 +126,16 @@ public class BoardController extends AbstractGuiController implements Observer {
         event.consume();
 
         FileChooser fileChooser = new FileChooser(app.getStage());
-        fileChooser.getFile();
+        File fileName = fileChooser.getFile();
+
+        if (fileName == null) {
+            // TODO: IMPLEMENT
+        }
+
+        FenParser fenParser = new FenParser(null);
+        String data = fenParser.toString(board.getConfiguration(), board.getPlayer());
+
+        FileIO fileIO = new FileIO(fileName);
+        fileIO.write(data);
     }
 }
