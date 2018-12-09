@@ -14,14 +14,7 @@ public class AppController extends AbstractGuiController {
     private Button startDefaultGameButton;
 
     public void startDefaultGame() throws IOException, ApplicationErrorException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("board.fxml"));
-
-        Pane root = fxmlLoader.load();
-        BoardController boardController = fxmlLoader.getController();
-        boardController.setApp(app);
-
-        Scene scene = new Scene(root);
-        app.setScene(scene);
+        BoardController boardController = (BoardController) app.loadView("board");
 
         boardController.setDefaultConfiguration();
     }

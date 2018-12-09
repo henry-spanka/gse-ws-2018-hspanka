@@ -157,13 +157,6 @@ public class BoardController extends AbstractGuiController implements Observer {
     public void backToMenu(ActionEvent event) throws IOException {
         event.consume();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("app.fxml"));
-
-        Pane root = fxmlLoader.load();
-        AppController appController = fxmlLoader.getController();
-        appController.setApp(app);
-
-        Scene scene = new Scene(root);
-        app.setScene(scene);
+        app.loadView("app");
     }
 }
