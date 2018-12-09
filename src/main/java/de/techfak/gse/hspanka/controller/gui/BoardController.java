@@ -5,6 +5,7 @@ import de.techfak.gse.hspanka.FenParser;
 import de.techfak.gse.hspanka.FileIO;
 import de.techfak.gse.hspanka.Move;
 import de.techfak.gse.hspanka.exceptions.*;
+import de.techfak.gse.hspanka.view.gui.Alert;
 import de.techfak.gse.hspanka.view.gui.BoardPane;
 import de.techfak.gse.hspanka.view.gui.CurrentPlayerText;
 import de.techfak.gse.hspanka.view.gui.FileChooser;
@@ -129,13 +130,22 @@ public class BoardController extends AbstractGuiController implements Observer {
         File fileName = fileChooser.getFile();
 
         if (fileName == null) {
-            // TODO: IMPLEMENT
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.saveError();
+            alert.show();
+            return;
         }
 
         FenParser fenParser = new FenParser(null);
         String data = fenParser.toString(board.getConfiguration(), board.getPlayer());
 
         FileIO fileIO = new FileIO(fileName);
-        fileIO.write(data);
+        if (fileIO.write(data) == false) {
+            if (fileName == null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.saveError();
+                alert.show();
+            }
+        }
     }
 }
