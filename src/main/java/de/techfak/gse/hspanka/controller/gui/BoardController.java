@@ -12,8 +12,12 @@ import de.techfak.gse.hspanka.view.gui.FileChooser;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -147,5 +151,19 @@ public class BoardController extends AbstractGuiController implements Observer {
                 alert.show();
             }
         }
+    }
+
+    @FXML
+    public void backToMenu(ActionEvent event) throws IOException {
+        event.consume();
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("app.fxml"));
+
+        Pane root = fxmlLoader.load();
+        AppController appController = fxmlLoader.getController();
+        appController.setApp(app);
+
+        Scene scene = new Scene(root);
+        app.setScene(scene);
     }
 }
