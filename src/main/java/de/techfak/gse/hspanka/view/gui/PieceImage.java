@@ -11,7 +11,7 @@ class PieceImage extends Image {
     /**
      * The location of the images.
      */
-    public static final String IMG_LOCATION = "images/";
+    private static final String IMG_LOCATION = "images/";
     /**
      * The image size in relatively to the cell in percentage.
      */
@@ -21,7 +21,7 @@ class PieceImage extends Image {
      * Initializes the piece image.
      * @param piece The piece which should be shown.
      */
-    public PieceImage(final Piece piece) {
+    PieceImage(final Piece piece) {
         super(IMG_LOCATION + getImageName(piece));
     }
 

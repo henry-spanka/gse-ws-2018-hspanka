@@ -9,7 +9,8 @@ public class AbstractGuiController {
     /**
      * The GUI Application.
      */
-    ChessGameGUIApplication app;
+    @SuppressWarnings("WeakerAccess")
+    protected ChessGameGUIApplication app;
 
     /**
      * Set's the app.

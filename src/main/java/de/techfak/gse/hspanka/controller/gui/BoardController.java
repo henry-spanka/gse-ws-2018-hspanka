@@ -35,14 +35,14 @@ public class BoardController extends AbstractGuiController implements Observer {
     private final Board board;
 
     @FXML
-    /**
-     * The Board grid.
+    /*
+      The Board grid.
      */
     private BoardPane grid;
 
     @FXML
-    /**
-     * The current player text.
+    /*
+      The current player text.
      */
     private CurrentPlayerText currentPlayer;
 

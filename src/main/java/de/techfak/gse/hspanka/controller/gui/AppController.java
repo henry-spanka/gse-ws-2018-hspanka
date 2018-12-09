@@ -13,7 +13,8 @@ import java.io.IOException;
 /**
  * Responible for the GUI Menu.
  */
-class AppController extends AbstractGuiController {
+@SuppressWarnings("WeakerAccess")
+public class AppController extends AbstractGuiController {
     /**
      * The view name.
      */

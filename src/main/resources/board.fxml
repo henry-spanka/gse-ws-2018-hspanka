@@ -12,32 +12,28 @@
 <VBox xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="de.techfak.gse.hspanka.controller.gui.BoardController">
   <SplitPane dividerPositions="0.5" orientation="VERTICAL">
-    <items>
-      <HBox prefHeight="0.0" prefWidth="400.0">
-        <children>
-          <CurrentPlayerText fx:id="currentPlayer" strokeType="OUTSIDE" strokeWidth="0.0" text="Player:">
-            <HBox.margin>
-              <Insets left="10.0" top="5.0"/>
-            </HBox.margin>
-          </CurrentPlayerText>
-          <Region prefHeight="27.0" prefWidth="228.0"/>
-          <Button alignment="CENTER_RIGHT" contentDisplay="RIGHT" minHeight="-Infinity" minWidth="-Infinity"
-                  mnemonicParsing="false" onAction="#saveGame" text="Save">
-            <HBox.margin>
-              <Insets right="10.0"/>
-            </HBox.margin>
-          </Button>
-          <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#backToMenu" text="Menu">
-            <HBox.margin>
-              <Insets right="10.0"/>
-            </HBox.margin>
-          </Button>
-        </children>
-      </HBox>
-      <BoardPane fx:id="grid" gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-                 minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0">
+    <HBox prefHeight="0.0" prefWidth="400.0">
+      <CurrentPlayerText fx:id="currentPlayer" strokeType="OUTSIDE" strokeWidth="0.0" text="Player:">
+        <HBox.margin>
+          <Insets left="10.0" top="5.0"/>
+        </HBox.margin>
+      </CurrentPlayerText>
+      <Region prefHeight="27.0" prefWidth="228.0"/>
+      <Button alignment="CENTER_RIGHT" contentDisplay="RIGHT" minHeight="-Infinity" minWidth="-Infinity"
+              mnemonicParsing="false" onAction="#saveGame" text="Save">
+        <HBox.margin>
+          <Insets right="10.0"/>
+        </HBox.margin>
+      </Button>
+      <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#backToMenu" text="Menu">
+        <HBox.margin>
+          <Insets right="10.0"/>
+        </HBox.margin>
+      </Button>
+    </HBox>
+    <BoardPane fx:id="grid" gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+               minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0">
 
-      </BoardPane>
-    </items>
+    </BoardPane>
   </SplitPane>
 </VBox>
