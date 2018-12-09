@@ -5,5 +5,6 @@ import javafx.scene.Scene;
 
 public interface ChessGameApplication {
     void run(String... args) throws ApplicationErrorException;
+
     void setScene(Scene scene);
 }

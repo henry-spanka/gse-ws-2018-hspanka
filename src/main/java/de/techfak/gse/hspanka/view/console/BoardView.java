@@ -1,6 +1,5 @@
 package de.techfak.gse.hspanka.view.console;
 
-import de.techfak.gse.hspanka.Board;
 import de.techfak.gse.hspanka.FenParser;
 import de.techfak.gse.hspanka.Player;
 import de.techfak.gse.hspanka.piece.Piece;

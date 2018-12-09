@@ -4,7 +4,9 @@ import de.techfak.gse.hspanka.Board;
 import de.techfak.gse.hspanka.FenParser;
 import de.techfak.gse.hspanka.FileIO;
 import de.techfak.gse.hspanka.Move;
-import de.techfak.gse.hspanka.exceptions.*;
+import de.techfak.gse.hspanka.exceptions.ApplicationMoveException;
+import de.techfak.gse.hspanka.exceptions.EmptyBoardConfigurationException;
+import de.techfak.gse.hspanka.exceptions.InvalidBoardConfiguration;
 import de.techfak.gse.hspanka.view.gui.Alert;
 import de.techfak.gse.hspanka.view.gui.BoardPane;
 import de.techfak.gse.hspanka.view.gui.CurrentPlayerText;
@@ -12,9 +14,6 @@ import de.techfak.gse.hspanka.view.gui.FileChooser;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,16 +21,14 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class BoardController extends AbstractGuiController implements Observer {
-    @FXML
-    public BoardPane grid;
-
-    @FXML
-    public CurrentPlayerText currentPlayer;
-
     /**
      * The board model.
      */
     private final Board board;
+    @FXML
+    public BoardPane grid;
+    @FXML
+    public CurrentPlayerText currentPlayer;
 
     public BoardController() {
         this.board = new Board();

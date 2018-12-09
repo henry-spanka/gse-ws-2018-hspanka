@@ -6,14 +6,13 @@ import javafx.scene.layout.*;
 
 public class PieceImage extends Image {
     /**
-     * The image size in relatively to the cell in percentage.
-     */
-    private static final double IMAGE_SIZE = 0.75;
-
-    /**
      * The location of the images
      */
     public static final String IMG_LOCATION = "images/";
+    /**
+     * The image size in relatively to the cell in percentage.
+     */
+    private static final double IMAGE_SIZE = 0.75;
 
     public PieceImage(Piece piece) {
         super(IMG_LOCATION + getImageName(piece));

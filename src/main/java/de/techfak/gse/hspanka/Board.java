@@ -52,6 +52,18 @@ public class Board extends Observable {
     }
 
     /**
+     * Set the current player who turn it is.
+     *
+     * @param player The player model.
+     */
+    public void setPlayer(final Player player) {
+        this.player = player;
+
+        setChanged();
+        notifyObservers();
+    }
+
+    /**
      * Places a piece on the board.
      *
      * @param piece The piece that should be placed on the board.
@@ -61,18 +73,6 @@ public class Board extends Observable {
      */
     public void placePiece(final Piece piece, final int row, final int col) {
         configuration[row][col] = piece;
-
-        setChanged();
-        notifyObservers();
-    }
-
-    /**
-     * Set the current player who turn it is.
-     *
-     * @param player The player model.
-     */
-    public void setPlayer(final Player player) {
-        this.player = player;
 
         setChanged();
         notifyObservers();
@@ -91,7 +91,6 @@ public class Board extends Observable {
 
     /**
      * Executes the move by changing the board configuration.
-     *
      */
     public void executeMove() {
         configuration[move.getrTo()][move.getcTo()] = configuration[move.getrFrom()][move.getcFrom()];
@@ -159,7 +158,7 @@ public class Board extends Observable {
      * Validates the move by checking whether the move is legal and the player
      * can actually move this piece.
      *
-     * @param move The move that should be checked.
+     * @param move      The move that should be checked.
      * @param checkDest Whether we should also check that the destination is correct.
      * @throws ApplicationMoveException A subclass is thrown that indicates the constraint that failed.
      */

@@ -11,20 +11,17 @@ import java.util.List;
  */
 public final class Move {
     /**
+     * Constant that indicates Move position unknown.
+     */
+    public static final int POS_UNKNOWN = -1;
+    /**
      * The start of the target move position in FEN notation.
      */
     private static final int MOVE_TARGET_START = 3;
-
     /**
      * The length of a move in FEN notation.
      */
     private static final int MOVE_LENGTH = 6;
-
-    /**
-     * Constant that indicates Move position unknown.
-     */
-    public static final int POS_UNKNOWN = -1;
-
     /**
      * The column of the Piece which should be moved.
      */

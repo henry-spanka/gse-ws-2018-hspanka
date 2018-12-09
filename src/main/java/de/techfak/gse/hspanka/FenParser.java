@@ -6,14 +6,13 @@ import de.techfak.gse.hspanka.piece.Piece;
 
 public class FenParser {
     /**
-     * The board model.
-     */
-    private final Board board;
-
-    /**
      * The FEN row separator.
      */
     private static final char FEN_ROW_SEPARATOR = '/';
+    /**
+     * The board model.
+     */
+    private final Board board;
 
     public FenParser(Board board) {
         this.board = board;
