@@ -7,6 +7,7 @@ import de.techfak.gse.hspanka.exceptions.*;
 import de.techfak.gse.hspanka.view.gui.BoardPane;
 import de.techfak.gse.hspanka.view.gui.CurrentPlayerText;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 import java.util.Observable;
@@ -115,5 +116,10 @@ public class BoardController extends AbstractGuiController implements Observer {
         if (staged_move.sourceComplete() && staged_move.destinationComplete()) {
             board.executeMove();
         }
+    }
+
+    @FXML
+    public void saveGame(ActionEvent event) {
+        event.consume();
     }
 }

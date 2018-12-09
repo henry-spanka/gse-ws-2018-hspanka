@@ -2,17 +2,29 @@
 
 <?import de.techfak.gse.hspanka.view.gui.BoardPane?>
 <?import de.techfak.gse.hspanka.view.gui.CurrentPlayerText?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.techfak.gse.hspanka.controller.gui.BoardController">
    <children>
       <SplitPane dividerPositions="0.5" orientation="VERTICAL">
          <items>
-            <HBox>
+            <HBox prefHeight="0.0" prefWidth="400.0">
                <children>
-                  <CurrentPlayerText fx:id="currentPlayer" strokeType="OUTSIDE" strokeWidth="0.0" text="Player:" />
+                  <CurrentPlayerText fx:id="currentPlayer" strokeType="OUTSIDE" strokeWidth="0.0" text="Player:">
+                     <HBox.margin>
+                        <Insets left="10.0" top="5.0" />
+                     </HBox.margin></CurrentPlayerText>
+                  <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                  <Button alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#saveGame" text="Save">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
                </children>
             </HBox>
             <BoardPane fx:id="grid" gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0">
