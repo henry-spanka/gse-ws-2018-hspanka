@@ -18,9 +18,10 @@ public class AppController extends AbstractGuiController {
     @FXML
     private Button startDefaultGameButton;
 
-    public void startDefaultGame() throws IOException, ApplicationErrorException {
-        BoardController boardController = (BoardController) app.loadView("board");
+    public void startDefaultGame(ActionEvent event) throws IOException, ApplicationErrorException {
+        event.consume();
 
+        BoardController boardController = (BoardController) app.loadView("board");
         boardController.setDefaultConfiguration();
     }
 
@@ -41,7 +42,6 @@ public class AppController extends AbstractGuiController {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.loadError();
             alert.show();
-            return;
         }
     }
 }
