@@ -140,6 +140,17 @@ public class Board extends Observable {
      * @throws ApplicationMoveException A subclass is thrown that indicates the constraint that failed.
      */
     public void validateMove() throws ApplicationMoveException {
+        validateMove(this.move);
+    }
+
+    /**
+     * Validates the move by checking whether the move is legal and the player
+     * can actually move this piece.
+     *
+     * @param move The move that should be checked
+     * @throws ApplicationMoveException A subclass is thrown that indicates the constraint that failed.
+     */
+    public void validateMove(Move move) throws ApplicationMoveException {
         final Piece fromPiece = getPiece(move.getrFrom(), move.getcFrom());
 
         if (fromPiece.getPlayer() != player) {

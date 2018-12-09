@@ -3,8 +3,10 @@ package de.techfak.gse.hspanka.controller.gui;
 import de.techfak.gse.hspanka.Board;
 import de.techfak.gse.hspanka.FenParser;
 import de.techfak.gse.hspanka.Move;
+import de.techfak.gse.hspanka.exceptions.ApplicationMoveException;
 import de.techfak.gse.hspanka.exceptions.EmptyBoardConfigurationException;
 import de.techfak.gse.hspanka.exceptions.InvalidBoardConfiguration;
+import de.techfak.gse.hspanka.exceptions.PieceNotOwnedException;
 import de.techfak.gse.hspanka.view.gui.BoardPane;
 import de.techfak.gse.hspanka.view.gui.CurrentPlayerText;
 import javafx.application.Platform;
@@ -88,13 +90,29 @@ public class BoardController extends AbstractGuiController implements Observer {
 
         if (move == null) {
             move = new Move(col, row, Move.POS_UNKNOWN, Move.POS_UNKNOWN);
+            try {
+                this.board.validateMove(move);
+            } catch (ApplicationMoveException e) {
+                return;
+            }
+            
             this.board.setMove(move);
         } else if (!move.sourceComplete()) {
             move = new Move(col, row, move.getcTo(), move.getrTo());
+            try {
+                this.board.validateMove(move);
+            } catch (ApplicationMoveException e) {
+                return;
+            }
+
             this.board.setMove(move);
         } else if (!move.destinationComplete()) {
             move = new Move(move.getcFrom(), move.getrFrom(), col, row);
             this.board.setMove(move);
+        }
+
+        if (move.sourceComplete() && move.destinationComplete()) {
+            board.executeMove();
         }
     }
 }
