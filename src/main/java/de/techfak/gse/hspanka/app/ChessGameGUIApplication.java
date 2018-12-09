@@ -1,7 +1,6 @@
 package de.techfak.gse.hspanka.app;
 
 import de.techfak.gse.hspanka.controller.gui.AbstractGuiController;
-import de.techfak.gse.hspanka.exceptions.ApplicationErrorException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,7 +14,7 @@ import java.io.IOException;
  */
 public class ChessGameGUIApplication extends Application implements ChessGameApplication {
     /**
-     * The primary stage from JavaFX
+     * The primary stage from JavaFX.
      */
     private Stage stage;
 
@@ -23,7 +22,7 @@ public class ChessGameGUIApplication extends Application implements ChessGameApp
      * Set's a scene.
      * @param scene The scene to be set.
      */
-    public void setScene(final Scene scene) {
+    private void setScene(final Scene scene) {
         stage.setTitle("Chess Game");
         stage.setScene(scene);
         stage.show();

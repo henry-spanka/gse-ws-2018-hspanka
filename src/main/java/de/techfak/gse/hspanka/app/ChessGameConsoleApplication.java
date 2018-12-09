@@ -5,7 +5,6 @@ import de.techfak.gse.hspanka.controller.console.BoardController;
 import de.techfak.gse.hspanka.exceptions.ApplicationErrorException;
 import de.techfak.gse.hspanka.exceptions.ApplicationMoveException;
 import de.techfak.gse.hspanka.exceptions.EmptyCommandException;
-import javafx.scene.Scene;
 
 import java.util.Scanner;
 
@@ -13,13 +12,6 @@ import java.util.Scanner;
  * The Console application.
  */
 public class ChessGameConsoleApplication implements ChessGameApplication {
-    /**
-     * Set's a scene. Not appliciable for console.
-     */
-    @Override
-    public void setScene(final Scene scene) {
-        throw new IllegalArgumentException();
-    }
 
     /**
      * This function initialises the controller and handles input from the command line.

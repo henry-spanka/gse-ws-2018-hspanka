@@ -8,7 +8,7 @@ import de.techfak.gse.hspanka.exceptions.ApplicationErrorException;
  * The main class that is invoked on startup.
  * Responsible for initialising the controller.
  */
-public class ChessGame {
+class ChessGame {
     /**
      * Bootstrap the Application.
      *

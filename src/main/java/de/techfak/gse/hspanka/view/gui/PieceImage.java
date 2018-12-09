@@ -7,9 +7,9 @@ import javafx.scene.layout.*;
 /**
  * Displays the piece's image.
  */
-public class PieceImage extends Image {
+class PieceImage extends Image {
     /**
-     * The location of the images
+     * The location of the images.
      */
     public static final String IMG_LOCATION = "images/";
     /**

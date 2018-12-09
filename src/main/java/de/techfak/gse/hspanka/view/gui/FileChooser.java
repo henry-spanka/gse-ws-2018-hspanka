@@ -11,18 +11,18 @@ public class FileChooser {
     /**
      * Which extensions should be allowed to select.
      */
-    public static final javafx.stage.FileChooser.ExtensionFilter EXTENSION_FILTER =
+    private static final javafx.stage.FileChooser.ExtensionFilter EXTENSION_FILTER =
         new javafx.stage.FileChooser.ExtensionFilter("FEN files (*.fen)", "*.fen");
 
     /**
      * The File chooser.
      */
-    private javafx.stage.FileChooser fxFileChooser;
+    private final javafx.stage.FileChooser fxFileChooser;
 
     /**
      * The Window where the chooser should be displayed.
      */
-    private Window window;
+    private final Window window;
 
     /**
      * Initializes the File Chooser.

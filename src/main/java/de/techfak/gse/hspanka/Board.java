@@ -82,6 +82,10 @@ public class Board extends Observable {
         return move;
     }
 
+    /**
+     * Set's the current move.
+     * @param move The move.
+     */
     public void setMove(final Move move) {
         this.move = move;
 

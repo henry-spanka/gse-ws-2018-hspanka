@@ -20,24 +20,35 @@ import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * The Board controller responsible for the board.
+ */
 public class BoardController extends AbstractGuiController implements Observer {
+    /**
+     * The view name.
+     */
+    public static final String VIEW_NAME = "board";
+
     /**
      * The board model.
      */
     private final Board board;
 
+    @FXML
     /**
      * The Board grid.
      */
-    @FXML
-    public BoardPane grid;
+    private BoardPane grid;
 
+    @FXML
     /**
      * The current player text.
      */
-    @FXML
-    public CurrentPlayerText currentPlayer;
+    private CurrentPlayerText currentPlayer;
 
+    /**
+     * initializes the BoardController.
+     */
     public BoardController() {
         super();
 
@@ -194,6 +205,6 @@ public class BoardController extends AbstractGuiController implements Observer {
     public void backToMenu(final ActionEvent event) throws IOException {
         event.consume();
 
-        app.loadView("app");
+        app.loadView(AppController.VIEW_NAME);
     }
 }

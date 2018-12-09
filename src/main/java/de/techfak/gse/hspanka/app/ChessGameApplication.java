@@ -10,13 +10,8 @@ public interface ChessGameApplication {
     /**
      * Starts the application.
      * @param args The command line parameters passed on execution.
-     * @throws ApplicationErrorException
+     * @throws ApplicationErrorException Thrown if an error occured during execution.
      */
     void run(String... args) throws ApplicationErrorException;
 
-    /**
-     * Switches the scene.
-     * @param scene The scene to be set.
-     */
-    void setScene(Scene scene);
 }

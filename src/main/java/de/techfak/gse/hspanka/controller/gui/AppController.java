@@ -13,7 +13,12 @@ import java.io.IOException;
 /**
  * Responible for the GUI Menu.
  */
-public class AppController extends AbstractGuiController {
+class AppController extends AbstractGuiController {
+    /**
+     * The view name.
+     */
+    public static final String VIEW_NAME = "app";
+
     /**
      * Starts a new default game.
      * @param event The ActionEvent.
@@ -24,7 +29,7 @@ public class AppController extends AbstractGuiController {
     public void startDefaultGame(final ActionEvent event) throws IOException, ApplicationErrorException {
         event.consume();
 
-        final BoardController boardController = (BoardController) app.loadView("board");
+        final BoardController boardController = (BoardController) app.loadView(BoardController.VIEW_NAME);
         boardController.setDefaultConfiguration();
     }
 
@@ -32,10 +37,9 @@ public class AppController extends AbstractGuiController {
      * Load sa game from File.
      * @param event The ActionEvent.
      * @throws IOException Thrown if the file cannot be found.
-     * @throws ApplicationErrorException Thrown if the content cannot be parsed.
      */
     @FXML
-    public void loadGame(final ActionEvent event) throws IOException, ApplicationErrorException {
+    public void loadGame(final ActionEvent event) throws IOException {
         event.consume();
 
         final FileChooser fileChooser = new FileChooser(app.getStage());

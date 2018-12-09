@@ -9,7 +9,7 @@ public class AbstractGuiController {
     /**
      * The GUI Application.
      */
-    protected ChessGameGUIApplication app;
+    ChessGameGUIApplication app;
 
     /**
      * Set's the app.

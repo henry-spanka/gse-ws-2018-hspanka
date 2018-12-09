@@ -11,10 +11,17 @@ import javafx.scene.Node;
 import javafx.scene.control.Control;
 import javafx.scene.layout.*;
 
+import java.util.Objects;
+
 /**
  * Displays the board on the stage.
  */
 public class BoardPane extends GridPane {
+    /**
+     * The minimum size of the grid pane.
+     */
+    private static final int MIN_SIZE = 5;
+
     /**
      * The BoardController so we can setup the event handler correctly.
      */
@@ -51,6 +58,7 @@ public class BoardPane extends GridPane {
             event.consume();
         };
 
+        //noinspection unchecked
         pane.setOnMouseClicked(handler);
     }
 
@@ -69,7 +77,7 @@ public class BoardPane extends GridPane {
     }
 
     /**
-     * Initializes the grid
+     * Initializes the grid.
      * @param controller The board controller on which the event handler's should be registered.
      */
     public void initialize(final BoardController controller) {
@@ -78,12 +86,12 @@ public class BoardPane extends GridPane {
         // Set the grid size.
         for (int i = 0; i < Board.FIELD_SIZE; i++) {
             getColumnConstraints().add(
-                new ColumnConstraints(5, Control.USE_COMPUTED_SIZE, Double.POSITIVE_INFINITY, Priority.ALWAYS,
+                new ColumnConstraints(MIN_SIZE, Control.USE_COMPUTED_SIZE, Double.POSITIVE_INFINITY, Priority.ALWAYS,
                     HPos.CENTER, true
                 )
             );
             getRowConstraints().add(
-                new RowConstraints(5, Control.USE_COMPUTED_SIZE, Double.POSITIVE_INFINITY, Priority.ALWAYS,
+                new RowConstraints(MIN_SIZE, Control.USE_COMPUTED_SIZE, Double.POSITIVE_INFINITY, Priority.ALWAYS,
                     VPos.CENTER, true
                 )
             );
@@ -118,21 +126,21 @@ public class BoardPane extends GridPane {
 
                 // If we have a field without a piece, remove the image (if any) and set color.
                 if (piece == null) {
-                    if (square.getChildren() != null && !square.getChildren().isEmpty()) {
+                    if (Objects.requireNonNull(square).getChildren() != null && !square.getChildren().isEmpty()) {
                         square.getChildren().remove(0, 1);
                         colorizeField(col, row, square);
                     }
                 } else {
                     // Check if the field is involved in a move and color it appropriately.
                     if (move != null && move.isInvolved(col, row)) {
-                        square.setStyle("-fx-background-color: #1e4156");
+                        Objects.requireNonNull(square).setStyle("-fx-background-color: #1e4156");
                     } else {
                         colorizeField(col, row, square);
                     }
 
                     StackPane piecePane;
                     // Add the piece image onto the cell.
-                    if (square.getChildren() == null || square.getChildren().isEmpty()) {
+                    if (Objects.requireNonNull(square).getChildren() == null || square.getChildren().isEmpty()) {
                         piecePane = new StackPane();
                         square.getChildren().add(piecePane);
                     } else {
