@@ -75,11 +75,11 @@ public class BoardController extends AbstractGuiController implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         if (o != null && o.equals(this.board)) {
-            grid.redraw(this.board.getConfiguration());
+            grid.redraw(this.board.getConfiguration(), this.board.getMove());
             currentPlayer.setPlayer(this.board.getPlayer());
         } else if (arg != null && arg.equals(this.board)) {
             // Force update by controller.
-            grid.redraw(this.board.getConfiguration());
+            grid.redraw(this.board.getConfiguration(), this.board.getMove());
             currentPlayer.setPlayer(this.board.getPlayer());
         }
     }
@@ -95,7 +95,7 @@ public class BoardController extends AbstractGuiController implements Observer {
             } catch (ApplicationMoveException e) {
                 return;
             }
-            
+
             this.board.setMove(move);
         } else if (!move.sourceComplete()) {
             move = new Move(col, row, move.getcTo(), move.getrTo());

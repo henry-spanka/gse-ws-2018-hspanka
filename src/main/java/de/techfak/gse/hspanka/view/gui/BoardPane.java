@@ -1,6 +1,7 @@
 package de.techfak.gse.hspanka.view.gui;
 
 import de.techfak.gse.hspanka.Board;
+import de.techfak.gse.hspanka.Move;
 import de.techfak.gse.hspanka.controller.gui.BoardController;
 import de.techfak.gse.hspanka.piece.Piece;
 import javafx.event.Event;
@@ -75,7 +76,7 @@ public class BoardPane extends GridPane {
         }
     }
 
-    public void redraw(Piece[][] pieces) {
+    public void redraw(Piece[][] pieces, Move move) {
         for (int row = 0; row < Board.FIELD_SIZE; row++) {
             // Check each piece in a row from the left to the right.
             for (int col = 0; col < Board.FIELD_SIZE; col++) {
@@ -85,6 +86,16 @@ public class BoardPane extends GridPane {
                     // TODO: Remove Background
                 } else {
                     StackPane stackPane = getStackPane(col, row);
+
+                    if (move != null && move.isInvolved(col, row)) {
+                        stackPane.setStyle("-fx-background-color: #123456");
+                    } else {
+                        if ((row + col) % 2 == 0) {
+                            stackPane.setStyle("-fx-background-color: #e8ebef");
+                        } else {
+                            stackPane.setStyle("-fx-background-color: #7d8796");
+                        }
+                    }
 
                     StackPane piece_pane;
                     if (stackPane.getChildren() == null || stackPane.getChildren().isEmpty()) {

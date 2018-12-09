@@ -147,4 +147,8 @@ public final class Move {
             throw new InvalidMoveException("The move cannot be executed because it is missing some positions");
         }
     }
+
+    public boolean isInvolved(int col, int row) {
+        return (cFrom == col && rFrom == row) || (cTo == col && rTo == row);
+    }
 }
