@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.techfak.gse.hspanka.view.gui.BoardPane?>
+<?import de.techfak.gse.hspanka.view.gui.CurrentPlayerText?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-
-<BoardPane fx:id="grid" gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.techfak.gse.hspanka.controller.gui.BoardController">
+<VBox xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.techfak.gse.hspanka.controller.gui.BoardController">
+   <children>
+      <SplitPane dividerPositions="0.5" orientation="VERTICAL">
+         <items>
+            <HBox>
+               <children>
+                  <CurrentPlayerText fx:id="currentPlayer" strokeType="OUTSIDE" strokeWidth="0.0" text="Player:" />
+               </children>
+            </HBox>
+            <BoardPane fx:id="grid" gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0">
 
 </BoardPane>
+         </items>
+      </SplitPane>
+   </children>
+</VBox>

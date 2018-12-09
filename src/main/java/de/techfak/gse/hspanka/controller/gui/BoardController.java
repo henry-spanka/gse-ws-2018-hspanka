@@ -5,12 +5,16 @@ import de.techfak.gse.hspanka.FenParser;
 import de.techfak.gse.hspanka.exceptions.EmptyBoardConfigurationException;
 import de.techfak.gse.hspanka.exceptions.InvalidBoardConfiguration;
 import de.techfak.gse.hspanka.view.gui.BoardPane;
+import de.techfak.gse.hspanka.view.gui.CurrentPlayerText;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 
 public class BoardController extends AbstractGuiController {
     @FXML
     public BoardPane grid;
+
+    @FXML
+    public CurrentPlayerText currentPlayer;
 
     /**
      * The board model.
@@ -26,6 +30,7 @@ public class BoardController extends AbstractGuiController {
         Platform.runLater(() -> {
             grid.initialize();
             grid.redraw(board.getConfiguration());
+            currentPlayer.setPlayer((board.getPlayer()));
         });
     }
 
