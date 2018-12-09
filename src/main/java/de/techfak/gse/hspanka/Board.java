@@ -28,6 +28,11 @@ public class Board extends Observable {
     private Player player;
 
     /**
+     * A pending move.
+     */
+    private Move move;
+
+    /**
      * Get the board configuration.
      *
      * @return Current board configuration.
@@ -72,14 +77,26 @@ public class Board extends Observable {
         notifyObservers();
     }
 
+    public Move getMove() {
+        return move;
+    }
+
+    public void setMove(Move move) {
+        this.move = move;
+
+        setChanged();
+        notifyObservers();
+    }
+
     /**
-     * Executes a move by changing the board configuration.
+     * Executes the move by changing the board configuration.
      *
-     * @param move The move object that describes the move.
      */
-    public void executeMove(final Move move) {
+    public void executeMove() {
         configuration[move.getrTo()][move.getcTo()] = configuration[move.getrFrom()][move.getcFrom()];
         configuration[move.getrFrom()][move.getcFrom()] = null;
+
+        move = null;
 
         switchTurn();
     }
@@ -120,10 +137,9 @@ public class Board extends Observable {
      * Validates the move by checking whether the move is legal and the player
      * can actually move this piece.
      *
-     * @param move The move that should be checked.
      * @throws ApplicationMoveException A subclass is thrown that indicates the constraint that failed.
      */
-    public void validateMove(final Move move) throws ApplicationMoveException {
+    public void validateMove() throws ApplicationMoveException {
         final Piece fromPiece = getPiece(move.getrFrom(), move.getcFrom());
 
         if (fromPiece.getPlayer() != player) {

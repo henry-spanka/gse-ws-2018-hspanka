@@ -2,6 +2,7 @@ package de.techfak.gse.hspanka.controller.gui;
 
 import de.techfak.gse.hspanka.Board;
 import de.techfak.gse.hspanka.FenParser;
+import de.techfak.gse.hspanka.Move;
 import de.techfak.gse.hspanka.exceptions.EmptyBoardConfigurationException;
 import de.techfak.gse.hspanka.exceptions.InvalidBoardConfiguration;
 import de.techfak.gse.hspanka.view.gui.BoardPane;
@@ -83,6 +84,17 @@ public class BoardController extends AbstractGuiController implements Observer {
 
     @FXML
     public void fieldClicked(int col, int row) {
-        // TODO: IMPLEMENT
+        Move move = this.board.getMove();
+
+        if (move == null) {
+            move = new Move(col, row, Move.POS_UNKNOWN, Move.POS_UNKNOWN);
+            this.board.setMove(move);
+        } else if (!move.sourceComplete()) {
+            move = new Move(col, row, move.getcTo(), move.getrTo());
+            this.board.setMove(move);
+        } else if (!move.destinationComplete()) {
+            move = new Move(move.getcFrom(), move.getrFrom(), col, row);
+            this.board.setMove(move);
+        }
     }
 }

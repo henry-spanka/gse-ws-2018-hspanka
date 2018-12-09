@@ -21,6 +21,11 @@ public final class Move {
     private static final int MOVE_LENGTH = 6;
 
     /**
+     * Constant that indicates Move position unknown.
+     */
+    public static final int POS_UNKNOWN = -1;
+
+    /**
      * The column of the Piece which should be moved.
      */
     private final int cFrom;
@@ -48,7 +53,7 @@ public final class Move {
      * @param cTo   The column of the target piece/field.
      * @param rTo   The row of the target piece/field.
      */
-    private Move(final int cFrom, final int rFrom, final int cTo, final int rTo) {
+    public Move(final int cFrom, final int rFrom, final int cTo, final int rTo) {
         this.cFrom = cFrom;
         this.rFrom = rFrom;
         this.cTo = cTo;
@@ -126,6 +131,20 @@ public final class Move {
     public void validateUniqueness() throws MoveToItselfException {
         if (cFrom == cTo && rFrom == rTo) {
             throw new MoveToItselfException("A piece can not be moved on itself.");
+        }
+    }
+
+    public boolean sourceComplete() {
+        return cFrom != POS_UNKNOWN && rFrom != POS_UNKNOWN;
+    }
+
+    public boolean destinationComplete() {
+        return cTo != POS_UNKNOWN && rTo != POS_UNKNOWN;
+    }
+
+    public void validateComplete() throws InvalidMoveException {
+        if (!sourceComplete() || !destinationComplete()) {
+            throw new InvalidMoveException("The move cannot be executed because it is missing some positions");
         }
     }
 }

@@ -73,7 +73,8 @@ public class BoardController {
      */
     public void makeMove(final Move move) throws ApplicationMoveException {
         move.validateUniqueness();
-        board.validateMove(move);
-        board.executeMove(move);
+        board.setMove(move);
+        board.validateMove();
+        board.executeMove();
     }
 }
