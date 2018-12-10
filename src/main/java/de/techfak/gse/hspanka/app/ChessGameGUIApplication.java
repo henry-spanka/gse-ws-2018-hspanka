@@ -43,6 +43,8 @@ public class ChessGameGUIApplication extends Application implements ChessGameApp
     public void start(final Stage primaryStage) throws IOException {
         stage = primaryStage;
 
+        stage.setResizable(false);
+
         loadView("app");
     }
 
