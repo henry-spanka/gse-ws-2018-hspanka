@@ -9,7 +9,7 @@ import java.io.File;
  */
 public class FileChooser {
     /**
-     * The Fen file extension
+     * The Fen file extension.
      */
     private static final String FEN_EXTENSION = ".fen";
     /**
