@@ -45,7 +45,7 @@ public class FileChooser {
     public File saveFile() {
         File file = fxFileChooser.showSaveDialog(window);
 
-        if (!file.toString().endsWith("." + FEN_EXTENSION)) {
+        if (file != null && !file.toString().endsWith(FEN_EXTENSION)) {
             file = new File(file.toString() + FEN_EXTENSION);
         }
 
