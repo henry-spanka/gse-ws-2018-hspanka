@@ -39,7 +39,13 @@ public class FileChooser {
      * @return The file selected.
      */
     public File saveFile() {
-        return fxFileChooser.showSaveDialog(window);
+        File file = fxFileChooser.showSaveDialog(window);
+
+        if (!file.toString().endsWith(".fen")) {
+            file = new File(file.toString() + ".fen");
+        }
+
+        return file;
     }
 
     /**
