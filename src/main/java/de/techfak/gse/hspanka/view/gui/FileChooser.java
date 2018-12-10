@@ -11,12 +11,12 @@ public class FileChooser {
     /**
      * The Fen file extension
      */
-    private static final String FEN_EXTENSION = "fen";
+    private static final String FEN_EXTENSION = ".fen";
     /**
      * Which extensions should be allowed to select.
      */
     private static final javafx.stage.FileChooser.ExtensionFilter EXTENSION_FILTER =
-        new javafx.stage.FileChooser.ExtensionFilter("FEN files (*." + FEN_EXTENSION + ")", "*." + FEN_EXTENSION);
+        new javafx.stage.FileChooser.ExtensionFilter("FEN files (*" + FEN_EXTENSION + ")", "*" + FEN_EXTENSION);
 
     /**
      * The File chooser.
@@ -46,7 +46,7 @@ public class FileChooser {
         File file = fxFileChooser.showSaveDialog(window);
 
         if (!file.toString().endsWith("." + FEN_EXTENSION)) {
-            file = new File(file.toString() + "." + FEN_EXTENSION);
+            file = new File(file.toString() + FEN_EXTENSION);
         }
 
         return file;
