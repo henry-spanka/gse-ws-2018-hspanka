@@ -1,5 +1,6 @@
 package de.techfak.gse.hspanka.piece;
 
+import de.techfak.gse.hspanka.ConstraintFieldGenerator;
 import de.techfak.gse.hspanka.Player;
 import de.techfak.gse.hspanka.exceptions.InvalidBoardConfiguration;
 
@@ -14,6 +15,11 @@ public abstract class Piece {
      * The player who's piece this is.
      */
     private final Player player;
+
+    /**
+     * The constraint field generator for the piece.
+     */
+    private static final ConstraintFieldGenerator CONSTRAINT_FIELD_GENERATOR = new ConstraintFieldGenerator();
 
     /**
      * Create a piece.
@@ -99,5 +105,13 @@ public abstract class Piece {
      */
     public Player getPlayer() {
         return player;
+    }
+
+    /**
+     * Get the constraint field generator for the piece.
+     * @return The constraint field generator.
+     */
+    public ConstraintFieldGenerator getConstraintFieldGenerator() {
+        return CONSTRAINT_FIELD_GENERATOR;
     }
 }

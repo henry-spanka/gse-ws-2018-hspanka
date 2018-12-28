@@ -1,9 +1,6 @@
 package de.techfak.gse.hspanka;
 
-import de.techfak.gse.hspanka.exceptions.ApplicationMoveException;
-import de.techfak.gse.hspanka.exceptions.BoardPositionEmptyException;
-import de.techfak.gse.hspanka.exceptions.CannotMoveToOwnedPieceException;
-import de.techfak.gse.hspanka.exceptions.PieceNotOwnedException;
+import de.techfak.gse.hspanka.exceptions.*;
 import de.techfak.gse.hspanka.piece.Piece;
 
 import java.util.Observable;
@@ -174,19 +171,26 @@ public class Board extends Observable {
             if (fromPiece.getPlayer() != player) {
                 throw new PieceNotOwnedException("Not allowed to move that piece.");
             }
-        }
 
-        if (move.destinationComplete() && checkDest) {
-            try {
-                final Piece toPiece = getPiece(move.getrTo(), move.getcTo());
+            if (move.destinationComplete() && checkDest) {
+                try {
+                    final Piece toPiece = getPiece(move.getrTo(), move.getcTo());
 
-                if (toPiece.getPlayer() == player) {
-                    throw new CannotMoveToOwnedPieceException(
-                        "Cannot move to a piece that is owned by the executing player"
-                    );
+                    if (toPiece.getPlayer() == player) {
+                        throw new CannotMoveToOwnedPieceException(
+                            "Cannot move to a piece that is owned by the executing player"
+                        );
+                    }
+                } catch (BoardPositionEmptyException e) {
+                    //
                 }
-            } catch (BoardPositionEmptyException e) {
-                //
+
+                ConstraintFieldGenerator generator = fromPiece.getConstraintFieldGenerator();
+                boolean[][] validFields = generator.getFields(move.getcFrom(), move.getrFrom());
+
+                if (!validFields[move.getrTo()][move.getcTo()]) {
+                    throw new InvalidMoveException("The move does not match the given constraints.");
+                }
             }
         }
     }
