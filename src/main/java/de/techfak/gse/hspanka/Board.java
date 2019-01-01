@@ -33,7 +33,7 @@ public class Board extends Observable {
     /**
      * The constraint field generator of the pending move.
      */
-    private ConstraintFieldGenerator constraintFieldGenerator;
+    private ConstraintFieldGenerator constraintFieldGenerator = new ConstraintFieldGenerator();
 
     /**
      * Get the board configuration.
@@ -106,7 +106,7 @@ public class Board extends Observable {
 
         move = null;
 
-        constraintFieldGenerator = null;
+        constraintFieldGenerator = new ConstraintFieldGenerator();
 
         switchTurn();
     }
@@ -167,6 +167,9 @@ public class Board extends Observable {
                 throw new PieceNotOwnedException("Not allowed to move that piece.");
             }
 
+            constraintFieldGenerator = fromPiece.getConstraintFieldGenerator();
+            final boolean[][] validFields = constraintFieldGenerator.getFields(move.getcFrom(), move.getrFrom());
+
             if (move.destinationComplete()) {
                 try {
                     final Piece toPiece = getPiece(move.getrTo(), move.getcTo());
@@ -179,9 +182,6 @@ public class Board extends Observable {
                 } catch (BoardPositionEmptyException e) {
                     //
                 }
-
-                constraintFieldGenerator = fromPiece.getConstraintFieldGenerator();
-                final boolean[][] validFields = constraintFieldGenerator.getFields(move.getcFrom(), move.getrFrom());
 
                 if (!validFields[move.getrTo()][move.getcTo()]) {
                     throw new InvalidMoveException("The move does not match the given constraints.");

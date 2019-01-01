@@ -26,7 +26,7 @@ public class ConstraintFieldGenerator {
     /**
      * The generated fields that match the constraints.
      */
-    private transient boolean[][] fields;
+    private transient boolean[][] fields = new boolean[Board.FIELD_SIZE][Board.FIELD_SIZE];
 
     /**
      * Add a constraint.
@@ -49,6 +49,20 @@ public class ConstraintFieldGenerator {
     }
 
     /**
+     * returns an array that indicates whether a field matches the constraints.
+     * @return
+     */
+    public boolean[][] getFields() {
+        return fields;
+    }
+
+    private void reset() {
+        for (final boolean[] fieldRow : fields) {
+            Arrays.fill(fieldRow, Boolean.FALSE);
+        }
+    }
+
+    /**
      * Generates and returns an array that indicates whether a field matches the constraints.
      * @param col The column that should be checked.
      * @param row the row that should be checked.
@@ -56,15 +70,7 @@ public class ConstraintFieldGenerator {
      * @throws InvalidMoveException
      */
     public boolean[][] getFields(final int col, final int row) {
-        fields = new boolean[Board.FIELD_SIZE][Board.FIELD_SIZE];
-
-        if (constraints.isEmpty()) {
-            for (final boolean[] fieldRow : fields) {
-                Arrays.fill(fieldRow, Boolean.TRUE);
-            }
-
-            return fields.clone();
-        }
+        reset();
 
         for (final Constraint constraint : constraints) {
             switch (constraint.getDirection()) {
@@ -82,6 +88,12 @@ public class ConstraintFieldGenerator {
         }
 
         return fields.clone();
+    }
+
+    private void generateAny() {
+        for (final boolean[] fieldRow : fields) {
+            Arrays.fill(fieldRow, Boolean.TRUE);
+        }
     }
 
     private void generateForward(final int col, final int row, final Constraint constraint) {

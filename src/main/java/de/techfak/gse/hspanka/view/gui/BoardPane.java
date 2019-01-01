@@ -24,12 +24,18 @@ public class BoardPane extends GridPane {
     private static final int MIN_SIZE = 5;
 
     /**
+     * The hightlight color.
+     */
+    private static final String HIGHLIGHT_COLOR = "#957973";
+
+    /**
      * The BoardController so we can setup the event handler correctly.
      */
     private BoardController controller;
 
     /**
      * Returns the StackPane at the specified position.
+     *
      * @param col The column.
      * @param row The row.
      * @return The StackPane or null if not found.
@@ -49,8 +55,9 @@ public class BoardPane extends GridPane {
 
     /**
      * Registers an event handler for the given row and column.
-     * @param col The column where the event was fired.
-     * @param row The row where the event was fired.
+     *
+     * @param col  The column where the event was fired.
+     * @param row  The row where the event was fired.
      * @param pane The pane on which the event handler should be registered.
      */
     private void registerEventHandler(final int col, final int row, final StackPane pane) {
@@ -64,20 +71,66 @@ public class BoardPane extends GridPane {
 
     /**
      * Set's the color of a field to display the alternating grid colors.
-     * @param col The column where the field is located.
-     * @param row The row where the field is located.
+     *
+     * @param col  The column where the field is located.
+     * @param row  The row where the field is located.
      * @param pane The pane on which the color should be applied.
      */
     private void colorizeField(final int col, final int row, final StackPane pane) {
+        colorizeField(col, row, pane, false);
+    }
+
+    /**
+     * Set's the color of a field to display the alternating grid colors.
+     *
+     * @param col       The column where the field is located.
+     * @param row       The row where the field is located.
+     * @param pane      The pane on which the color should be applied.
+     * @param alternate Whether we should use alternate colors.
+     */
+    private void colorizeField(final int col, final int row, final StackPane pane, boolean alternate) {
         if ((row + col) % 2 == 0) {
-            pane.setStyle("-fx-background-color: #e8ebef");
+            if (alternate) {
+                pane.setStyle("-fx-background-color: #581845");
+            } else {
+                pane.setStyle("-fx-background-color: #e8ebef");
+            }
         } else {
-            pane.setStyle("-fx-background-color: #7d8796");
+            if (alternate) {
+                pane.setStyle("-fx-background-color: #900C3F");
+            } else {
+                pane.setStyle("-fx-background-color: #7d8796");
+            }
+        }
+    }
+
+    /**
+     * Set's the color of a field to display the alternating grid colors.
+     *
+     * @param col           The column where the field is located.
+     * @param row           The row where the field is located.
+     * @param pane          The pane on which the color should be applied.
+     * @param allowedFields The allowed fields that should be colored differently.
+     * @param board         The board.
+     */
+    private void colorizeField(
+        final int col,
+        final int row,
+        final StackPane pane,
+        boolean[][] allowedFields,
+        Piece piece,
+        Board board
+    ) {
+        if (allowedFields[row][col] && (piece == null || !piece.getPlayer().equals(board.getPlayer()))) {
+            colorizeField(col, row, pane, true);
+        } else {
+            colorizeField(col, row, pane, false);
         }
     }
 
     /**
      * Initializes the grid.
+     *
      * @param controller The board controller on which the event handler's should be registered.
      */
     public void initialize(final BoardController controller) {
@@ -113,12 +166,14 @@ public class BoardPane extends GridPane {
 
     /**
      * Redraw's the grid.
+     *
      * @param board The board to be drawn.
      */
     public void redraw(final Board board) {
         Piece[][] pieces = board.getConfiguration();
         Move move = board.getMove();
-        
+        boolean[][] allowedFields = board.getConstraintFieldGenerator().getFields();
+
         for (int row = 0; row < Board.FIELD_SIZE; row++) {
 
             // Check each piece in a row from the left to the right.
@@ -131,14 +186,15 @@ public class BoardPane extends GridPane {
                 if (piece == null) {
                     if (Objects.requireNonNull(square).getChildren() != null && !square.getChildren().isEmpty()) {
                         square.getChildren().remove(0, 1);
-                        colorizeField(col, row, square);
                     }
+
+                    colorizeField(col, row, square, allowedFields, null, board);
                 } else {
                     // Check if the field is involved in a move and color it appropriately.
                     if (move != null && move.isInvolved(col, row)) {
                         Objects.requireNonNull(square).setStyle("-fx-background-color: #1e4156");
                     } else {
-                        colorizeField(col, row, square);
+                        colorizeField(col, row, square, allowedFields, piece, board);
                     }
 
                     StackPane piecePane;
