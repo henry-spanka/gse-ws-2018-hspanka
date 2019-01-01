@@ -185,8 +185,8 @@ public class Board extends Observable {
                     //
                 }
 
-                ConstraintFieldGenerator generator = fromPiece.getConstraintFieldGenerator();
-                boolean[][] validFields = generator.getFields(move.getcFrom(), move.getrFrom());
+                final ConstraintFieldGenerator generator = fromPiece.getConstraintFieldGenerator();
+                final boolean[][] validFields = generator.getFields(move.getcFrom(), move.getrFrom());
 
                 if (!validFields[move.getrTo()][move.getcTo()]) {
                     throw new InvalidMoveException("The move does not match the given constraints.");

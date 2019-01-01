@@ -32,15 +32,15 @@ public class Constraint {
      * @param min The minimium step size.
      * @param max The maximum step size.
      */
-    public Constraint(Direction direction, int min, int max) {
+    public Constraint(final Direction direction, final int min, final int max) {
         this.direction = direction;
         this.min = min;
         this.max = max;
     }
 
     /**
-     * Get the direction to be enforced
-     * @return The direction
+     * Get the direction to be enforced.
+     * @return The direction,
      */
     public Direction getDirection() {
         return direction;

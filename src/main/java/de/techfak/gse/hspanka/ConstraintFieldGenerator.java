@@ -36,8 +36,8 @@ public class ConstraintFieldGenerator {
      * @param required Whether the constraint must ALWAYS match.
      * @return The current ConstraintFieldGenerator instance with the added constraint.
      */
-    public ConstraintFieldGenerator addConstraint(Direction direction, int min, int max, boolean required) {
-        Constraint constraint = new Constraint(direction, min, max);
+    public ConstraintFieldGenerator addConstraint(final Direction direction, final int min, final int max, final boolean required) {
+        final Constraint constraint = new Constraint(direction, min, max);
 
         if (required) {
             requiredConstraints.add(constraint);
@@ -55,18 +55,18 @@ public class ConstraintFieldGenerator {
      * @return All the fields of the board with matched fields set to true.
      * @throws InvalidMoveException
      */
-    public boolean[][] getFields(int col, int row) {
+    public boolean[][] getFields(final int col, final int row) {
         fields = new boolean[Board.FIELD_SIZE][Board.FIELD_SIZE];
 
         if (constraints.isEmpty()) {
-            for (boolean[] fieldRow : fields) {
+            for (final boolean[] fieldRow : fields) {
                 Arrays.fill(fieldRow, Boolean.TRUE);
             }
 
-            return fields;
+            return fields.clone();
         }
 
-        for (Constraint constraint : constraints) {
+        for (final Constraint constraint : constraints) {
             switch (constraint.getDirection()) {
                 case ANY:
                     generateForward(col, row, constraint);
@@ -74,13 +74,17 @@ public class ConstraintFieldGenerator {
                     generateVerticalForward(col, row, constraint);
                     generateVerticalBackward(col, row, constraint);
                     generateDiagonal(col, row, constraint);
+                    break;
+
+                default:
+                    //
             }
         }
 
-        return fields;
+        return fields.clone();
     }
 
-    private void generateForward(int col, int row, Constraint constraint) {
+    private void generateForward(final int col, final int row, final Constraint constraint) {
         int i = constraint.getMin();
 
         while (row + i < Board.FIELD_SIZE && i <= constraint.getMax()) {
@@ -90,7 +94,7 @@ public class ConstraintFieldGenerator {
         }
     }
 
-    private void generateBackward(int col, int row, Constraint constraint) {
+    private void generateBackward(final int col, final int row, final Constraint constraint) {
         int i = constraint.getMin();
 
         while (row - i >= 0 && i <= constraint.getMax()) {
@@ -100,7 +104,7 @@ public class ConstraintFieldGenerator {
         }
     }
 
-    private void generateVerticalForward(int col, int row, Constraint constraint) {
+    private void generateVerticalForward(final int col, final int row, final Constraint constraint) {
         int i = constraint.getMin();
 
         while (col + i < Board.FIELD_SIZE && i <= constraint.getMax()) {
@@ -110,7 +114,7 @@ public class ConstraintFieldGenerator {
         }
     }
 
-    private void generateVerticalBackward(int col, int row, Constraint constraint) {
+    private void generateVerticalBackward(final int col, final int row, final Constraint constraint) {
         int i = constraint.getMin();
 
         while (col - i >= 0 && i <= constraint.getMax()) {
@@ -120,7 +124,7 @@ public class ConstraintFieldGenerator {
         }
     }
 
-    private void generateDiagonal(int col, int row, Constraint constraint) {
+    private void generateDiagonal(final int col, final int row, final Constraint constraint) {
         int i = constraint.getMin();
 
         while (col + i < Board.FIELD_SIZE && row + i < Board.FIELD_SIZE && i <= constraint.getMax()) {
