@@ -75,11 +75,24 @@ public class ConstraintFieldGenerator {
         for (final Constraint constraint : constraints) {
             switch (constraint.getDirection()) {
                 case ANY:
+                    generateAny();
+                    break;
+                case HORIZONTAL:
                     generateForward(col, row, constraint);
                     generateBackward(col, row, constraint);
+                    break;
+                case VERTICAL:
                     generateVerticalForward(col, row, constraint);
                     generateVerticalBackward(col, row, constraint);
+                    break;
+                case DIAGONAL:
                     generateDiagonal(col, row, constraint);
+                    break;
+                case FORWARD:
+                    generateForward(col, row, constraint);
+                    break;
+                case BACKWARD:
+                    generateBackward(col, row, constraint);
                     break;
 
                 default:

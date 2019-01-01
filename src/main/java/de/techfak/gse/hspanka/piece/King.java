@@ -15,7 +15,9 @@ public class King extends Piece {
      */
     private static final ConstraintFieldGenerator CONSTRAINT_FIELD_GENERATOR =
         new ConstraintFieldGenerator()
-        .addConstraint(Constraint.Direction.ANY, 1, 1, false);
+        .addConstraint(Constraint.Direction.HORIZONTAL, 1, 1, false)
+        .addConstraint(Constraint.Direction.VERTICAL, 1, 1, false)
+        .addConstraint(Constraint.Direction.DIAGONAL, 1, 1, false);
 
     public King(final Player player) {
         super(player);
