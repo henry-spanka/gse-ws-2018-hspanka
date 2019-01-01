@@ -74,7 +74,6 @@ public class BoardController {
     public void makeMove(final Move move) throws ApplicationMoveException {
         move.validateUniqueness();
         board.setMove(move);
-        board.validateMove();
         board.executeMove();
     }
 }

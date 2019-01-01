@@ -31,6 +31,11 @@ public class Board extends Observable {
     private Move move;
 
     /**
+     * The constraint field generator of the pending move.
+     */
+    private ConstraintFieldGenerator constraintFieldGenerator;
+
+    /**
      * Get the board configuration.
      *
      * @return Current board configuration.
@@ -82,8 +87,10 @@ public class Board extends Observable {
     /**
      * Set's the current move.
      * @param move The move.
+     * @throws ApplicationMoveException Thrown if the move is invalid.
      */
-    public void setMove(final Move move) {
+    public void setMove(final Move move) throws ApplicationMoveException {
+        validateMove(move);
         this.move = move;
 
         setChanged();
@@ -98,6 +105,8 @@ public class Board extends Observable {
         configuration[move.getrFrom()][move.getcFrom()] = null;
 
         move = null;
+
+        constraintFieldGenerator = null;
 
         switchTurn();
     }
@@ -135,13 +144,11 @@ public class Board extends Observable {
     }
 
     /**
-     * Validates the move by checking whether the move is legal and the player
-     * can actually move this piece.
-     *
-     * @throws ApplicationMoveException A subclass is thrown that indicates the constraint that failed.
+     * Get the constraint field generator.
+     * @return The constraint field generator.
      */
-    public void validateMove() throws ApplicationMoveException {
-        validateMove(this.move);
+    public ConstraintFieldGenerator getConstraintFieldGenerator() {
+        return constraintFieldGenerator;
     }
 
     /**
@@ -173,8 +180,8 @@ public class Board extends Observable {
                     //
                 }
 
-                final ConstraintFieldGenerator generator = fromPiece.getConstraintFieldGenerator();
-                final boolean[][] validFields = generator.getFields(move.getcFrom(), move.getrFrom());
+                constraintFieldGenerator = fromPiece.getConstraintFieldGenerator();
+                final boolean[][] validFields = constraintFieldGenerator.getFields(move.getcFrom(), move.getrFrom());
 
                 if (!validFields[move.getrTo()][move.getcTo()]) {
                     throw new InvalidMoveException("The move does not match the given constraints.");

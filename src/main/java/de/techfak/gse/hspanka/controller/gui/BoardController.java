@@ -130,7 +130,7 @@ public class BoardController extends AbstractGuiController implements Observer {
         if (move == null || (!move.sourceComplete() && !move.destinationComplete())) {
             stagedMove = new Move(col, row, Move.POS_UNKNOWN, Move.POS_UNKNOWN);
             try {
-                this.board.validateMove(stagedMove);
+                this.board.setMove(stagedMove);
             } catch (ApplicationMoveException e) {
                 return;
             }
@@ -142,20 +142,17 @@ public class BoardController extends AbstractGuiController implements Observer {
             stagedMove = new Move(col, row, move.getcTo(), move.getrTo());
             try {
                 // Check if the position is a valid source position.
-                this.board.validateMove(stagedMove);
+                this.board.setMove(stagedMove);
             } catch (ApplicationMoveException e) {
                 stagedMove = new Move(move.getcFrom(), move.getrFrom(), col, row);
                 try {
                     // Try as destination position instead.
-                    this.board.validateMove(stagedMove);
+                    this.board.setMove(stagedMove);
                 } catch (ApplicationMoveException e3) {
                     return;
                 }
             }
         }
-
-        // Set's the move on the board.
-        this.board.setMove(stagedMove);
 
         // If source and destionation is present, we should execute the move.
         if (stagedMove.sourceComplete() && stagedMove.destinationComplete()) {
