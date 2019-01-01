@@ -27,12 +27,17 @@ public class Constraint {
     private int max;
 
     /**
+     * Whether the fields in between must be empty.
+     */
+    private boolean empty;
+
+    /**
      * Instaniates a new constraint.
      * @param direction The direction to be enforced.
      * @param min The minimium step size.
      * @param max The maximum step size.
      */
-    public Constraint(final Direction direction, final int min, final int max) {
+    public Constraint(final Direction direction, final int min, final int max, final boolean empty) {
         this.direction = direction;
         this.min = min;
 
@@ -41,6 +46,8 @@ public class Constraint {
         } else {
             this.max = max;
         }
+
+        this.empty = empty;
     }
 
     /**
@@ -65,5 +72,13 @@ public class Constraint {
      */
     public int getMax() {
         return max;
+    }
+
+    /**
+     * Whether the fields in between must be empty.
+     * @return True if they must be empty.
+     */
+    public boolean getEmpty() {
+        return empty;
     }
 }
