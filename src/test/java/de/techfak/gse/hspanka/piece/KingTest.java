@@ -6,6 +6,8 @@ import de.techfak.gse.hspanka.Move;
 import de.techfak.gse.hspanka.exceptions.ApplicationErrorException;
 import de.techfak.gse.hspanka.exceptions.ApplicationMoveException;
 import static org.junit.jupiter.api.Assertions.*;
+
+import de.techfak.gse.hspanka.exceptions.CannotMoveToOwnedPieceException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -17,11 +19,6 @@ class KingTest {
         // Move Right
         assertDoesNotThrow(() -> {
             board.validateMove(new Move(4, 6, 5, 6), true);
-        });
-
-        // Move Left
-        assertDoesNotThrow(() -> {
-            board.validateMove(new Move(4, 6, 3, 6), true);
         });
 
         // Move Forward
@@ -66,10 +63,18 @@ class KingTest {
         });
     }
 
+    @Test
+    void can_not_move_to_ally_field() {
+        // Check that the King cannot move to an allied field.
+        assertThrows(CannotMoveToOwnedPieceException.class, () -> {
+            board.validateMove(new Move(4, 6, 3, 6), true);
+        });
+    }
+
     @BeforeAll
     public static void setUp() throws ApplicationErrorException{
         board = new Board();
         final FenParser fen = new FenParser(board);
-        fen.parse("8/8/8/8/8/8/4K3/8 w");
+        fen.parse("8/8/8/8/8/8/3BK3/8 w");
     }
 }
