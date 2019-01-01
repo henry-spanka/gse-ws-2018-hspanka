@@ -71,10 +71,23 @@ class KingTest {
         });
     }
 
+    @Test
+    void can_move_to_enemy_field() {
+        // Bishop forward
+        assertDoesNotThrow(() -> {
+            board.validateMove(new Move(4, 6, 4, 5), true);
+        });
+
+        // Rook backward
+        assertDoesNotThrow(() -> {
+            board.validateMove(new Move(4, 6, 4, 7), true);
+        });
+    }
+
     @BeforeAll
     public static void setUp() throws ApplicationErrorException{
         board = new Board();
         final FenParser fen = new FenParser(board);
-        fen.parse("8/8/8/8/8/8/3BK3/8 w");
+        fen.parse("8/8/8/8/8/4b3/3BK3/4r3 w");
     }
 }
