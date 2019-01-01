@@ -146,25 +146,13 @@ public class Board extends Observable {
 
     /**
      * Validates the move by checking whether the move is legal and the player
-     * can actually move this piece. Does not check destination
-     *
-     * @param move The move that should be checked
-     * @throws ApplicationMoveException A subclass is thrown that indicates the constraint that failed.
-     */
-    public void validateMove(final Move move) throws ApplicationMoveException {
-        validateMove(move, false);
-    }
-
-    /**
-     * Validates the move by checking whether the move is legal and the player
      * can actually move this piece.
      *
      * @param move      The move that should be checked.
-     * @param checkDest Whether we should also check that the destination is correct.
      * @throws ApplicationMoveException A subclass is thrown that indicates the constraint that failed.
      */
     @SuppressWarnings("PMD.EmptyCatchBlock")
-    public void validateMove(final Move move, final boolean checkDest) throws ApplicationMoveException {
+    public void validateMove(final Move move) throws ApplicationMoveException {
         if (move.sourceComplete()) {
             final Piece fromPiece = getPiece(move.getrFrom(), move.getcFrom());
 
@@ -172,7 +160,7 @@ public class Board extends Observable {
                 throw new PieceNotOwnedException("Not allowed to move that piece.");
             }
 
-            if (move.destinationComplete() && checkDest) {
+            if (move.destinationComplete()) {
                 try {
                     final Piece toPiece = getPiece(move.getrTo(), move.getcTo());
 

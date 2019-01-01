@@ -18,25 +18,25 @@ class KingTest {
     void can_move_to_nearby_fields() {
         // Move Right
         assertDoesNotThrow(() -> {
-            board.validateMove(new Move(4, 6, 5, 6), true);
+            board.validateMove(new Move(4, 6, 5, 6));
         });
 
         // Move Forward
         assertDoesNotThrow(() -> {
-            board.validateMove(new Move(4, 6, 4, 5), true);
+            board.validateMove(new Move(4, 6, 4, 5));
         });
 
         // Move Backward
         assertDoesNotThrow(() -> {
-            board.validateMove(new Move(4, 6, 4, 7), true);
+            board.validateMove(new Move(4, 6, 4, 7));
         });
 
         // Move Diagonal
         assertDoesNotThrow(() -> {
-            board.validateMove(new Move(4, 6, 5, 7), true);
-            board.validateMove(new Move(4, 6, 3, 5), true);
-            board.validateMove(new Move(4, 6, 3, 7), true);
-            board.validateMove(new Move(4, 6, 5, 5), true);
+            board.validateMove(new Move(4, 6, 5, 7));
+            board.validateMove(new Move(4, 6, 3, 5));
+            board.validateMove(new Move(4, 6, 3, 7));
+            board.validateMove(new Move(4, 6, 5, 5));
         });
     }
 
@@ -44,22 +44,22 @@ class KingTest {
     void can_not_move_to_distant_fields() {
         // Cannot move two fields to the right
         assertThrows(ApplicationMoveException.class, () -> {
-            board.validateMove(new Move(4, 6, 6, 6), true);
+            board.validateMove(new Move(4, 6, 6, 6));
         });
 
         // Cannot move two fields to the left
         assertThrows(ApplicationMoveException.class, () -> {
-            board.validateMove(new Move(4, 6, 2, 6), true);
+            board.validateMove(new Move(4, 6, 2, 6));
         });
 
         // Cannot move two fields forward
         assertThrows(ApplicationMoveException.class, () -> {
-            board.validateMove(new Move(4, 6, 4, 4), true);
+            board.validateMove(new Move(4, 6, 4, 4));
         });
 
         // Cannot move two fields diagonal (upper left)
         assertThrows(ApplicationMoveException.class, () -> {
-            board.validateMove(new Move(4, 6, 2, 4), true);
+            board.validateMove(new Move(4, 6, 2, 4));
         });
     }
 
@@ -67,7 +67,7 @@ class KingTest {
     void can_not_move_to_ally_field() {
         // Check that the King cannot move to an allied field.
         assertThrows(CannotMoveToOwnedPieceException.class, () -> {
-            board.validateMove(new Move(4, 6, 3, 6), true);
+            board.validateMove(new Move(4, 6, 3, 6));
         });
     }
 
@@ -75,12 +75,12 @@ class KingTest {
     void can_move_to_enemy_field() {
         // Bishop forward
         assertDoesNotThrow(() -> {
-            board.validateMove(new Move(4, 6, 4, 5), true);
+            board.validateMove(new Move(4, 6, 4, 5));
         });
 
         // Rook backward
         assertDoesNotThrow(() -> {
-            board.validateMove(new Move(4, 6, 4, 7), true);
+            board.validateMove(new Move(4, 6, 4, 7));
         });
     }
 

@@ -142,12 +142,12 @@ public class BoardController extends AbstractGuiController implements Observer {
             stagedMove = new Move(col, row, move.getcTo(), move.getrTo());
             try {
                 // Check if the position is a valid source position.
-                this.board.validateMove(stagedMove, true);
+                this.board.validateMove(stagedMove);
             } catch (ApplicationMoveException e) {
                 stagedMove = new Move(move.getcFrom(), move.getrFrom(), col, row);
                 try {
                     // Try as destination position instead.
-                    this.board.validateMove(stagedMove, true);
+                    this.board.validateMove(stagedMove);
                 } catch (ApplicationMoveException e3) {
                     return;
                 }
