@@ -113,11 +113,14 @@ public class BoardPane extends GridPane {
 
     /**
      * Redraw's the grid.
-     * @param pieces The pieces that should be drawed on the grid.
-     * @param move The current player.
+     * @param board The board to be drawn.
      */
-    public void redraw(final Piece[][] pieces, final Move move) {
+    public void redraw(final Board board) {
+        Piece[][] pieces = board.getConfiguration();
+        Move move = board.getMove();
+        
         for (int row = 0; row < Board.FIELD_SIZE; row++) {
+
             // Check each piece in a row from the left to the right.
             for (int col = 0; col < Board.FIELD_SIZE; col++) {
                 final Piece piece = pieces[row][col];
