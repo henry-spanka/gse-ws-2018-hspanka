@@ -35,7 +35,12 @@ public class Constraint {
     public Constraint(final Direction direction, final int min, final int max) {
         this.direction = direction;
         this.min = min;
-        this.max = max;
+
+        if (max == -1) {
+            this.max = Board.FIELD_SIZE - 1;
+        } else {
+            this.max = max;
+        }
     }
 
     /**
