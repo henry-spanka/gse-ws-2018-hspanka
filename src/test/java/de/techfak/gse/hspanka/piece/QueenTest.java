@@ -4,6 +4,7 @@ import de.techfak.gse.hspanka.Board;
 import de.techfak.gse.hspanka.FenParser;
 import de.techfak.gse.hspanka.Move;
 import de.techfak.gse.hspanka.exceptions.ApplicationErrorException;
+import de.techfak.gse.hspanka.exceptions.CannotMoveToOwnedPieceException;
 import de.techfak.gse.hspanka.exceptions.InvalidMoveException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -48,10 +49,18 @@ class QueenTest {
         });
     }
 
+    @Test
+    void can_not_move_to_ally_field() {
+        // Check that the Queen cannot move to an allied field.
+        assertThrows(CannotMoveToOwnedPieceException.class, () -> {
+            board.setMove(new Move(4, 6, 1, 3));
+        });
+    }
+
     @BeforeAll
     public static void setUp() throws ApplicationErrorException {
         board = new Board();
         final FenParser fen = new FenParser(board);
-        fen.parse("8/8/8/8/4r3/8/4Q3/8 w");
+        fen.parse("8/8/8/1K6/4r3/8/4Q3/8 w");
     }
 }
