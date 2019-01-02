@@ -32,12 +32,17 @@ public class Constraint {
     private boolean empty;
 
     /**
+     * Whether the target field must be empty.
+     */
+    private boolean targetEmpty;
+
+    /**
      * Instaniates a new constraint.
      * @param direction The direction to be enforced.
      * @param min The minimium step size.
      * @param max The maximum step size.
      */
-    public Constraint(final Direction direction, final int min, final int max, final boolean empty) {
+    public Constraint(final Direction direction, final int min, final int max, final boolean empty, final boolean targetEmpty) {
         this.direction = direction;
         this.min = min;
 
@@ -48,6 +53,7 @@ public class Constraint {
         }
 
         this.empty = empty;
+        this.targetEmpty = targetEmpty;
     }
 
     /**
@@ -81,4 +87,10 @@ public class Constraint {
     public boolean getEmpty() {
         return empty;
     }
+
+    /**
+     * Whether the target field must be empty.
+     * @return True if it must be empty.
+     */
+    public boolean targetFieldMustBeEmpty() { return targetEmpty; }
 }

@@ -64,7 +64,37 @@ public class ConstraintFieldGenerator {
         final boolean required,
         final boolean empty
     ) {
-        final Constraint constraint = new Constraint(direction, min, max, empty);
+        final Constraint constraint = new Constraint(direction, min, max, empty, false);
+
+        if (required) {
+            requiredConstraints.add(constraint);
+        } else {
+            constraints.add(constraint);
+        }
+
+        return this;
+    }
+
+    /**
+     * Add a constraint.
+     *
+     * @param direction The direction to be constrained.
+     * @param min       The minimum steps into the direction.
+     * @param max       The maximum steps into the direction.
+     * @param required  Whether the constraint must ALWAYS match.
+     * @param empty     Whether the fields in between must be empty.
+     * @param targetEmpty Whether the target field must be empty.
+     * @return The current ConstraintFieldGenerator instance with the added constraint.
+     */
+    public ConstraintFieldGenerator addConstraint(
+        final Direction direction,
+        final int min,
+        final int max,
+        final boolean required,
+        final boolean empty,
+        final boolean targetEmpty
+    ) {
+        final Constraint constraint = new Constraint(direction, min, max, empty, targetEmpty);
 
         if (required) {
             requiredConstraints.add(constraint);
@@ -99,8 +129,11 @@ public class ConstraintFieldGenerator {
      * @return All the fields of the board with matched fields set to true.
      * @throws InvalidMoveException
      */
-    public boolean[][] getFields(final int col, final int row, Piece[][] pieces) {
+    public boolean[][] getFields(Move move, Piece[][] pieces) {
         reset();
+
+        int col = move.getcFrom();
+        int row = move.getrFrom();
 
         for (final Constraint constraint : constraints) {
             switch (constraint.getDirection()) {
@@ -119,14 +152,28 @@ public class ConstraintFieldGenerator {
                     generateDiagonal(col, row, constraint, pieces);
                     break;
                 case FORWARD:
-                    generateForward(col, row, constraint, pieces);
+                    // If the White Player is moving a piece we need to flip the board.
+                    if (pieces[row][col].getPlayer() == Player.WHITE) {
+                        generateBackward(col, row, constraint, pieces);
+                    } else {
+                        generateForward(col, row, constraint, pieces);
+                    }
                     break;
                 case BACKWARD:
-                    generateBackward(col, row, constraint, pieces);
+                    // If the White Player is moving a piece we need to flip the board.
+                    if (pieces[row][col].getPlayer() == Player.WHITE) {
+                        generateForward(col, row, constraint, pieces);
+                    } else {
+                        generateBackward(col, row, constraint, pieces);
+                    }
                     break;
 
                 default:
                     //
+            }
+
+            if (constraint.targetFieldMustBeEmpty() && pieces[move.getrTo()][move.getcTo()] != null) {
+                fields[move.getrTo()][move.getcTo()] = false;
             }
         }
 

@@ -168,9 +168,7 @@ public class Board extends Observable {
             }
 
             constraintFieldGenerator = fromPiece.getConstraintFieldGenerator();
-            final boolean[][] validFields = constraintFieldGenerator.getFields(
-                move.getcFrom(), move.getrFrom(), getConfiguration()
-            );
+            final boolean[][] validFields = constraintFieldGenerator.getFields(move, getConfiguration());
 
             if (move.destinationComplete()) {
                 try {
