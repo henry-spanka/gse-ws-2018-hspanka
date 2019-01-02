@@ -57,6 +57,14 @@ class QueenTest {
         });
     }
 
+    @Test
+    void can_move_to_enemy_field() {
+        // Rook 2 forward
+        assertDoesNotThrow(() -> {
+            board.setMove(new Move(4, 6, 4, 4));
+        });
+    }
+
     @BeforeAll
     public static void setUp() throws ApplicationErrorException {
         board = new Board();
