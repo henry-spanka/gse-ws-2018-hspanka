@@ -11,7 +11,7 @@ import de.techfak.gse.hspanka.Player;
  */
 public class Bishop extends Piece {
     /**
-     * The constraint field generator for the Rook.
+     * The constraint field generator for the Bishop.
      */
     private static final ConstraintFieldGenerator CONSTRAINT_FIELD_GENERATOR =
         new ConstraintFieldGenerator()
