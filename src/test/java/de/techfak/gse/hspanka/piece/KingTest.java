@@ -6,6 +6,7 @@ import de.techfak.gse.hspanka.Move;
 import de.techfak.gse.hspanka.exceptions.ApplicationErrorException;
 import de.techfak.gse.hspanka.exceptions.ApplicationMoveException;
 import de.techfak.gse.hspanka.exceptions.CannotMoveToOwnedPieceException;
+import org.assertj.core.util.VisibleForTesting;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +24,8 @@ class KingTest {
     }
 
     @Test
-    void can_move_to_nearby_fields() {
+    @VisibleForTesting
+    void canMoveToNearbyFields() {
         // Move Right
         assertDoesNotThrow(() -> {
             board.setMove(new Move(4, 6, 5, 6));
@@ -49,7 +51,8 @@ class KingTest {
     }
 
     @Test
-    void can_not_move_to_distant_fields() {
+    @VisibleForTesting
+    void canNotMoveToDistantFields() {
         // Cannot move two fields to the right
         assertThrows(ApplicationMoveException.class, () -> {
             board.setMove(new Move(4, 6, 6, 6));
@@ -72,7 +75,8 @@ class KingTest {
     }
 
     @Test
-    void can_not_move_to_ally_field() {
+    @VisibleForTesting
+    void canNotMoveToAllyField() {
         // Check that the King cannot move to an allied field.
         assertThrows(CannotMoveToOwnedPieceException.class, () -> {
             board.setMove(new Move(4, 6, 3, 6));
@@ -80,7 +84,8 @@ class KingTest {
     }
 
     @Test
-    void can_move_to_enemy_field() {
+    @VisibleForTesting
+    void canMoveToEnemyField() {
         // Bishop forward
         assertDoesNotThrow(() -> {
             board.setMove(new Move(4, 6, 4, 5));

@@ -1,6 +1,5 @@
 package de.techfak.gse.hspanka;
 
-import de.techfak.gse.hspanka.exceptions.InvalidMoveException;
 import de.techfak.gse.hspanka.piece.Piece;
 
 import java.util.ArrayList;
@@ -10,6 +9,7 @@ import java.util.List;
 /**
  * Generates fields that match constraints.
  */
+@SuppressWarnings("PMD.CyclomaticComplexity")
 public class ConstraintFieldGenerator {
 
     /**
@@ -63,7 +63,7 @@ public class ConstraintFieldGenerator {
      * @return All the fields of the board with matched fields set to true.
      */
     public boolean[][] getFields() {
-        return fields;
+        return fields.clone();
     }
 
     private void reset() {
@@ -75,17 +75,15 @@ public class ConstraintFieldGenerator {
     /**
      * Generates and returns an array that indicates whether a field matches the constraints.
      *
-     * @param col    The column that should be checked.
-     * @param row    the row that should be checked.
+     * @param move   The move for which the fields should be generated.
      * @param pieces The pieces on the board.
      * @return All the fields of the board with matched fields set to true.
-     * @throws InvalidMoveException
      */
-    public boolean[][] getFields(Move move, Piece[][] pieces) {
+    public boolean[][] getFields(final Move move, final Piece[][] pieces) {
         reset();
 
-        int col = move.getcFrom();
-        int row = move.getrFrom();
+        final int col = move.getcFrom();
+        final int row = move.getrFrom();
 
         srcPiece = pieces[row][col];
 
@@ -102,7 +100,7 @@ public class ConstraintFieldGenerator {
         return fields.clone();
     }
 
-    private void processConstraint(int col, int row, Constraint constraint, Piece[][] pieces) {
+    private void processConstraint(final int col, final int row, final Constraint constraint, final Piece[][] pieces) {
         switch (constraint.getDirection()) {
             case ANY:
                 generateAny();
@@ -163,7 +161,7 @@ public class ConstraintFieldGenerator {
         }
     }
 
-    private void generateForward(final int col, final int row, final Constraint constraint, Piece[][] pieces) {
+    private void generateForward(final int col, final int row, final Constraint constraint, final Piece[][] pieces) {
         for (int i = 1; row + i < Board.FIELD_SIZE && i <= constraint.getMax(); i++) {
             if (i >= constraint.getMin()) {
                 if (constraint.targetFieldMustBeEmpty() && pieces[row + i][col] != null) {
@@ -181,13 +179,13 @@ public class ConstraintFieldGenerator {
                 }
             }
 
-            if (constraint.getEmpty() && pieces[row + i][col] != null) {
+            if (constraint.fieldsInBetweenMustBeEmpty() && pieces[row + i][col] != null) {
                 break;
             }
         }
     }
 
-    private void generateBackward(final int col, final int row, final Constraint constraint, Piece[][] pieces) {
+    private void generateBackward(final int col, final int row, final Constraint constraint, final Piece[][] pieces) {
         for (int i = 1; row - i >= 0 && i <= constraint.getMax(); i++) {
             if (i >= constraint.getMin()) {
                 if (constraint.targetFieldMustBeEmpty() && pieces[row - i][col] != null) {
@@ -205,13 +203,17 @@ public class ConstraintFieldGenerator {
                 }
             }
 
-            if (constraint.getEmpty() && pieces[row - i][col] != null) {
+            if (constraint.fieldsInBetweenMustBeEmpty() && pieces[row - i][col] != null) {
                 break;
             }
         }
     }
 
-    private void generateVerticalForward(final int col, final int row, final Constraint constraint, Piece[][] pieces) {
+    private void generateVerticalForward(
+        final int col,
+        final int row,
+        final Constraint constraint,
+        final Piece[][] pieces) {
         for (int i = 1; col + i < Board.FIELD_SIZE && i <= constraint.getMax(); i++) {
             if (i >= constraint.getMin()) {
                 if (constraint.targetFieldMustBeEmpty() && pieces[row][col + i] != null) {
@@ -229,13 +231,17 @@ public class ConstraintFieldGenerator {
                 }
             }
 
-            if (constraint.getEmpty() && pieces[row][col + i] != null) {
+            if (constraint.fieldsInBetweenMustBeEmpty() && pieces[row][col + i] != null) {
                 break;
             }
         }
     }
 
-    private void generateVerticalBackward(final int col, final int row, final Constraint constraint, Piece[][] pieces) {
+    private void generateVerticalBackward(
+        final int col,
+        final int row,
+        final Constraint constraint,
+        final Piece[][] pieces) {
         for (int i = 1; col - i >= 0 && i <= constraint.getMax(); i++) {
             if (i >= constraint.getMin()) {
                 if (constraint.targetFieldMustBeEmpty() && pieces[row][col - i] != null) {
@@ -253,13 +259,17 @@ public class ConstraintFieldGenerator {
                 }
             }
 
-            if (constraint.getEmpty() && pieces[row][col - i] != null) {
+            if (constraint.fieldsInBetweenMustBeEmpty() && pieces[row][col - i] != null) {
                 break;
             }
         }
     }
 
-    private void generateDiagonalForward(final int col, final int row, final Constraint constraint, Piece[][] pieces) {
+    private void generateDiagonalForward(
+        final int col,
+        final int row,
+        final Constraint constraint,
+        final Piece[][] pieces) {
         for (int i = 1; col + i < Board.FIELD_SIZE && row + i < Board.FIELD_SIZE && i <= constraint.getMax(); i++) {
             if (i >= constraint.getMin()) {
                 if (constraint.targetFieldMustBeEmpty() && pieces[row + i][col + i] != null) {
@@ -273,7 +283,7 @@ public class ConstraintFieldGenerator {
                 fields[row + i][col + i] = true;
             }
 
-            if (constraint.getEmpty() && pieces[row + i][col + i] != null) {
+            if (constraint.fieldsInBetweenMustBeEmpty() && pieces[row + i][col + i] != null) {
                 break;
             }
         }
@@ -291,13 +301,17 @@ public class ConstraintFieldGenerator {
                 fields[row + i][col - i] = true;
             }
 
-            if (constraint.getEmpty() && pieces[row + i][col - i] != null) {
+            if (constraint.fieldsInBetweenMustBeEmpty() && pieces[row + i][col - i] != null) {
                 break;
             }
         }
     }
 
-    private void generateDiagonalBackward(final int col, final int row, final Constraint constraint, Piece[][] pieces) {
+    private void generateDiagonalBackward(
+        final int col,
+        final int row,
+        final Constraint constraint,
+        final Piece[][] pieces) {
         for (int i = 1; col + i < Board.FIELD_SIZE && row - i >= 0 && i <= constraint.getMax(); i++) {
             if (i >= constraint.getMin()) {
                 if (constraint.targetFieldMustBeEmpty() && pieces[row - i][col + i] != null) {
@@ -311,7 +325,7 @@ public class ConstraintFieldGenerator {
                 fields[row - i][col + i] = true;
             }
 
-            if (constraint.getEmpty() && pieces[row - i][col + i] != null) {
+            if (constraint.fieldsInBetweenMustBeEmpty() && pieces[row - i][col + i] != null) {
                 break;
             }
         }
@@ -329,7 +343,7 @@ public class ConstraintFieldGenerator {
                 fields[row - i][col - i] = true;
             }
 
-            if (constraint.getEmpty() && pieces[row - i][col - i] != null) {
+            if (constraint.fieldsInBetweenMustBeEmpty() && pieces[row - i][col - i] != null) {
                 break;
             }
         }

@@ -113,7 +113,7 @@ public class Constraint {
      *
      * @return True if they must be empty.
      */
-    public boolean getEmpty() {
+    public boolean fieldsInBetweenMustBeEmpty() {
         return empty;
     }
 
@@ -139,7 +139,7 @@ public class Constraint {
      * @param then The constraint to be set.
      * @return The original constraint chained with the new one.
      */
-    public Constraint then(Constraint then) {
+    public Constraint then(final Constraint then) {
         this.then = then;
 
         return this;

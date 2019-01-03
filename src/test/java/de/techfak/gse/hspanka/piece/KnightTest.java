@@ -6,6 +6,7 @@ import de.techfak.gse.hspanka.Move;
 import de.techfak.gse.hspanka.exceptions.ApplicationErrorException;
 import de.techfak.gse.hspanka.exceptions.CannotMoveToOwnedPieceException;
 import de.techfak.gse.hspanka.exceptions.InvalidMoveException;
+import org.assertj.core.util.VisibleForTesting;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +24,8 @@ class KnightTest {
     }
 
     @Test
-    void can_make_valid_moves() {
+    @VisibleForTesting
+    void canMakeValidMoves() {
         // Move two right, followed by one field up
         assertDoesNotThrow(() -> {
             board.setMove(new Move(3, 4, 5, 3));
@@ -46,7 +48,8 @@ class KnightTest {
     }
 
     @Test
-    void can_not_make_illegal_moves() {
+    @VisibleForTesting
+    void canNotMakeIllegalMoves() {
         // Move one up
         assertThrows(InvalidMoveException.class, () -> {
             board.setMove(new Move(3, 4, 3, 3));
@@ -59,7 +62,8 @@ class KnightTest {
     }
 
     @Test
-    void can_move_to_enemy_field() {
+    @VisibleForTesting
+    void canMoveToEnemyField() {
         // Move two up and one left to the enemy King
         assertDoesNotThrow(() -> {
             board.setMove(new Move(3, 4, 2, 2));
@@ -72,7 +76,8 @@ class KnightTest {
     }
 
     @Test
-    void can_not_move_to_ally_field() {
+    @VisibleForTesting
+    void canNotMoveToAllyField() {
         // Move two up and one right to the ally Pawn
         assertThrows(CannotMoveToOwnedPieceException.class, () -> {
             board.setMove(new Move(3, 4, 4, 2));

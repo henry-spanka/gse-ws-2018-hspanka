@@ -97,10 +97,10 @@ public class Board extends Observable {
      * @throws ApplicationMoveException Thrown if the move is invalid.
      */
     public void setMove(final Move move) throws ApplicationMoveException {
-        if (!move.sourceComplete() && !move.destinationComplete()) {
-            constraintFieldGenerator = new ConstraintFieldGenerator();
-        } else {
+        if (move.sourceComplete() || move.destinationComplete()) {
             validateMove(move);
+        } else {
+            constraintFieldGenerator = new ConstraintFieldGenerator();
         }
 
         this.move = move;

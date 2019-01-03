@@ -25,11 +25,6 @@ public class BoardPane extends GridPane {
     private static final int MIN_SIZE = 5;
 
     /**
-     * The hightlight color.
-     */
-    private static final String HIGHLIGHT_COLOR = "#957973";
-
-    /**
      * The BoardController so we can setup the event handler correctly.
      */
     private BoardController controller;
@@ -89,7 +84,7 @@ public class BoardPane extends GridPane {
      * @param pane The pane on which the color should be applied.
      * @param alt  Whether we should use alternate colors.
      */
-    private void colorizeField(final int col, final int row, final StackPane pane, int alt) {
+    private void colorizeField(final int col, final int row, final StackPane pane, final int alt) {
         if ((row + col) % 2 == 0) {
             if (alt == 1) {
                 pane.setStyle("-fx-background-color: #E67E22");
@@ -122,17 +117,17 @@ public class BoardPane extends GridPane {
         final int col,
         final int row,
         final StackPane pane,
-        boolean[][] allowedFields,
-        Piece piece,
-        Board board
+        final boolean[][] allowedFields,
+        final Piece piece,
+        final Board board
     ) {
         if (allowedFields[row][col]) {
             if (piece == null) {
                 colorizeField(col, row, pane, 1);
-            } else if (!piece.getPlayer().equals(board.getPlayer())) {
-                colorizeField(col, row, pane, 2);
-            } else {
+            } else if (piece.getPlayer().equals(board.getPlayer())) {
                 colorizeField(col, row, pane, 0);
+            } else {
+                colorizeField(col, row, pane, 2);
             }
         } else {
             colorizeField(col, row, pane, 0);
@@ -181,9 +176,9 @@ public class BoardPane extends GridPane {
      * @param board The board to be drawn.
      */
     public void redraw(final Board board) {
-        Piece[][] pieces = board.getConfiguration();
-        Move move = board.getMove();
-        boolean[][] allowedFields = board.getConstraintFieldGenerator().getFields();
+        final Piece[][] pieces = board.getConfiguration();
+        final Move move = board.getMove();
+        final boolean[][] allowedFields = board.getConstraintFieldGenerator().getFields();
 
         for (int row = 0; row < Board.FIELD_SIZE; row++) {
 
@@ -223,12 +218,13 @@ public class BoardPane extends GridPane {
         }
 
         if (board.getPlayerWon() != null) {
-            Alert alertWon = new Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
+            final Alert alertWon = new Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
             alertWon.setTitle("The Game has ended!");
             alertWon.setHeaderText("Thanks for playing.");
 
-            StringBuilder builder = new StringBuilder("The ");
+            final StringBuilder builder = new StringBuilder(64);
             builder
+                .append("The ")
                 .append(board.getPlayerWon() == Player.WHITE ? "white" : "black")
                 .append(" player has won! Congratulations.");
 
