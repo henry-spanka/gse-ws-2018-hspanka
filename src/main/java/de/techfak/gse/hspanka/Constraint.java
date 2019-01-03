@@ -160,4 +160,12 @@ public class Constraint {
     public Constraint getNext() {
         return then;
     }
+
+    /**
+     * Check whether a chained constraint exists.
+     * @return A boolean.
+     */
+    public boolean hasNext() {
+        return then != null;
+    }
 }

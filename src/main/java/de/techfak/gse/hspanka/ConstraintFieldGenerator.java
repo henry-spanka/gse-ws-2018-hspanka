@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static de.techfak.gse.hspanka.Constraint.Direction;
-
 /**
  * Generates fields that match constraints.
  */
@@ -20,7 +18,7 @@ public class ConstraintFieldGenerator {
     private List<Constraint> constraints = new ArrayList<>();
 
     /**
-     * The constraints of which at least ONE must be met and the piece must be untouched.
+     * The constraints of which at least ONE must be met and the srcPiece must be untouched.
      */
     private List<Constraint> untouchedConstraints = new ArrayList<>();
 
@@ -29,6 +27,10 @@ public class ConstraintFieldGenerator {
      */
     private transient boolean[][] fields = new boolean[Board.FIELD_SIZE][Board.FIELD_SIZE];
 
+    /**
+     * The srcPiece that is being moved.
+     */
+    private transient Piece srcPiece;
 
     /**
      * Add a new constraint to the field generator.
@@ -43,7 +45,7 @@ public class ConstraintFieldGenerator {
 
     /**
      * Add a new untouched constraint to the field generator.
-     * The constraint will only be validated if the piece has not been touched yet.
+     * The constraint will only be validated if the srcPiece has not been touched yet.
      * @param constraint The constraint to be added.
      * @return The generator with the added constraint.
      */
@@ -83,6 +85,8 @@ public class ConstraintFieldGenerator {
         int col = move.getcFrom();
         int row = move.getrFrom();
 
+        srcPiece = pieces[row][col];
+
         for (final Constraint constraint : constraints) {
             processConstraint(col, row, constraint, pieces);
         }
@@ -114,23 +118,23 @@ public class ConstraintFieldGenerator {
                 generateDiagonalBackward(col, row, constraint, pieces);
                 break;
             case DIAGONAL_FORWARD:
-                // If the White Player is moving a piece we need to flip the board.
-                if (pieces[row][col].getPlayer() == Player.WHITE) {
+                // If the White Player is moving a srcPiece we need to flip the board.
+                if (srcPiece.getPlayer() == Player.WHITE) {
                     generateDiagonalBackward(col, row, constraint, pieces);
                 } else {
                     generateDiagonalForward(col, row, constraint, pieces);
                 }
                 break;
             case DIAGONAL_BACKWARD:
-                // If the White Player is moving a piece we need to flip the board.
-                if (pieces[row][col].getPlayer() == Player.WHITE) {
+                // If the White Player is moving a srcPiece we need to flip the board.
+                if (srcPiece.getPlayer() == Player.WHITE) {
                     generateDiagonalForward(col, row, constraint, pieces);
                 } else {
                     generateDiagonalBackward(col, row, constraint, pieces);
                 }
                 break;
             case FORWARD:
-                // If the White Player is moving a piece we need to flip the board.
+                // If the White Player is moving a srcPiece we need to flip the board.
                 if (pieces[row][col].getPlayer() == Player.WHITE) {
                     generateBackward(col, row, constraint, pieces);
                 } else {
@@ -138,7 +142,7 @@ public class ConstraintFieldGenerator {
                 }
                 break;
             case BACKWARD:
-                // If the White Player is moving a piece we need to flip the board.
+                // If the White Player is moving a srcPiece we need to flip the board.
                 if (pieces[row][col].getPlayer() == Player.WHITE) {
                     generateForward(col, row, constraint, pieces);
                 } else {
@@ -168,7 +172,11 @@ public class ConstraintFieldGenerator {
                     continue;
                 }
 
-                fields[row + i][col] = true;
+                if (constraint.hasNext()) {
+                    processConstraint(col, row + i, constraint.getNext(), pieces);
+                } else {
+                    fields[row + i][col] = true;
+                }
             }
 
             if (constraint.getEmpty() && pieces[row + i][col] != null) {
@@ -188,7 +196,11 @@ public class ConstraintFieldGenerator {
                     continue;
                 }
 
-                fields[row - i][col] = true;
+                if (constraint.hasNext()) {
+                    processConstraint(col, row - i, constraint.getNext(), pieces);
+                } else {
+                    fields[row - i][col] = true;
+                }
             }
 
             if (constraint.getEmpty() && pieces[row - i][col] != null) {
@@ -208,7 +220,11 @@ public class ConstraintFieldGenerator {
                     continue;
                 }
 
-                fields[row][col + i] = true;
+                if (constraint.hasNext()) {
+                    processConstraint(col + i, row, constraint.getNext(), pieces);
+                } else {
+                    fields[row][col + i] = true;
+                }
             }
 
             if (constraint.getEmpty() && pieces[row][col + i] != null) {
@@ -228,7 +244,11 @@ public class ConstraintFieldGenerator {
                     continue;
                 }
 
-                fields[row][col - i] = true;
+                if (constraint.hasNext()) {
+                    processConstraint(col - i, row, constraint.getNext(), pieces);
+                } else {
+                    fields[row][col - i] = true;
+                }
             }
 
             if (constraint.getEmpty() && pieces[row][col - i] != null) {
