@@ -8,7 +8,7 @@ public class Constraint {
      * The possible directions that can be constrained.
      */
     public enum Direction {
-        HORIZONTAL, VERTICAL, DIAGONAL, FORWARD, BACKWARD, ANY
+        HORIZONTAL, VERTICAL, DIAGONAL, FORWARD, BACKWARD, DIAGONAL_FORWARD, DIAGONAL_BACKWARD, ANY
     }
 
     /**
@@ -37,12 +37,17 @@ public class Constraint {
     private boolean targetEmpty;
 
     /**
+     * Whether the target field must be occupied.
+     */
+    private boolean targetOccupied;
+
+    /**
      * Instaniates a new constraint.
      * @param direction The direction to be enforced.
      * @param min The minimium step size.
      * @param max The maximum step size.
      */
-    public Constraint(final Direction direction, final int min, final int max, final boolean empty, final boolean targetEmpty) {
+    public Constraint(final Direction direction, final int min, final int max, final boolean empty, final boolean targetEmpty, final boolean targetOccupied) {
         this.direction = direction;
         this.min = min;
 
@@ -54,6 +59,7 @@ public class Constraint {
 
         this.empty = empty;
         this.targetEmpty = targetEmpty;
+        this.targetOccupied = targetOccupied;
     }
 
     /**
@@ -93,4 +99,11 @@ public class Constraint {
      * @return True if it must be empty.
      */
     public boolean targetFieldMustBeEmpty() { return targetEmpty; }
+
+    /**
+     * Whether the target field must be occupied.
+     */
+    public boolean targetFieldMustBeOccupied() {
+        return targetOccupied;
+    }
 }

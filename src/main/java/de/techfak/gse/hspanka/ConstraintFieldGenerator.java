@@ -64,7 +64,7 @@ public class ConstraintFieldGenerator {
         final boolean required,
         final boolean empty
     ) {
-        final Constraint constraint = new Constraint(direction, min, max, empty, false);
+        final Constraint constraint = new Constraint(direction, min, max, empty, false, false);
 
         if (required) {
             requiredConstraints.add(constraint);
@@ -94,7 +94,39 @@ public class ConstraintFieldGenerator {
         final boolean empty,
         final boolean targetEmpty
     ) {
-        final Constraint constraint = new Constraint(direction, min, max, empty, targetEmpty);
+        final Constraint constraint = new Constraint(direction, min, max, empty, targetEmpty, false);
+
+        if (required) {
+            requiredConstraints.add(constraint);
+        } else {
+            constraints.add(constraint);
+        }
+
+        return this;
+    }
+
+    /**
+     * Add a constraint.
+     *
+     * @param direction The direction to be constrained.
+     * @param min       The minimum steps into the direction.
+     * @param max       The maximum steps into the direction.
+     * @param required  Whether the constraint must ALWAYS match.
+     * @param empty     Whether the fields in between must be empty.
+     * @param targetEmpty Whether the target field must be empty.
+     * @param targetOccupied Whether the target field must be occupied.
+     * @return The current ConstraintFieldGenerator instance with the added constraint.
+     */
+    public ConstraintFieldGenerator addConstraint(
+        final Direction direction,
+        final int min,
+        final int max,
+        final boolean required,
+        final boolean empty,
+        final boolean targetEmpty,
+        final boolean targetOccupied
+    ) {
+        final Constraint constraint = new Constraint(direction, min, max, empty, targetEmpty, targetOccupied);
 
         if (required) {
             requiredConstraints.add(constraint);
@@ -149,7 +181,24 @@ public class ConstraintFieldGenerator {
                     generateVerticalBackward(col, row, constraint, pieces);
                     break;
                 case DIAGONAL:
-                    generateDiagonal(col, row, constraint, pieces);
+                    generateDiagonalForward(col, row, constraint, pieces);
+                    generateDiagonalBackward(col, row, constraint, pieces);
+                    break;
+                case DIAGONAL_FORWARD:
+                    // If the White Player is moving a piece we need to flip the board.
+                    if (pieces[row][col].getPlayer() == Player.WHITE) {
+                        generateDiagonalBackward(col, row, constraint, pieces);
+                    } else {
+                        generateDiagonalForward(col, row, constraint, pieces);
+                    }
+                    break;
+                case DIAGONAL_BACKWARD:
+                    // If the White Player is moving a piece we need to flip the board.
+                    if (pieces[row][col].getPlayer() == Player.WHITE) {
+                        generateDiagonalForward(col, row, constraint, pieces);
+                    } else {
+                        generateDiagonalBackward(col, row, constraint, pieces);
+                    }
                     break;
                 case FORWARD:
                     // If the White Player is moving a piece we need to flip the board.
@@ -190,6 +239,10 @@ public class ConstraintFieldGenerator {
                 break;
             }
 
+            if (constraint.targetFieldMustBeOccupied() && pieces[row + i][col] == null) {
+                break;
+            }
+
             fields[row + i][col] = true;
 
             if (constraint.getEmpty() && pieces[row + i][col] != null) {
@@ -205,6 +258,10 @@ public class ConstraintFieldGenerator {
 
         while (row - i >= 0 && i <= constraint.getMax()) {
             if (constraint.targetFieldMustBeEmpty() && pieces[row - i][col] != null) {
+                break;
+            }
+
+            if (constraint.targetFieldMustBeOccupied() && pieces[row - i][col] == null) {
                 break;
             }
 
@@ -226,6 +283,10 @@ public class ConstraintFieldGenerator {
                 break;
             }
 
+            if (constraint.targetFieldMustBeOccupied() && pieces[row][col + i] == null) {
+                break;
+            }
+
             fields[row][col + i] = true;
 
             if (constraint.getEmpty() && pieces[row][col + i] != null) {
@@ -244,6 +305,10 @@ public class ConstraintFieldGenerator {
                 break;
             }
 
+            if (constraint.targetFieldMustBeOccupied() && pieces[row][col - i] == null) {
+                break;
+            }
+
             fields[row][col - i] = true;
 
             if (constraint.getEmpty() && pieces[row][col - i] != null) {
@@ -254,11 +319,15 @@ public class ConstraintFieldGenerator {
         }
     }
 
-    private void generateDiagonal(final int col, final int row, final Constraint constraint, Piece[][] pieces) {
+    private void generateDiagonalForward(final int col, final int row, final Constraint constraint, Piece[][] pieces ) {
         int i = constraint.getMin();
 
         while (col + i < Board.FIELD_SIZE && row + i < Board.FIELD_SIZE && i <= constraint.getMax()) {
             if (constraint.targetFieldMustBeEmpty() && pieces[row + i][col + i] != null) {
+                break;
+            }
+
+            if (constraint.targetFieldMustBeOccupied() && pieces[row + i][col + i] == null) {
                 break;
             }
 
@@ -273,24 +342,12 @@ public class ConstraintFieldGenerator {
 
         i = constraint.getMin();
 
-        while (col - i >= 0 && row - i >= 0 && i <= constraint.getMax()) {
-            if (constraint.targetFieldMustBeEmpty() && pieces[row - i][col - i] != null) {
-                break;
-            }
-
-            fields[row - i][col - i] = true;
-
-            if (constraint.getEmpty() && pieces[row - i][col - i] != null) {
-                break;
-            }
-
-            i++;
-        }
-
-        i = constraint.getMin();
-
         while (col - i >= 0 && row + i < Board.FIELD_SIZE && i <= constraint.getMax()) {
             if (constraint.targetFieldMustBeEmpty() && pieces[row + i][col - i] != null) {
+                break;
+            }
+
+            if (constraint.targetFieldMustBeOccupied() && pieces[row + i][col - i] == null) {
                 break;
             }
 
@@ -302,17 +359,43 @@ public class ConstraintFieldGenerator {
 
             i++;
         }
+    }
 
-        i = constraint.getMin();
+    private void generateDiagonalBackward(final int col, final int row, final Constraint constraint, Piece[][] pieces) {
+        int i = constraint.getMin();
 
         while (col + i < Board.FIELD_SIZE && row - i >= 0 && i <= constraint.getMax()) {
             if (constraint.targetFieldMustBeEmpty() && pieces[row - i][col + i] != null) {
                 break;
             }
 
+            if (constraint.targetFieldMustBeOccupied() && pieces[row - i][col + i] == null) {
+                break;
+            }
+
             fields[row - i][col + i] = true;
 
             if (constraint.getEmpty() && pieces[row - i][col + i] != null) {
+                break;
+            }
+
+            i++;
+        }
+
+        i = constraint.getMin();
+
+        while (col - i >= 0 && row - i >= 0 && i <= constraint.getMax()) {
+            if (constraint.targetFieldMustBeEmpty() && pieces[row - i][col - i] != null) {
+                break;
+            }
+
+            if (constraint.targetFieldMustBeOccupied() && pieces[row - i][col - i] == null) {
+                break;
+            }
+
+            fields[row - i][col - i] = true;
+
+            if (constraint.getEmpty() && pieces[row - i][col - i] != null) {
                 break;
             }
 

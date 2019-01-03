@@ -15,7 +15,8 @@ public class Pawn extends Piece {
      */
     private static final ConstraintFieldGenerator CONSTRAINT_FIELD_GENERATOR =
         new ConstraintFieldGenerator()
-            .addConstraint(Constraint.Direction.FORWARD, 1, 1, false, true, true);
+            .addConstraint(Constraint.Direction.FORWARD, 1, 1, false, true, true)
+            .addConstraint(Constraint.Direction.DIAGONAL_FORWARD, 1, 1, false, true, false, true);
     public Pawn(final Player player) {
         super(player);
     }
