@@ -78,7 +78,7 @@ public class BoardPane extends GridPane {
      * @param pane The pane on which the color should be applied.
      */
     private void colorizeField(final int col, final int row, final StackPane pane) {
-        colorizeField(col, row, pane, false);
+        colorizeField(col, row, pane, 0);
     }
 
     /**
@@ -87,18 +87,22 @@ public class BoardPane extends GridPane {
      * @param col       The column where the field is located.
      * @param row       The row where the field is located.
      * @param pane      The pane on which the color should be applied.
-     * @param alternate Whether we should use alternate colors.
+     * @param alt Whether we should use alternate colors.
      */
-    private void colorizeField(final int col, final int row, final StackPane pane, boolean alternate) {
+    private void colorizeField(final int col, final int row, final StackPane pane, int alt) {
         if ((row + col) % 2 == 0) {
-            if (alternate) {
-                pane.setStyle("-fx-background-color: #581845");
+            if (alt == 1) {
+                pane.setStyle("-fx-background-color: #E67E22");
+            } else if (alt == 2) {
+                pane.setStyle("-fx-background-color: #7D3C98");
             } else {
                 pane.setStyle("-fx-background-color: #e8ebef");
             }
         } else {
-            if (alternate) {
-                pane.setStyle("-fx-background-color: #900C3F");
+            if (alt == 1) {
+                pane.setStyle("-fx-background-color: #DC7633");
+            } else if (alt == 2) {
+                pane.setStyle("-fx-background-color: #A569BD");
             } else {
                 pane.setStyle("-fx-background-color: #7d8796");
             }
@@ -122,10 +126,16 @@ public class BoardPane extends GridPane {
         Piece piece,
         Board board
     ) {
-        if (allowedFields[row][col] && (piece == null || !piece.getPlayer().equals(board.getPlayer()))) {
-            colorizeField(col, row, pane, true);
+        if (allowedFields[row][col]) {
+            if (piece == null) {
+                colorizeField(col, row, pane, 1);
+            } else if (!piece.getPlayer().equals(board.getPlayer())) {
+                colorizeField(col, row, pane, 2);
+            } else {
+                colorizeField(col, row, pane, 0);
+            }
         } else {
-            colorizeField(col, row, pane, false);
+            colorizeField(col, row, pane, 0);
         }
     }
 
