@@ -4,6 +4,7 @@ import de.techfak.gse.hspanka.Board;
 import de.techfak.gse.hspanka.FenParser;
 import de.techfak.gse.hspanka.Move;
 import de.techfak.gse.hspanka.exceptions.ApplicationErrorException;
+import de.techfak.gse.hspanka.exceptions.CannotMoveToOwnedPieceException;
 import de.techfak.gse.hspanka.exceptions.InvalidMoveException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -63,10 +64,23 @@ class KnightTest {
         });
     }
 
+    @Test
+    void can_not_move_to_ally_field() {
+        // Move two up and one right to the ally Pawn
+        assertThrows(CannotMoveToOwnedPieceException.class, () -> {
+            board.setMove(new Move(3, 4, 4, 2));
+        });
+
+        // Move two left and one up to the ally Bishop
+        assertThrows(CannotMoveToOwnedPieceException.class, () -> {
+            board.setMove(new Move(3, 4, 1, 3));
+        });
+    }
+
     @BeforeAll
     public static void setUp() throws ApplicationErrorException {
         board = new Board();
         final FenParser fen = new FenParser(board);
-        fen.parse("8/8/2k5/8/3N4/5n2/8/8 w");
+        fen.parse("8/8/2k1P3/1B6/3N4/5n2/8/8 w");
     }
 }
