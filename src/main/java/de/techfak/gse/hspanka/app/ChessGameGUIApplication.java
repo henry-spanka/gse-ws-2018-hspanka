@@ -20,6 +20,7 @@ public class ChessGameGUIApplication extends Application implements ChessGameApp
 
     /**
      * Set's a scene.
+     *
      * @param scene The scene to be set.
      */
     private void setScene(final Scene scene) {
@@ -30,6 +31,7 @@ public class ChessGameGUIApplication extends Application implements ChessGameApp
 
     /**
      * Get the primary stage.
+     *
      * @return The primary stage.
      */
     public Stage getStage() {
@@ -58,6 +60,7 @@ public class ChessGameGUIApplication extends Application implements ChessGameApp
 
     /**
      * Loads a view into the primary stage.
+     *
      * @param viewName The view name.
      * @return The controller used by the new.
      * @throws IOException If the controller cannot be found.

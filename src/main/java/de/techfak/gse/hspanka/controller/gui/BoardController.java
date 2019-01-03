@@ -100,8 +100,9 @@ public class BoardController extends AbstractGuiController implements Observer {
 
     /**
      * Called by the observervable to update the view.
+     *
      * @param observable The observable.
-     * @param arg The board if update is forced.
+     * @param arg        The board if update is forced.
      */
     @Override
     public void update(final Observable observable, final Object arg) {
@@ -117,6 +118,7 @@ public class BoardController extends AbstractGuiController implements Observer {
 
     /**
      * Called by JavaFX when a field is clicked.
+     *
      * @param col The column clicked.
      * @param row The row clicked.
      */
@@ -136,7 +138,7 @@ public class BoardController extends AbstractGuiController implements Observer {
             } catch (ApplicationMoveException e) {
                 return;
             }
-        // If the col and row is present in the move, we remove the source position to deselect.
+            // If the col and row is present in the move, we remove the source position to deselect.
         } else if (move.isInvolved(col, row)) {
             stagedMove = new Move(Move.POS_UNKNOWN, Move.POS_UNKNOWN, move.getcTo(), move.getrTo());
             try {
@@ -145,7 +147,7 @@ public class BoardController extends AbstractGuiController implements Observer {
                 return;
             }
         } else {
-        // Try to set position as source position and if it fails try destination instead.
+            // Try to set position as source position and if it fails try destination instead.
             stagedMove = new Move(col, row, move.getcTo(), move.getrTo());
             try {
                 // Check if the position is a valid source position.
@@ -169,6 +171,7 @@ public class BoardController extends AbstractGuiController implements Observer {
 
     /**
      * Saves the game to a file. Called by JavaFX when the button is selected.
+     *
      * @param event The ActionEvent.
      */
     @FXML
@@ -199,6 +202,7 @@ public class BoardController extends AbstractGuiController implements Observer {
 
     /**
      * Switches the view back to the menu (AppController).
+     *
      * @param event The ActionEvent.
      * @throws IOException Thrown if the view cannot be found.
      */

@@ -34,6 +34,7 @@ public class ConstraintFieldGenerator {
 
     /**
      * Add a new constraint to the field generator.
+     *
      * @param constraint The constraint to be added.
      * @return The generator with the added constraint.
      */
@@ -46,6 +47,7 @@ public class ConstraintFieldGenerator {
     /**
      * Add a new untouched constraint to the field generator.
      * The constraint will only be validated if the srcPiece has not been touched yet.
+     *
      * @param constraint The constraint to be added.
      * @return The generator with the added constraint.
      */
@@ -257,7 +259,7 @@ public class ConstraintFieldGenerator {
         }
     }
 
-    private void generateDiagonalForward(final int col, final int row, final Constraint constraint, Piece[][] pieces ) {
+    private void generateDiagonalForward(final int col, final int row, final Constraint constraint, Piece[][] pieces) {
         for (int i = 1; col + i < Board.FIELD_SIZE && row + i < Board.FIELD_SIZE && i <= constraint.getMax(); i++) {
             if (i >= constraint.getMin()) {
                 if (constraint.targetFieldMustBeEmpty() && pieces[row + i][col + i] != null) {

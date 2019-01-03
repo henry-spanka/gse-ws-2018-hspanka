@@ -5,14 +5,22 @@ import de.techfak.gse.hspanka.FenParser;
 import de.techfak.gse.hspanka.Move;
 import de.techfak.gse.hspanka.exceptions.ApplicationErrorException;
 import de.techfak.gse.hspanka.exceptions.ApplicationMoveException;
-import static org.junit.jupiter.api.Assertions.*;
-
 import de.techfak.gse.hspanka.exceptions.CannotMoveToOwnedPieceException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 class KingTest {
     private static Board board;
+
+    @BeforeAll
+    public static void setUp() throws ApplicationErrorException {
+        board = new Board();
+        final FenParser fen = new FenParser(board);
+        fen.parse("8/8/8/8/8/4b3/3BK3/4r3 w");
+    }
 
     @Test
     void can_move_to_nearby_fields() {
@@ -82,12 +90,5 @@ class KingTest {
         assertDoesNotThrow(() -> {
             board.setMove(new Move(4, 6, 4, 7));
         });
-    }
-
-    @BeforeAll
-    public static void setUp() throws ApplicationErrorException{
-        board = new Board();
-        final FenParser fen = new FenParser(board);
-        fen.parse("8/8/8/8/8/4b3/3BK3/4r3 w");
     }
 }

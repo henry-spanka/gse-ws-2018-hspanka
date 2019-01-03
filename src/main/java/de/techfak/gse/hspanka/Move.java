@@ -133,6 +133,7 @@ public final class Move {
 
     /**
      * Checks if the source is complete.
+     *
      * @return True of False.
      */
     public boolean sourceComplete() {
@@ -141,6 +142,7 @@ public final class Move {
 
     /**
      * Checks if the destination is complete.
+     *
      * @return True or False.
      */
     public boolean destinationComplete() {
@@ -149,6 +151,7 @@ public final class Move {
 
     /**
      * Checks if a position is involved in a move.
+     *
      * @param col The column.
      * @param row The row.
      * @return True or False.

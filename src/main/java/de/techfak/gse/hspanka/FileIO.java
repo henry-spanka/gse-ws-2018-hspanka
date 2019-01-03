@@ -13,6 +13,7 @@ public class FileIO {
 
     /**
      * Initialize the class.
+     *
      * @param file The file that should be used.
      */
     public FileIO(final File file) {
@@ -21,6 +22,7 @@ public class FileIO {
 
     /**
      * Write a string to the file.
+     *
      * @param data The data to be written.
      * @return Returns true if the write was successfull. False instead.
      */
@@ -39,6 +41,7 @@ public class FileIO {
 
     /**
      * Reads the first line from the file.
+     *
      * @return The string or null if an error occurred.
      */
     @SuppressWarnings("PMD.AvoidFileStream")

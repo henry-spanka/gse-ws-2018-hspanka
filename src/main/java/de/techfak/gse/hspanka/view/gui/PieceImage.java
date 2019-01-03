@@ -19,6 +19,7 @@ class PieceImage extends Image {
 
     /**
      * Initializes the piece image.
+     *
      * @param piece The piece which should be shown.
      */
     PieceImage(final Piece piece) {
@@ -27,6 +28,7 @@ class PieceImage extends Image {
 
     /**
      * Convert's a piece to the corresponding image name.
+     *
      * @param piece The piece to be converted.
      * @return The image name.
      */
@@ -65,6 +67,7 @@ class PieceImage extends Image {
 
     /**
      * Returns the image wrapped into a background.
+     *
      * @return The JavaFX background.
      */
     public Background asBackground() {

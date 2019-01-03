@@ -30,6 +30,7 @@ public class FileChooser {
 
     /**
      * Initializes the File Chooser.
+     *
      * @param window The window where the chooser should be displayed.
      */
     public FileChooser(final Window window) {
@@ -40,6 +41,7 @@ public class FileChooser {
 
     /**
      * Show a Save dialog.
+     *
      * @return The file selected.
      */
     public File saveFile() {
@@ -54,6 +56,7 @@ public class FileChooser {
 
     /**
      * Show an Open dialog.
+     *
      * @return The file selected.
      */
     public File openFile() {

@@ -5,44 +5,25 @@ package de.techfak.gse.hspanka;
  */
 public class Constraint {
     /**
-     * The possible directions that can be constrained.
-     */
-    public enum Direction {
-        HORIZONTAL, VERTICAL, DIAGONAL, FORWARD, BACKWARD, DIAGONAL_FORWARD, DIAGONAL_BACKWARD, ANY
-    }
-
-    /**
-     * Whether the target field must be occupied or empty.
-     */
-    public enum Target {
-        EMPTY, OCCUPIED, EMPTY_OR_OCCUPIPED
-    }
-
-    /**
      * The direction the constraint should be enforced.
      */
     private Direction direction;
-
     /**
      * The minimum step size.
      */
     private int min;
-
     /**
      * The maximum step size.
      */
     private int max;
-
     /**
      * Whether the fields in between must be empty.
      */
     private boolean empty;
-
     /**
      * Whether the target field must be empty or occupied.
      */
     private Target target;
-
     /**
      * A constraint that must be matched after the original.
      */
@@ -50,9 +31,10 @@ public class Constraint {
 
     /**
      * Instaniates a new constraint.
+     *
      * @param direction The direction to be enforced.
-     * @param min The minimium step size.
-     * @param max The maximum step size.
+     * @param min       The minimium step size.
+     * @param max       The maximum step size.
      */
     public Constraint(final Direction direction, final int min, final int max) {
         this(direction, min, max, true, Target.EMPTY_OR_OCCUPIPED);
@@ -60,10 +42,11 @@ public class Constraint {
 
     /**
      * Instaniates a new constraint.
+     *
      * @param direction The direction to be enforced.
-     * @param min The minimium step size.
-     * @param max The maximum step size.
-     * @param empty Whether the fields in between must be empty.
+     * @param min       The minimium step size.
+     * @param max       The maximum step size.
+     * @param empty     Whether the fields in between must be empty.
      */
     public Constraint(final Direction direction, final int min, final int max, final boolean empty) {
         this(direction, min, max, empty, Target.EMPTY_OR_OCCUPIPED);
@@ -71,11 +54,12 @@ public class Constraint {
 
     /**
      * Instaniates a new constraint.
+     *
      * @param direction The direction to be enforced.
-     * @param min The minimium step size.
-     * @param max The maximum step size.
-     * @param empty Whether the fields in between must be empty.
-     * @param target Whether the target field must be empty or occupied.
+     * @param min       The minimium step size.
+     * @param max       The maximum step size.
+     * @param empty     Whether the fields in between must be empty.
+     * @param target    Whether the target field must be empty or occupied.
      */
     public Constraint(
         final Direction direction,
@@ -99,6 +83,7 @@ public class Constraint {
 
     /**
      * Get the direction to be enforced.
+     *
      * @return The direction,
      */
     public Direction getDirection() {
@@ -107,6 +92,7 @@ public class Constraint {
 
     /**
      * Get minimum step size.
+     *
      * @return The minimum step size.
      */
     public int getMin() {
@@ -115,6 +101,7 @@ public class Constraint {
 
     /**
      * Get the maximum step size.
+     *
      * @return The maximum step size.
      */
     public int getMax() {
@@ -123,6 +110,7 @@ public class Constraint {
 
     /**
      * Whether the fields in between must be empty.
+     *
      * @return True if they must be empty.
      */
     public boolean getEmpty() {
@@ -131,9 +119,12 @@ public class Constraint {
 
     /**
      * Whether the target field must be empty.
+     *
      * @return True if it must be empty.
      */
-    public boolean targetFieldMustBeEmpty() { return target == Target.EMPTY; }
+    public boolean targetFieldMustBeEmpty() {
+        return target == Target.EMPTY;
+    }
 
     /**
      * Whether the target field must be occupied.
@@ -144,6 +135,7 @@ public class Constraint {
 
     /**
      * Set a constraint that must be matched after the original has been validated.
+     *
      * @param then The constraint to be set.
      * @return The original constraint chained with the new one.
      */
@@ -155,6 +147,7 @@ public class Constraint {
 
     /**
      * Get the next chained constraint.
+     *
      * @return The chained constraint.
      */
     public Constraint getNext() {
@@ -163,9 +156,24 @@ public class Constraint {
 
     /**
      * Check whether a chained constraint exists.
+     *
      * @return A boolean.
      */
     public boolean hasNext() {
         return then != null;
+    }
+
+    /**
+     * The possible directions that can be constrained.
+     */
+    public enum Direction {
+        HORIZONTAL, VERTICAL, DIAGONAL, FORWARD, BACKWARD, DIAGONAL_FORWARD, DIAGONAL_BACKWARD, ANY
+    }
+
+    /**
+     * Whether the target field must be occupied or empty.
+     */
+    public enum Target {
+        EMPTY, OCCUPIED, EMPTY_OR_OCCUPIPED
     }
 }

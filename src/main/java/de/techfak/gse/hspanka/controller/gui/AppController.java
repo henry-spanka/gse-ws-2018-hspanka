@@ -22,8 +22,9 @@ public class AppController extends AbstractGuiController {
 
     /**
      * Starts a new default game.
+     *
      * @param event The ActionEvent.
-     * @throws IOException Thrown if the view cannot be found.
+     * @throws IOException               Thrown if the view cannot be found.
      * @throws ApplicationErrorException Thrown if the configuration cannot be parsed.
      */
     @FXML
@@ -36,6 +37,7 @@ public class AppController extends AbstractGuiController {
 
     /**
      * Load sa game from File.
+     *
      * @param event The ActionEvent.
      * @throws IOException Thrown if the file cannot be found.
      */

@@ -6,6 +6,7 @@ package de.techfak.gse.hspanka.app;
 public class ChessGameApplicationFactory {
     /**
      * Creates a console application.
+     *
      * @return The Console application instance implementing ChessGameApplication.
      */
     public ChessGameApplication makeConsoleApplication() {
@@ -14,6 +15,7 @@ public class ChessGameApplicationFactory {
 
     /**
      * Creates a GUI application.
+     *
      * @return The GUI application instance implementing ChessGameApplication.
      */
     public ChessGameApplication makeGuiApplication() {

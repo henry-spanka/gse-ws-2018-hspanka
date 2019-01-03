@@ -19,6 +19,7 @@ public class FenParser {
 
     /**
      * Initialize the FEN parser with the board.
+     *
      * @param board The board model.
      */
     public FenParser(final Board board) {
@@ -121,6 +122,7 @@ public class FenParser {
 
     /**
      * Converts from pieces back to a string.
+     *
      * @param pieces The pieces to be converted.
      * @param player The player to be converted.
      * @return A string in FEN notation.

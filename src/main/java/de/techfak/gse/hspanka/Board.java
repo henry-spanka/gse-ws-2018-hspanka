@@ -92,6 +92,7 @@ public class Board extends Observable {
 
     /**
      * Set's the current move.
+     *
      * @param move The move.
      * @throws ApplicationMoveException Thrown if the move is invalid.
      */
@@ -165,6 +166,7 @@ public class Board extends Observable {
 
     /**
      * Get the constraint field generator.
+     *
      * @return The constraint field generator.
      */
     public ConstraintFieldGenerator getConstraintFieldGenerator() {
@@ -175,7 +177,7 @@ public class Board extends Observable {
      * Validates the move by checking whether the move is legal and the player
      * can actually move this piece.
      *
-     * @param move      The move that should be checked.
+     * @param move The move that should be checked.
      * @throws ApplicationMoveException A subclass is thrown that indicates the constraint that failed.
      */
     @SuppressWarnings("PMD.EmptyCatchBlock")

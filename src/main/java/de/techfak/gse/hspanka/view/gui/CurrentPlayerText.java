@@ -9,6 +9,7 @@ import javafx.scene.text.Text;
 public class CurrentPlayerText extends Text {
     /**
      * Set's the text appropriately.
+     *
      * @param player The current player.
      */
     public void setPlayer(final Player player) {

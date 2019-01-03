@@ -14,6 +14,7 @@ public class AbstractGuiController {
 
     /**
      * Set's the app.
+     *
      * @param app The App.
      */
     public void setApp(final ChessGameGUIApplication app) {

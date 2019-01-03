@@ -16,6 +16,7 @@ public class Alert extends javafx.scene.control.Alert {
 
     /**
      * Creates a new alert box.
+     *
      * @param alertType The alert type.
      */
     public Alert(final AlertType alertType) {

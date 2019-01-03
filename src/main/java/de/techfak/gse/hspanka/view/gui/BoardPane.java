@@ -84,10 +84,10 @@ public class BoardPane extends GridPane {
     /**
      * Set's the color of a field to display the alternating grid colors.
      *
-     * @param col       The column where the field is located.
-     * @param row       The row where the field is located.
-     * @param pane      The pane on which the color should be applied.
-     * @param alt Whether we should use alternate colors.
+     * @param col  The column where the field is located.
+     * @param row  The row where the field is located.
+     * @param pane The pane on which the color should be applied.
+     * @param alt  Whether we should use alternate colors.
      */
     private void colorizeField(final int col, final int row, final StackPane pane, int alt) {
         if ((row + col) % 2 == 0) {

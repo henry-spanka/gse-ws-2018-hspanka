@@ -15,6 +15,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class KnightTest {
     private static Board board;
 
+    @BeforeAll
+    public static void setUp() throws ApplicationErrorException {
+        board = new Board();
+        final FenParser fen = new FenParser(board);
+        fen.parse("8/8/2k1P3/1B6/3N4/5n2/8/8 w");
+    }
+
     @Test
     void can_make_valid_moves() {
         // Move two right, followed by one field up
@@ -75,12 +82,5 @@ class KnightTest {
         assertThrows(CannotMoveToOwnedPieceException.class, () -> {
             board.setMove(new Move(3, 4, 1, 3));
         });
-    }
-
-    @BeforeAll
-    public static void setUp() throws ApplicationErrorException {
-        board = new Board();
-        final FenParser fen = new FenParser(board);
-        fen.parse("8/8/2k1P3/1B6/3N4/5n2/8/8 w");
     }
 }

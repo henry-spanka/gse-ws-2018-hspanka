@@ -8,6 +8,7 @@ import de.techfak.gse.hspanka.exceptions.ApplicationErrorException;
 public interface ChessGameApplication {
     /**
      * Starts the application.
+     *
      * @param args The command line parameters passed on execution.
      * @throws ApplicationErrorException Thrown if an error occured during execution.
      */

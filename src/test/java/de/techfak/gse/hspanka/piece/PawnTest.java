@@ -4,9 +4,7 @@ import de.techfak.gse.hspanka.Board;
 import de.techfak.gse.hspanka.FenParser;
 import de.techfak.gse.hspanka.Move;
 import de.techfak.gse.hspanka.exceptions.ApplicationErrorException;
-import de.techfak.gse.hspanka.exceptions.CannotMoveToOwnedPieceException;
 import de.techfak.gse.hspanka.exceptions.InvalidMoveException;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -53,7 +51,7 @@ class PawnTest {
     void can_move_forward_diagonal_to_occupied_field() {
         // Move forward diagonal to the enemy rook
         assertDoesNotThrow(() -> {
-            board.setMove(new Move(4, 6,3, 5));
+            board.setMove(new Move(4, 6, 3, 5));
         });
     }
 
@@ -61,7 +59,7 @@ class PawnTest {
     void can_not_move_backward_diagonal_to_occupied_field() {
         // Move backward diagonal to the enemy rook
         assertThrows(InvalidMoveException.class, () -> {
-            board.setMove(new Move(4, 6,3, 7));
+            board.setMove(new Move(4, 6, 3, 7));
         });
     }
 
@@ -69,7 +67,7 @@ class PawnTest {
     void can_move_two_forward_if_untouched() {
         // Move two forward to empty field.
         assertDoesNotThrow(() -> {
-            board.setMove(new Move(0, 6,0, 4));
+            board.setMove(new Move(0, 6, 0, 4));
         });
     }
 
@@ -78,7 +76,7 @@ class PawnTest {
         // Move two forward if touched.
         assertThrows(InvalidMoveException.class, () -> {
             board.getPiece(6, 0).touch();
-            board.setMove(new Move(0, 6,0, 4));
+            board.setMove(new Move(0, 6, 0, 4));
         });
     }
 

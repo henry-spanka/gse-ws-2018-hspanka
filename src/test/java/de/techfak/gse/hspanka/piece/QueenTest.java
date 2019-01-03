@@ -15,6 +15,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class QueenTest {
     private static Board board;
 
+    @BeforeAll
+    public static void setUp() throws ApplicationErrorException {
+        board = new Board();
+        final FenParser fen = new FenParser(board);
+        fen.parse("8/8/8/1K6/4r3/8/4Q3/8 w");
+    }
+
     @Test
     void can_move_to_nearby_fields() {
         // Move Right
@@ -63,12 +70,5 @@ class QueenTest {
         assertDoesNotThrow(() -> {
             board.setMove(new Move(4, 6, 4, 4));
         });
-    }
-
-    @BeforeAll
-    public static void setUp() throws ApplicationErrorException {
-        board = new Board();
-        final FenParser fen = new FenParser(board);
-        fen.parse("8/8/8/1K6/4r3/8/4Q3/8 w");
     }
 }
