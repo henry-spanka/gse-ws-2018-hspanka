@@ -122,6 +122,8 @@ public class BoardController extends AbstractGuiController implements Observer {
      */
     @FXML
     public void fieldClicked(final int col, final int row) {
+        if (this.board.getPlayerWon() != null) return;
+
         final Move move = this.board.getMove();
 
         Move stagedMove;

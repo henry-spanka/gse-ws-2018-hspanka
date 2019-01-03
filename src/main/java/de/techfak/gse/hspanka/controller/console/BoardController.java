@@ -5,6 +5,7 @@ import de.techfak.gse.hspanka.FenParser;
 import de.techfak.gse.hspanka.Move;
 import de.techfak.gse.hspanka.exceptions.ApplicationMoveException;
 import de.techfak.gse.hspanka.exceptions.EmptyBoardConfigurationException;
+import de.techfak.gse.hspanka.exceptions.GameEndedException;
 import de.techfak.gse.hspanka.exceptions.InvalidBoardConfiguration;
 import de.techfak.gse.hspanka.view.console.BoardView;
 
@@ -75,5 +76,9 @@ public class BoardController {
         move.validateUniqueness();
         board.setMove(move);
         board.executeMove();
+
+        if (board.getPlayerWon() != null) {
+            throw new GameEndedException("The game has ended.");
+        }
     }
 }

@@ -1,6 +1,7 @@
 package de.techfak.gse.hspanka;
 
 import de.techfak.gse.hspanka.exceptions.*;
+import de.techfak.gse.hspanka.piece.King;
 import de.techfak.gse.hspanka.piece.Piece;
 
 import java.util.Observable;
@@ -29,6 +30,11 @@ public class Board extends Observable {
      * A pending move.
      */
     private Move move;
+
+    /**
+     * The player who has won the game.
+     */
+    private transient Player playerWon;
 
     /**
      * The constraint field generator of the pending move.
@@ -106,6 +112,13 @@ public class Board extends Observable {
      * Executes the move by changing the board configuration.
      */
     public void executeMove() {
+        if (configuration[move.getrTo()][move.getcTo()] instanceof King) {
+            if (configuration[move.getrTo()][move.getcTo()].getPlayer() == Player.WHITE) {
+                playerWon = Player.BLACK;
+            } else {
+                playerWon = Player.WHITE;
+            }
+        }
         configuration[move.getrTo()][move.getcTo()] = configuration[move.getrFrom()][move.getcFrom()];
         configuration[move.getrFrom()][move.getcFrom()] = null;
 
@@ -195,5 +208,9 @@ public class Board extends Observable {
                 }
             }
         }
+    }
+
+    public Player getPlayerWon() {
+        return playerWon;
     }
 }

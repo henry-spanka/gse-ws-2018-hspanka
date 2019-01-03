@@ -2,6 +2,7 @@ package de.techfak.gse.hspanka.view.gui;
 
 import de.techfak.gse.hspanka.Board;
 import de.techfak.gse.hspanka.Move;
+import de.techfak.gse.hspanka.Player;
 import de.techfak.gse.hspanka.controller.gui.BoardController;
 import de.techfak.gse.hspanka.piece.Piece;
 import javafx.event.EventHandler;
@@ -209,6 +210,21 @@ public class BoardPane extends GridPane {
                     piecePane.setBackground(pieceImg.asBackground());
                 }
             }
+        }
+
+        if (board.getPlayerWon() != null) {
+            Alert alertWon = new Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
+            alertWon.setTitle("The Game has ended!");
+            alertWon.setHeaderText("Thanks for playing.");
+
+            StringBuilder builder = new StringBuilder("The ");
+            builder
+                .append(board.getPlayerWon() == Player.WHITE ? "white" : "black")
+                .append(" player has won! Congratulations.");
+
+            alertWon.setContentText(builder.toString());
+
+            alertWon.show();
         }
     }
 }
