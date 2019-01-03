@@ -171,10 +171,6 @@ public class ConstraintFieldGenerator {
                 default:
                     //
             }
-
-            if (constraint.targetFieldMustBeEmpty() && pieces[move.getrTo()][move.getcTo()] != null) {
-                fields[move.getrTo()][move.getcTo()] = false;
-            }
         }
 
         return fields.clone();
@@ -190,6 +186,10 @@ public class ConstraintFieldGenerator {
         int i = constraint.getMin();
 
         while (row + i < Board.FIELD_SIZE && i <= constraint.getMax()) {
+            if (constraint.targetFieldMustBeEmpty() && pieces[row + i][col] != null) {
+                break;
+            }
+
             fields[row + i][col] = true;
 
             if (constraint.getEmpty() && pieces[row + i][col] != null) {
@@ -204,6 +204,10 @@ public class ConstraintFieldGenerator {
         int i = constraint.getMin();
 
         while (row - i >= 0 && i <= constraint.getMax()) {
+            if (constraint.targetFieldMustBeEmpty() && pieces[row - i][col] != null) {
+                break;
+            }
+
             fields[row - i][col] = true;
 
             if (constraint.getEmpty() && pieces[row - i][col] != null) {
@@ -218,6 +222,10 @@ public class ConstraintFieldGenerator {
         int i = constraint.getMin();
 
         while (col + i < Board.FIELD_SIZE && i <= constraint.getMax()) {
+            if (constraint.targetFieldMustBeEmpty() && pieces[row][col + i] != null) {
+                break;
+            }
+
             fields[row][col + i] = true;
 
             if (constraint.getEmpty() && pieces[row][col + i] != null) {
@@ -232,6 +240,10 @@ public class ConstraintFieldGenerator {
         int i = constraint.getMin();
 
         while (col - i >= 0 && i <= constraint.getMax()) {
+            if (constraint.targetFieldMustBeEmpty() && pieces[row][col - i] != null) {
+                break;
+            }
+
             fields[row][col - i] = true;
 
             if (constraint.getEmpty() && pieces[row][col - i] != null) {
@@ -246,6 +258,10 @@ public class ConstraintFieldGenerator {
         int i = constraint.getMin();
 
         while (col + i < Board.FIELD_SIZE && row + i < Board.FIELD_SIZE && i <= constraint.getMax()) {
+            if (constraint.targetFieldMustBeEmpty() && pieces[row + i][col + i] != null) {
+                break;
+            }
+
             fields[row + i][col + i] = true;
 
             if (constraint.getEmpty() && pieces[row + i][col + i] != null) {
@@ -258,6 +274,10 @@ public class ConstraintFieldGenerator {
         i = constraint.getMin();
 
         while (col - i >= 0 && row - i >= 0 && i <= constraint.getMax()) {
+            if (constraint.targetFieldMustBeEmpty() && pieces[row - i][col - i] != null) {
+                break;
+            }
+
             fields[row - i][col - i] = true;
 
             if (constraint.getEmpty() && pieces[row - i][col - i] != null) {
@@ -270,6 +290,10 @@ public class ConstraintFieldGenerator {
         i = constraint.getMin();
 
         while (col - i >= 0 && row + i < Board.FIELD_SIZE && i <= constraint.getMax()) {
+            if (constraint.targetFieldMustBeEmpty() && pieces[row + i][col - i] != null) {
+                break;
+            }
+
             fields[row + i][col - i] = true;
 
             if (constraint.getEmpty() && pieces[row + i][col - i] != null) {
@@ -282,6 +306,10 @@ public class ConstraintFieldGenerator {
         i = constraint.getMin();
 
         while (col + i < Board.FIELD_SIZE && row - i >= 0 && i <= constraint.getMax()) {
+            if (constraint.targetFieldMustBeEmpty() && pieces[row - i][col + i] != null) {
+                break;
+            }
+
             fields[row - i][col + i] = true;
 
             if (constraint.getEmpty() && pieces[row - i][col + i] != null) {

@@ -137,6 +137,11 @@ public class BoardController extends AbstractGuiController implements Observer {
         // If the col and row is present in the move, we remove the source position to deselect.
         } else if (move.isInvolved(col, row)) {
             stagedMove = new Move(Move.POS_UNKNOWN, Move.POS_UNKNOWN, move.getcTo(), move.getrTo());
+            try {
+                this.board.setMove(stagedMove);
+            } catch (ApplicationMoveException e) {
+                return;
+            }
         } else {
         // Try to set position as source position and if it fails try destination instead.
             stagedMove = new Move(col, row, move.getcTo(), move.getrTo());
