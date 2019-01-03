@@ -23,11 +23,6 @@ public abstract class Piece {
     private boolean touched = false;
 
     /**
-     * The constraint field generator for the piece.
-     */
-    private static final ConstraintFieldGenerator CONSTRAINT_FIELD_GENERATOR = new ConstraintFieldGenerator().addConstraint(Constraint.Direction.ANY, 0, 99, false);
-
-    /**
      * Create a piece.
      *
      * @param player The player who owns the piece.
@@ -133,7 +128,5 @@ public abstract class Piece {
      * Get the constraint field generator for the piece.
      * @return The constraint field generator.
      */
-    public ConstraintFieldGenerator getConstraintFieldGenerator() {
-        return CONSTRAINT_FIELD_GENERATOR;
-    }
+    public abstract ConstraintFieldGenerator getConstraintFieldGenerator();
 }

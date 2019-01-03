@@ -15,7 +15,7 @@ public class Bishop extends Piece {
      */
     private static final ConstraintFieldGenerator CONSTRAINT_FIELD_GENERATOR =
         new ConstraintFieldGenerator()
-            .addConstraint(Constraint.Direction.DIAGONAL, 1, -1, false);
+            .addConstraint(new Constraint(Constraint.Direction.DIAGONAL, 1, -1));
 
     public Bishop(final Player player) {
         super(player);

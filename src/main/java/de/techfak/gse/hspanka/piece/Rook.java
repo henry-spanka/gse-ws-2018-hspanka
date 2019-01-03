@@ -15,8 +15,8 @@ public class Rook extends Piece {
      */
     private static final ConstraintFieldGenerator CONSTRAINT_FIELD_GENERATOR =
         new ConstraintFieldGenerator()
-            .addConstraint(Constraint.Direction.HORIZONTAL, 1, -1, false)
-            .addConstraint(Constraint.Direction.VERTICAL, 1, -1, false);
+            .addConstraint(new Constraint(Constraint.Direction.HORIZONTAL, 1, -1))
+            .addConstraint(new Constraint(Constraint.Direction.VERTICAL, 1, -1));
 
     public Rook(final Player player) {
         super(player);

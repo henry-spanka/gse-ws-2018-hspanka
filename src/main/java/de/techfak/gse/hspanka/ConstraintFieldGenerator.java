@@ -29,110 +29,26 @@ public class ConstraintFieldGenerator {
      */
     private transient boolean[][] fields = new boolean[Board.FIELD_SIZE][Board.FIELD_SIZE];
 
-    /**
-     * Add a constraint.
-     *
-     * @param direction The direction to be constrained.
-     * @param min       The minimum steps into the direction.
-     * @param max       The maximum steps into the direction.
-     * @param required  Whether the constraint must ALWAYS match.
-     * @return The current ConstraintFieldGenerator instance with the added constraint.
-     */
-    public ConstraintFieldGenerator addConstraint(
-        final Direction direction,
-        final int min,
-        final int max,
-        final boolean untouched
-    ) {
-        return addConstraint(direction, min, max, untouched, true);
-    }
 
     /**
-     * Add a constraint.
-     *
-     * @param direction The direction to be constrained.
-     * @param min       The minimum steps into the direction.
-     * @param max       The maximum steps into the direction.
-     * @param required  Whether the constraint must ALWAYS match.
-     * @param empty     Whether the fields in between must be empty.
-     * @return The current ConstraintFieldGenerator instance with the added constraint.
+     * Add a new constraint to the field generator.
+     * @param constraint The constraint to be added.
+     * @return The generator with the added constraint.
      */
-    public ConstraintFieldGenerator addConstraint(
-        final Direction direction,
-        final int min,
-        final int max,
-        final boolean untouched,
-        final boolean empty
-    ) {
-        final Constraint constraint = new Constraint(direction, min, max, empty, false, false);
-
-        if (untouched) {
-            untouchedConstraints.add(constraint);
-        } else {
-            constraints.add(constraint);
-        }
+    public ConstraintFieldGenerator addConstraint(final Constraint constraint) {
+        constraints.add(constraint);
 
         return this;
     }
 
     /**
-     * Add a constraint.
-     *
-     * @param direction The direction to be constrained.
-     * @param min       The minimum steps into the direction.
-     * @param max       The maximum steps into the direction.
-     * @param required  Whether the constraint must ALWAYS match.
-     * @param empty     Whether the fields in between must be empty.
-     * @param targetEmpty Whether the target field must be empty.
-     * @return The current ConstraintFieldGenerator instance with the added constraint.
+     * Add a new untouched constraint to the field generator.
+     * The constraint will only be validated if the piece has not been touched yet.
+     * @param constraint The constraint to be added.
+     * @return The generator with the added constraint.
      */
-    public ConstraintFieldGenerator addConstraint(
-        final Direction direction,
-        final int min,
-        final int max,
-        final boolean untouched,
-        final boolean empty,
-        final boolean targetEmpty
-    ) {
-        final Constraint constraint = new Constraint(direction, min, max, empty, targetEmpty, false);
-
-        if (untouched) {
-            untouchedConstraints.add(constraint);
-        } else {
-            constraints.add(constraint);
-        }
-
-        return this;
-    }
-
-    /**
-     * Add a constraint.
-     *
-     * @param direction The direction to be constrained.
-     * @param min       The minimum steps into the direction.
-     * @param max       The maximum steps into the direction.
-     * @param required  Whether the constraint must ALWAYS match.
-     * @param empty     Whether the fields in between must be empty.
-     * @param targetEmpty Whether the target field must be empty.
-     * @param targetOccupied Whether the target field must be occupied.
-     * @return The current ConstraintFieldGenerator instance with the added constraint.
-     */
-    public ConstraintFieldGenerator addConstraint(
-        final Direction direction,
-        final int min,
-        final int max,
-        final boolean untouched,
-        final boolean empty,
-        final boolean targetEmpty,
-        final boolean targetOccupied
-    ) {
-        final Constraint constraint = new Constraint(direction, min, max, empty, targetEmpty, targetOccupied);
-
-        if (untouched) {
-            untouchedConstraints.add(constraint);
-        } else {
-            constraints.add(constraint);
-        }
+    public ConstraintFieldGenerator addUntouchedConstraint(final Constraint constraint) {
+        untouchedConstraints.add(constraint);
 
         return this;
     }

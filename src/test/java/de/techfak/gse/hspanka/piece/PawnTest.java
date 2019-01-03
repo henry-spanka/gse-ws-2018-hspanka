@@ -41,6 +41,15 @@ class PawnTest {
     }
 
     @Test
+    void can_not_jump_to_unoccupied_field() {
+        // Move forward to the enemy rook
+        assertThrows(InvalidMoveException.class, () -> {
+            board.setMove(new Move(4, 2, 4, 0));
+        });
+    }
+
+
+    @Test
     void can_move_forward_diagonal_to_occupied_field() {
         // Move forward diagonal to the enemy rook
         assertDoesNotThrow(() -> {

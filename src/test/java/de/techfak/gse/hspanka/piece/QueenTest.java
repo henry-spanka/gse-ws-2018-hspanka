@@ -43,7 +43,7 @@ class QueenTest {
 
     @Test
     void can_not_jump_over_occupied_fields() {
-        // Move three forward to the enemy rook
+        // Move three forward jumping over the Rook
         assertThrows(InvalidMoveException.class, () -> {
             board.setMove((new Move(4, 6, 4, 3)));
         });

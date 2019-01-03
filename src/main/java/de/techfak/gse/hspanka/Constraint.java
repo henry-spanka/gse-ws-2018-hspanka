@@ -12,6 +12,13 @@ public class Constraint {
     }
 
     /**
+     * Whether the target field must be occupied or empty.
+     */
+    public enum Target {
+        EMPTY, OCCUPIED, EMPTY_OR_OCCUPIPED
+    }
+
+    /**
      * The direction the constraint should be enforced.
      */
     private Direction direction;
@@ -32,14 +39,14 @@ public class Constraint {
     private boolean empty;
 
     /**
-     * Whether the target field must be empty.
+     * Whether the target field must be empty or occupied.
      */
-    private boolean targetEmpty;
+    private Target target;
 
     /**
-     * Whether the target field must be occupied.
+     * A constraint that must be matched after the original.
      */
-    private boolean targetOccupied;
+    private Constraint then;
 
     /**
      * Instaniates a new constraint.
@@ -47,7 +54,36 @@ public class Constraint {
      * @param min The minimium step size.
      * @param max The maximum step size.
      */
-    public Constraint(final Direction direction, final int min, final int max, final boolean empty, final boolean targetEmpty, final boolean targetOccupied) {
+    public Constraint(final Direction direction, final int min, final int max) {
+        this(direction, min, max, true, Target.EMPTY_OR_OCCUPIPED);
+    }
+
+    /**
+     * Instaniates a new constraint.
+     * @param direction The direction to be enforced.
+     * @param min The minimium step size.
+     * @param max The maximum step size.
+     * @param empty Whether the fields in between must be empty.
+     */
+    public Constraint(final Direction direction, final int min, final int max, final boolean empty) {
+        this(direction, min, max, empty, Target.EMPTY_OR_OCCUPIPED);
+    }
+
+    /**
+     * Instaniates a new constraint.
+     * @param direction The direction to be enforced.
+     * @param min The minimium step size.
+     * @param max The maximum step size.
+     * @param empty Whether the fields in between must be empty.
+     * @param target Whether the target field must be empty or occupied.
+     */
+    public Constraint(
+        final Direction direction,
+        final int min,
+        final int max,
+        final boolean empty,
+        final Target target
+    ) {
         this.direction = direction;
         this.min = min;
 
@@ -58,8 +94,7 @@ public class Constraint {
         }
 
         this.empty = empty;
-        this.targetEmpty = targetEmpty;
-        this.targetOccupied = targetOccupied;
+        this.target = target;
     }
 
     /**
@@ -98,12 +133,31 @@ public class Constraint {
      * Whether the target field must be empty.
      * @return True if it must be empty.
      */
-    public boolean targetFieldMustBeEmpty() { return targetEmpty; }
+    public boolean targetFieldMustBeEmpty() { return target == Target.EMPTY; }
 
     /**
      * Whether the target field must be occupied.
      */
     public boolean targetFieldMustBeOccupied() {
-        return targetOccupied;
+        return target == Target.OCCUPIED;
+    }
+
+    /**
+     * Set a constraint that must be matched after the original has been validated.
+     * @param then The constraint to be set.
+     * @return The original constraint chained with the new one.
+     */
+    public Constraint then(Constraint then) {
+        this.then = then;
+
+        return this;
+    }
+
+    /**
+     * Get the next chained constraint.
+     * @return The chained constraint.
+     */
+    public Constraint getNext() {
+        return then;
     }
 }
