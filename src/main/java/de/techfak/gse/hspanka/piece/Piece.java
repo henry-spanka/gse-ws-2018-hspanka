@@ -18,6 +18,11 @@ public abstract class Piece {
     private final Player player;
 
     /**
+     * Whether the piece has been touched yet.
+     */
+    private boolean touched = false;
+
+    /**
      * The constraint field generator for the piece.
      */
     private static final ConstraintFieldGenerator CONSTRAINT_FIELD_GENERATOR = new ConstraintFieldGenerator().addConstraint(Constraint.Direction.ANY, 0, 99, false);
@@ -106,6 +111,22 @@ public abstract class Piece {
      */
     public Player getPlayer() {
         return player;
+    }
+
+    /**
+     * Whether the piece has been touched yet.
+     *
+     * @return true if the piece has been touched.
+     */
+    public boolean hasBeenTouched() {
+        return touched;
+    }
+
+    /**
+     * Touch the piece.
+     */
+    public void touch() {
+        touched = true;
     }
 
     /**

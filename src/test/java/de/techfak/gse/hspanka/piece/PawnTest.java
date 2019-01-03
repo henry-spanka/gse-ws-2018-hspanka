@@ -7,6 +7,7 @@ import de.techfak.gse.hspanka.exceptions.ApplicationErrorException;
 import de.techfak.gse.hspanka.exceptions.CannotMoveToOwnedPieceException;
 import de.techfak.gse.hspanka.exceptions.InvalidMoveException;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -55,10 +56,27 @@ class PawnTest {
         });
     }
 
-    @BeforeAll
-    public static void setUp() throws ApplicationErrorException {
+    @Test
+    void can_move_two_forward_if_untouched() {
+        // Move two forward to empty field.
+        assertDoesNotThrow(() -> {
+            board.setMove(new Move(0, 6,0, 4));
+        });
+    }
+
+    @Test
+    void can_not_move_two_forward_if_touched() {
+        // Move two forward if touched.
+        assertThrows(InvalidMoveException.class, () -> {
+            board.getPiece(6, 0).touch();
+            board.setMove(new Move(0, 6,0, 4));
+        });
+    }
+
+    @BeforeEach
+    public void setUp() throws ApplicationErrorException {
         board = new Board();
         final FenParser fen = new FenParser(board);
-        fen.parse("8/4r3/4P3/1K6/4r3/3r4/4P3/3r4 w");
+        fen.parse("8/4r3/4P3/1K6/4r3/3r4/P3P3/3r4 w");
     }
 }

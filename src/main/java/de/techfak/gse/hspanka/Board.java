@@ -109,6 +109,8 @@ public class Board extends Observable {
         configuration[move.getrTo()][move.getcTo()] = configuration[move.getrFrom()][move.getcFrom()];
         configuration[move.getrFrom()][move.getcFrom()] = null;
 
+        configuration[move.getrTo()][move.getcTo()].touch();
+
         move = null;
 
         constraintFieldGenerator = new ConstraintFieldGenerator();
@@ -138,7 +140,7 @@ public class Board extends Observable {
      * @return The piece at the specified position.
      * @throws BoardPositionEmptyException Thrown if the Position is empty.
      */
-    private Piece getPiece(final int row, final int col) throws BoardPositionEmptyException {
+    public Piece getPiece(final int row, final int col) throws BoardPositionEmptyException {
         final Piece piece = configuration[row][col];
 
         if (piece == null) {
