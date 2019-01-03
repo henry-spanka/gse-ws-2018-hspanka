@@ -50,10 +50,23 @@ class KnightTest {
         });
     }
 
+    @Test
+    void can_move_to_enemy_field() {
+        // Move two up and one left to the enemy King
+        assertDoesNotThrow(() -> {
+            board.setMove(new Move(3, 4, 2, 2));
+        });
+
+        // Move two right and one down to the enemy Knight
+        assertDoesNotThrow(() -> {
+            board.setMove(new Move(3, 4, 5, 5));
+        });
+    }
+
     @BeforeAll
     public static void setUp() throws ApplicationErrorException {
         board = new Board();
         final FenParser fen = new FenParser(board);
-        fen.parse("8/8/8/8/3N4/8/8/8 w");
+        fen.parse("8/8/2k5/8/3N4/5n2/8/8 w");
     }
 }
